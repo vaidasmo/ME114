@@ -1,7 +1,7 @@
 ## ME114 Introduction to Data Science and Big Data Analytics ##
 
 
-#### LSE Methods Summer Programme 2015 ####
+#### LSE Methods Summer Programme 2015
 
 [Kenneth Benoit](kbenoit@lse.ac.uk), Department of Methodology, LSE  
 [Slava Mikhaylov](s.mikhaylov@ucl.ac.uk), University College London 
@@ -29,70 +29,70 @@ You can also subscribe to the repository if you have [a GitHub account](https://
 
 ### Resources for each day ###
 
-#### Monday, August 17: Overview and introduction to data science [KB, SM] ####
+#### Monday, August 17: Overview and introduction to data science [KB, SM]
 
 - [Slides](day1/ME114_day1.pdf)
 - [R code from lecture](day1/ME114_day1.Rmd)
 - [Exercise 1 as R markdown](day1/ME114_lab1_LASTNAME_FIRSTNAME.Rmd)
 - [Exercise 1 dataset: *<description here>*](day1/dataset.ext)
 
-#### Tuesday, August 18: Research design issues in data science [SM, KB] ####  
+#### Tuesday, August 18: Research design issues in data science [SM, KB]  
 
 - [Slides](day2/ME114_day2.pdf)
 - [R code from lecture](day1/ME114_day2.Rmd)
 - [Exercise 1 as R markdown](day1/ME114_lab2_LASTNAME_FIRSTNAME.Rmd)
 - [Exercise 1 dataset: *<description here>*](day2/dataset.ext)
 
-#### Wednesday, August 19: Probability and statistical foundations [SM] #### 
+#### Wednesday, August 19: Probability and statistical foundations [SM] 
 
 - [Slides](day3/ME114_day3.pdf)
 - [R code from lecture](day1/ME114_day3.Rmd)
 - [Exercise 1 as R markdown](day3/ME114_lab3_LASTNAME_FIRSTNAME.Rmd)
 - [Exercise 1 dataset: *<description here>*](day3/dataset.ext)
 
-#### Thursday, August 20: Linear Regression [SM] #### 
+#### Thursday, August 20: Linear Regression [SM] 
 
 - [Slides](day4/ME114_day4.pdf)
 - [R code from lecture](day4/ME114_day4.Rmd)
 - [Exercise 1 as R markdown](day4/ME114_lab4_LASTNAME_FIRSTNAME.Rmd)
 - [Exercise 1 dataset: *<description here>*](day4/dataset.ext)
 
-#### Friday, August 21: Generalized Linear Regression [SM] ####
+#### Friday, August 21: Generalized Linear Regression [SM]
 
 - [Slides](day5/ME114_day5.pdf)
 - [R code from lecture](day1/ME114_day5.Rmd)
 - [Exercise 1 as R markdown](day1/ME114_lab5_LASTNAME_FIRSTNAME.Rmd)
 - [Exercise 1 dataset: *<description here>*](day5/dataset.ext)
 
-#### Monday, August 24: Association rules and clustering [KB] ####
+#### Monday, August 24: Association rules and clustering [KB]
 
 - [Slides](day6/ME114_day6.pdf)
 - [R code from lecture](day1/ME114_day6.Rmd)
 - [Exercise 1 as R markdown](day1/ME114_lab1_LASTNAME_FIRSTNAME.Rmd)
 - [Exercise 1 dataset: *<description here>*](day1/dataset.ext)
 
-#### Tuesday, August 25: Machine Learning [KB] ####
+#### Tuesday, August 25: Machine Learning [KB]
 
 - [Slides](day7/ME114_day7.pdf)
 - [R code from lecture](day7/ME114_day7.Rmd)
 - [Exercise 1 as R markdown](day7/ME114_lab7_LASTNAME_FIRSTNAME.Rmd)
 - [Exercise 1 dataset: *<description here>*](day7/dataset.ext)
 
-#### Wednesday, August 26: Unsupervised learning and dimensional reduction [KB] ####
+#### Wednesday, August 26: Unsupervised learning and dimensional reduction [KB]
 
 - [Slides](day8/ME114_day8.pdf)
 - [R code from lecture](day1/ME114_day8.Rmd)
 - [Exercise 1 as R markdown](day8/ME114_lab8_LASTNAME_FIRSTNAME.Rmd)
 - [Exercise 1 dataset: *<description here>*](day8/dataset.ext)
 
-#### Thursday, August 27: Text analysis [KB] ####
+#### Thursday, August 27: Text analysis [KB]
 
 - [Slides](day9/ME114_day9.pdf)
 - [R code from lecture](day9/ME114_day9.Rmd)
 - [Exercise 1 as R markdown](day9/ME114_lab9_LASTNAME_FIRSTNAME.Rmd)
 - [Exercise 1 dataset: *<description here>*](day9/dataset.ext)
 
-#### Friday, August 28: Mining the Social Web [KB, SM] ####
+#### Friday, August 28: Mining the Social Web [KB, SM]
 
 - [Slides](day10/ME114_day10.pdf)
 - [R code from lecture](day10/ME114_day10.Rmd)
