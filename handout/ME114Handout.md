@@ -1,5 +1,3 @@
-# 
-
 Overview {#overview .unnumbered}
 ========
 
@@ -216,11 +214,30 @@ software.
 
 ### Required Reading: {#required-reading .unnumbered}
 
+-   James et al (2013), Chapters 1–2.
+
+-   Zumel and Mount, Chapter 2.
+
+-   *An Introduction to R*, available from
+    <https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf>
+
+-   Downloading and installing RStudio, available from
+    <http://www.rstudio.com>.
+
+-   A brief on-line introduction to RMarkdown, which we will use for
+    completing the exercises for the course, see
+    <https://goo.gl/ZqOwUe>.
+
 ### Recommended Reading: {#recommended-reading .unnumbered}
 
-### Exercise: {#exercise .unnumbered}
+-   Patrick Burns, 2011. *The R Inferno*. Available from
+    <http://www.burns-stat.com/pages/Tutor/R_inferno.pdf>.
 
-Getting started with R and RMarkdown.
+-   Lantz, Ch. 2.
+
+### Exercise 1: Getting started with R and RMarkdown. {#exercise-1-getting-started-with-r-and-rmarkdown. .unnumbered}
+
+This and subsequent exercises can be found from the .
 
 Tuesday, August 18: Research design issues in data science [SM, KB] {#tuesday-august-18-research-design-issues-in-data-science-sm-kb .unnumbered}
 -------------------------------------------------------------------
@@ -232,11 +249,9 @@ predictive accuracy versus marginal effects, and model selection.
 
 ### Required Reading: {#required-reading-1 .unnumbered}
 
-James et al. Chapter 1-2, 6.
+-   James et al. Chapter 1-2, 6.
 
-### Recommended Reading: {#recommended-reading-1 .unnumbered}
-
-### Exercise: {#exercise-1 .unnumbered}
+### Exercise 2: TBA {#exercise-2-tba .unnumbered}
 
 Wednesday, August 19: Probability and statistical foundations [SM] {#wednesday-august-19-probability-and-statistical-foundations-sm .unnumbered}
 ------------------------------------------------------------------
@@ -246,11 +261,9 @@ Normal distributions, resampling, and bootstrapping.
 
 ### Required Reading: {#required-reading-2 .unnumbered}
 
-James et al. Chapter 5
+-   James et al. Chapter 5
 
-### Recommended Reading: {#recommended-reading-2 .unnumbered}
-
-### Exercise: {#exercise-2 .unnumbered}
+### Exercise 3: TBA {#exercise-3-tba .unnumbered}
 
 Thursday, August 20: Linear Regression [SM] {#thursday-august-20-linear-regression-sm .unnumbered}
 -------------------------------------------
@@ -260,11 +273,9 @@ on prediction.
 
 ### Required Reading: {#required-reading-3 .unnumbered}
 
-James et al. Chapter 3
+-   James et al. Chapter 3
 
-### Recommended Reading: {#recommended-reading-3 .unnumbered}
-
-### Exercise: {#exercise-3 .unnumbered}
+### Exercise 4: TBA {#exercise-4-tba .unnumbered}
 
 Friday, August 21: Generalized Linear Regression [SM] {#friday-august-21-generalized-linear-regression-sm .unnumbered}
 -----------------------------------------------------
@@ -274,11 +285,9 @@ This session will cover logistic regression, generalized additive models
 
 ### Required Reading: {#required-reading-4 .unnumbered}
 
-James et al. Chapter 4, 7.6-7.7.
+-   James et al. Chapters 4, 7.6–7.7
 
-### Recommended Reading: {#recommended-reading-4 .unnumbered}
-
-### Exercise: {#exercise-4 .unnumbered}
+### Exercise 5: TBA {#exercise-5-tba .unnumbered}
 
 Monday, August 24: Association rules and clustering [KB] {#monday-august-24-association-rules-and-clustering-kb .unnumbered}
 --------------------------------------------------------
@@ -288,11 +297,15 @@ hierarchical clustering.
 
 ### Required Reading: {#required-reading-5 .unnumbered}
 
-James et al. Chapter 10.3
+-   James et al. Chapter 10.3
 
-### Recommended Reading: {#recommended-reading-5 .unnumbered}
+-   Zumel and Mount, Chapter 8
 
-### Exercise: {#exercise-5 .unnumbered}
+### Recommended Reading: {#recommended-reading-1 .unnumbered}
+
+Lantz, Chapter 8
+
+### Exercise 6: TBA {#exercise-6-tba .unnumbered}
 
 Tuesday, August 25: Machine Learning [KB] {#tuesday-august-25-machine-learning-kb .unnumbered}
 -----------------------------------------
@@ -303,11 +316,15 @@ cross-validation.
 
 ### Required Reading: {#required-reading-6 .unnumbered}
 
-James et al. Chapter 8.
+-   James et al. Chapter 8
 
-### Recommended Reading: {#recommended-reading-6 .unnumbered}
+-   Zumel and Mount, Chapter 5
 
-### Exercise: {#exercise-6 .unnumbered}
+### Recommended Reading: {#recommended-reading-2 .unnumbered}
+
+-   Lantz, Chapter 10
+
+### Exercise 7: TBA {#exercise-7-tba .unnumbered}
 
 Wednesday, August 26: Unsupervised learning and dimensional reduction [KB] {#wednesday-august-26-unsupervised-learning-and-dimensional-reduction-kb .unnumbered}
 --------------------------------------------------------------------------
@@ -317,11 +334,13 @@ analysis.
 
 ### Required Reading: {#required-reading-7 .unnumbered}
 
-James et al. Chapter 10.1-10.2
+-   James et al. Chapter 10.1–10.2
 
-### Recommended Reading: {#recommended-reading-7 .unnumbered}
+### Recommended Reading: {#recommended-reading-3 .unnumbered}
 
-### Exercise: {#exercise-7 .unnumbered}
+TBA
+
+### Exercise 8: TBA {#exercise-8-tba .unnumbered}
 
 Thursday, August 27: Text analysis [KB] {#thursday-august-27-text-analysis-kb .unnumbered}
 ---------------------------------------
@@ -331,9 +350,19 @@ analysis, dictionary methods.
 
 ### Required Reading: {#required-reading-8 .unnumbered}
 
-### Recommended Reading: {#recommended-reading-8 .unnumbered}
+-   Grimmer, J, and B M Stewart. 2013. “Text as Data: the Promise and
+    Pitfalls of Automatic Content Analysis Methods for Political Texts.”
+    *Political Analysis*
 
-### Exercise: {#exercise-8 .unnumbered}
+-   Benoit, Kenneth and Alexander Herzog. In press. “.” In Analytics,
+    Policy and Governance, eds. Jennifer Bachner, Kathyrn Wagner Hill,
+    and Benjamin Ginsberg. 21(3): 267–97.
+
+### Recommended Reading: {#recommended-reading-4 .unnumbered}
+
+TBA
+
+### Exercise 9: Analysing text using the  {#exercise-9-analysing-text-using-the .unnumbered}
 
 Friday, August 28: Mining the Social Web [KB, SM] {#friday-august-28-mining-the-social-web-kb-sm .unnumbered}
 -------------------------------------------------
@@ -343,6 +372,10 @@ data.
 
 ### Required Reading: {#required-reading-9 .unnumbered}
 
-### Recommended Reading: {#recommended-reading-9 .unnumbered}
+TBA
 
-### Exercise: {#exercise-9 .unnumbered}
+### Recommended Reading: {#recommended-reading-5 .unnumbered}
+
+TBA
+
+### Exercise 10: Working with Twitter data {#exercise-10-working-with-twitter-data .unnumbered}
