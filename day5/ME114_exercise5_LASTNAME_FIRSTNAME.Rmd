@@ -1,0 +1,112 @@
+---
+title: "Exercise Set 5 - Resampling Methods"
+author: "Ken Benoit and Slava Mikhaylov"
+output: html_document
+bibliography: ../bibliography/bibliography.bib
+---
+
+@james2013 provide a set of exercises (conceptual and applied) for each chapter in their book. Applied exercises focus on linking conceptual material with practical implementation in R. Below are the applied exercises for Chapter 5 "Resampling Methods" [@james2013, pp. 175-201].
+
+Please **submit this exercise by email as an html file**  by putting your answers prior to the  **deadline of 9pm on Friday, August XX**. 
+
+You will need to load the core library for the course textbook:
+```{r}
+library(ISLR)
+```
+
+
+## Exercise 5.1
+
+Logistic regression may be used to predict the probability of `default` using `income` and `balance` on the [Default](http://bit.ly/1InG11P) data set. Here we will estimate the test error of this logistic regression model using the validation set approach. Do not forget to set a random seed before beginning your analysis.
+
+   (a) Fit a logistic regression model that uses `income` and `balance` to predict `default`.
+   (b) Using the validation set approach, estimate the test error of this model. In order to do this, you must perform the following steps:
+     i. Split the sample set into a training set and a validation set.
+     ii. Fit a multiple logistic regression model using only the training observations.
+     iii. Obtain a prediction of default status for each individual in the validation set by computing the posterior probability of default for that individual, and classifying the individual to the `default` category if the posterior probability is greater than 0.5.
+     iv. Compute the validation set error, which is the fraction of the observations in the validation set that are misclassified.
+   (c) Repeat the process in (b) three times, using three different splits of the observations into a training set and a validation set. Comment on the results obtained.
+   (d) Now consider a logistic regression model that predicts the probability of `default` using `income`, `balance`, and a dummy variable for `student`. Estimate the test error for this model using the validation set approach. Comment on whether or not including a dummy variable for `student` leads to a reduction in the test error rate.
+
+
+## Exercise 5.2
+
+We continue to consider the use of a logistic regression model to predict the probability of `default` using `income` and `balance` on the [Default](http://bit.ly/1InG11P) data set. In particular, we will now compute estimates for the standard errors of the `income` and `balance` logistic regression coefficients in two different ways: (1) using the bootstrap, and (2) using the standard formula for computing the standard errors in the [glm()](http://bit.ly/R_glm) function. Do not forget to set a random seed before beginning your analysis.
+
+   (a) Using the [summary()](http://bit.ly/R_summary) and [glm()](http://bit.ly/R_glm) functions, determine the estimated standard errors for the coefficients associated with income and balance in a multiple logistic regression model that uses both predictors.
+   (b) Write a function, `boot.fn()`, that takes as input the [Default](http://bit.ly/1InG11P) data set as well as an index of the observations, and that outputs the coefficient estimates for `income` and `balance` in the multiple logistic regression model.
+   (c) Use the [boot()](http://bit.ly/R_boot) function together with your `boot.fn()` function to estimate the standard errors of the logistic regression coefficients for `income` and `balance`.
+   (d) Comment on the estimated standard errors obtained using the [glm()](http://bit.ly/R_glm) function and using your bootstrap function.
+
+
+## Exercise 5.3
+
+In Sections 5.3.2 and 5.3.3 in @james2013, we saw that the [cv.glm()](http://bit.ly/R_cv_glm) function can be used in order to compute the LOOCV test error estimate. Alternatively, one could compute those quantities using just the [glm()](http://bit.ly/R_glm) and `predict.glm()` functions, and a [for()](http://bit.ly/R_Control) loop. You will now take this approach in order to compute the LOOCV error for a simple logistic regression model on the [Weekly](http://bit.ly/1g5T3JN) data set. Recall that in the context of classification problems, the LOOCV error is given in (5.4).
+
+   (a) Fit a logistic regression model that predicts `Direction` using `Lag1` and `Lag2`.
+   (b) Fit a logistic regression model that predicts `Direction` using `Lag1` and `Lag2` *using all but the first observation*.
+   (c) Use the model from (b) to predict the direction of the first observation. You can do this by predicting that the first observation will go up if `P(Direction="Up"|Lag1, Lag2)` > 0.5. Was this observation correctly classified?
+   (d) Write a for loop from $i=1$ to $i=n$ ,where $n$ is the number of observations in the data set, that performs each of the following steps:
+    i. Fit a logistic regression model using all but the $i$th observation to predict `Direction` using `Lag1` and `Lag2`.
+    ii. Compute the posterior probability of the market moving up for the $i$th observation.
+    iii. Use the posterior probability for the $i$th observation in order to predict whether or not the market moves up.
+    iv. Determine whether or not an error was made in predicting the direction for the $i$th observation. If an error was made, then indicate this as a 1, and otherwise indicate it as a 0.
+   (e) Take the average of the $n$ numbers obtained in (d)iv in order to obtain the LOOCV estimate for the test error. Comment on the results.
+   
+## Exercise 5.4
+
+We will now perform cross-validation on a simulated data set.
+
+   (a) Generate a simulated data set as follows:
+```{R}
+   set.seed(1)
+   y=rnorm(100)
+   x=rnorm(100)
+   y=x-2*x^2+rnorm(100)
+```
+In this data set, what is $n$ and what is $p$? Write out the model used to generate the data in equation form.
+
+   (b) Create a scatterplot of $X$ against $Y$. Comment on what you find.
+   
+   (c) Set a random seed, and then compute the LOOCV errors that result from fitting the following four models using least squares:
+   1. $Y = \beta_0 + \beta_1 X + \epsilon$
+   2. $Y = \beta_0 + \beta_1 X + \beta_2 X_2 + \epsilon$
+   3. $Y = \beta_0 + \beta_1 X + \beta_2 X_2 + \beta_3 X_3 + \epsilon$
+   4. $Y = \beta_0 + \beta_1 X + \beta_2 X_2 + \beta_3 X_3 + \beta_4 X_4 + \epsilon$.
+
+Note you may find it helpful to use the `data.frame()` function
+to create a single data set containing both $X$ and $Y$.
+
+   (d) Repeat (c) using another random seed, and report your results. Are your results the same as what you got in (c)? Why?
+   (e) Which of the models in (c) had the smallest LOOCV error? Is this what you expected? Explain your answer.
+   (f) Comment on the statistical significance of the coefficient estimates that results from fitting each of the models in (c) using least squares. Do these results agree with the conclusions drawn based on the cross-validation results?
+
+
+## Exercise 5.5
+
+We will now consider the [Boston](http://bit.ly/1M9I5Ro) housing data set, from the [MASS](http://bit.ly/1E6z7w6) package. 
+
+(a) Based on this data set, provide an estimate for the population mean of `medv`. Call this estimate $\hat{\mu}$.
+   
+(b) Provide an estimate of the standard error of $\hat{\mu}$. Interpret this result.
+*Hint: We can compute the standard error of the sample mean by dividing the sample standard deviation by the square root of the number of observations.*
+   
+(c) Now estimate the standard error of $\hat{\mu}$ using the bootstrap. How does this compare to your answer from (b)?
+   
+(d) Based on your bootstrap estimate from (c), provide a 95 % confidence interval for the mean of `medv`. Compare it to the results obtained using `t.test(Boston$medv)`.
+*Hint: You can approximate a 95% confidence interval using the formula [$\hat{\mu}$ − 2SE($\hat{\mu}$), $\hat{\mu}$ + 2SE($\hat{\mu}$)]*.
+   
+(e) Based on this data set, provide an estimate, $\hat{\mu}_{med}$, for the median value of `medv` in the population.
+   
+(f) We now would like to estimate the standard error of $\hat{\mu}_{med}$. Unfortunately, there is no simple formula for computing the standard error of the median. Instead, estimate the standard error of the median using the bootstrap. Comment on your findings.
+   
+(g) Based on this data set, provide an estimate for the tenth percentile of `medv` in Boston suburbs. Call this quantity $\hat{\mu}_{0.1}$. (You can use the [quantile()](http://bit.ly/1T07A6y) function.)
+
+(h) Use the bootstrap to estimate the standard error of $\hat{\mu}_{0.1}$. Comment on your findings.
+
+
+
+
+   
+   
+### References
