@@ -1,0 +1,5 @@
+# ME114 Day 3
+
+* [Lab](ME114_lab3.html)
+* [Exercise](ME114_exercise3_LASTNAME_FIRSTNAME.html)
+* [Solutions](ME114_solutions3.html)
