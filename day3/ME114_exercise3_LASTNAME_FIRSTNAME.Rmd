@@ -1,11 +1,11 @@
 ---
-title: "Exercise Set 3 - Resampling Methods"
+title: "Exercise Set 3 - Linear Regression"
 author: "Ken Benoit and Slava Mikhaylov"
 output: html_document
 bibliography: ../bibliography/bibliography.bib
 ---
 
-@james2013 provide a set of exercises (conceptual and applied) for each chapter in their book. Applied exercises focus on linking conceptual material with practical implementation in R. Below are the applied exercises for Chapter 5 "Resampling Methods" [@james2013, pp. 175-201].
+@james2013 provide a set of exercises (conceptual and applied) for each chapter in their book. Applied exercises focus on linking conceptual material with practical implementation in R. Below are the applied exercises for Chapter 3 "Linear Regression" [@james2013, pp. 121-126].
 
 Please **submit this exercise by email as an html file**  by putting your answers prior to the  **deadline of 9pm on Wednesday, August XX**. 
 
@@ -15,98 +15,139 @@ library(ISLR)
 ```
 
 
-## Exercise 1
+## Exercise 3.1
 
-Logistic regression may be used to predict the probability of `default` using `income` and `balance` on the [Default](http://bit.ly/1InG11P) data set. Here we will estimate the test error of this logistic regression model using the validation set approach. Do not forget to set a random seed before beginning your analysis.
+This question involves the use of simple linear regression on the `Auto` data set.
 
-   (a) Fit a logistic regression model that uses `income` and `balance` to predict `default`.
-   (b) Using the validation set approach, estimate the test error of this model. In order to do this, you must perform the following steps:
-     i. Split the sample set into a training set and a validation set.
-     ii. Fit a multiple logistic regression model using only the training observations.
-     iii. Obtain a prediction of default status for each individual in the validation set by computing the posterior probability of default for that individual, and classifying the individual to the `default` category if the posterior probability is greater than 0.5.
-     iv. Compute the validation set error, which is the fraction of the observations in the validation set that are misclassified.
-   (c) Repeat the process in (b) three times, using three different splits of the observations into a training set and a validation set. Comment on the results obtained.
-   (d) Now consider a logistic regression model that predicts the probability of `default` using `income`, `balance`, and a dummy variable for `student`. Estimate the test error for this model using the validation set approach. Comment on whether or not including a dummy variable for `student` leads to a reduction in the test error rate.
+(a) Use the `lm()` function to perform a simple linear regression with `mpg` as the response and `horsepower` as the predictor. Use the `summary()` function to print the results. Comment on the output. For example:
 
+    i. Is there a relationship between the predictor and the response?
+    ii. How strong is the relationship between the predictor and the response?
+    iii. Is the relationship between the predictor and the response positive or negative?
+    iv. What is the predicted `mpg` associated with a `horsepower` of 98? What are the associated 95 % confidence and prediction intervals?
 
-## Exercise 2
+(b) Plot the response and the predictor. Use the `abline()` function to display the least squares regression line.
 
-We continue to consider the use of a logistic regression model to predict the probability of `default` using `income` and `balance` on the [Default](http://bit.ly/1InG11P) data set. In particular, we will now compute estimates for the standard errors of the `income` and `balance` logistic regression coefficients in two different ways: (1) using the bootstrap, and (2) using the standard formula for computing the standard errors in the [glm()](http://bit.ly/R_glm) function. Do not forget to set a random seed before beginning your analysis.
-
-   (a) Using the [summary()](http://bit.ly/R_summary) and [glm()](http://bit.ly/R_glm) functions, determine the estimated standard errors for the coefficients associated with income and balance in a multiple logistic regression model that uses both predictors.
-   (b) Write a function, `boot.fn()`, that takes as input the [Default](http://bit.ly/1InG11P) data set as well as an index of the observations, and that outputs the coefficient estimates for `income` and `balance` in the multiple logistic regression model.
-   (c) Use the [boot()](http://bit.ly/R_boot) function together with your `boot.fn()` function to estimate the standard errors of the logistic regression coefficients for `income` and `balance`.
-   (d) Comment on the estimated standard errors obtained using the [glm()](http://bit.ly/R_glm) function and using your bootstrap function.
+(c) Use the `plot()` function to produce diagnostic plots of the least squares regression fit. Comment on any problems you see with the fit.
 
 
-## Exercise 3
+## Exercise 3.2
 
-In Sections 5.3.2 and 5.3.3 in @james2013, we saw that the [cv.glm()](http://bit.ly/R_cv_glm) function can be used in order to compute the LOOCV test error estimate. Alternatively, one could compute those quantities using just the [glm()](http://bit.ly/R_glm) and `predict.glm()` functions, and a [for()](http://bit.ly/R_Control) loop. You will now take this approach in order to compute the LOOCV error for a simple logistic regression model on the [Weekly](http://bit.ly/1g5T3JN) data set. Recall that in the context of classification problems, the LOOCV error is given in (5.4).
+This question involves the use of multiple linear regression on the `Auto` data set.
 
-   (a) Fit a logistic regression model that predicts `Direction` using `Lag1` and `Lag2`.
-   (b) Fit a logistic regression model that predicts `Direction` using `Lag1` and `Lag2` *using all but the first observation*.
-   (c) Use the model from (b) to predict the direction of the first observation. You can do this by predicting that the first observation will go up if `P(Direction="Up"|Lag1, Lag2)` > 0.5. Was this observation correctly classified?
-   (d) Write a for loop from $i=1$ to $i=n$ ,where $n$ is the number of observations in the data set, that performs each of the following steps:
-    i. Fit a logistic regression model using all but the $i$th observation to predict `Direction` using `Lag1` and `Lag2`.
-    ii. Compute the posterior probability of the market moving up for the $i$th observation.
-    iii. Use the posterior probability for the $i$th observation in order to predict whether or not the market moves up.
-    iv. Determine whether or not an error was made in predicting the direction for the $i$th observation. If an error was made, then indicate this as a 1, and otherwise indicate it as a 0.
-   (e) Take the average of the $n$ numbers obtained in (d)iv in order to obtain the LOOCV estimate for the test error. Comment on the results.
-   
-## Exercise 4
+(a) Produce a scatterplot matrix which includes all of the variables in the data set.
+(b) Compute the matrix of correlations between the variables using the function `cor()`. You will need to exclude the `name` variable, which is qualitative.
+(c) Use the `lm()` function to perform a multiple linear regression with `mpg` as the response and all other variables except `name` as the predictors. Use the `summary()` function to print the results. Comment on the output. For instance:
 
-We will now perform cross-validation on a simulated data set.
+    i. Is there a relationship between the predictors and the response?
+    ii. Which predictors appear to have a statistically significant relationship to the response?
+    iii. What does the coefficient for the `year` variable suggest?
 
-   (a) Generate a simulated data set as follows:
-```{R}
-   set.seed(1)
-   y=rnorm(100)
-   x=rnorm(100)
-   y=x-2*x^2+rnorm(100)
+(d) Use the `plot()` function to produce diagnostic plots of the linear regression fit. Comment on any problems you see with the fit. Do the residual plots suggest any unusually large outliers? Does the leverage plot identify any observations with unusually high leverage?
+(e) Use the `*` and `:` symbols to fit linear regression models with interaction effects. Do any interactions appear to be statistically significant?
+(f) Try a few different transformations of the variables, such as $log(X)$, $\sqrt{X}$, $X^2$. Comment on your findings.
+
+
+## Exercise 3.3
+
+This question should be answered using the `Carseats` data set.
+
+(a) Fit a multiple regression model to predict `Sales` using `Price`,
+`Urban`, and `US`.
+(b) Provide an interpretation of each coefficient in the model. Be
+careful—some of the variables in the model are qualitative!
+(c) Write out the model in equation form, being careful to handle the qualitative variables properly.
+(d) For which of the predictors can you reject the null hypothesis $H_0 : \beta_j =0$?
+(e) On the basis of your response to the previous question, fit a smaller model that only uses the predictors for which there is evidence of association with the outcome.
+(f) How well do the models in (a) and (e) fit the data?
+(g) Using the model from (e), obtain 95% confidence intervals for the coefficient(s).
+(h) Is there evidence of outliers or high leverage observations in the model from (e)?
+
+## Exercise 3.4
+
+In this problem we will investigate the t-statistic for the null hypothesis $H_0 : \beta =0$ in simple linear regression without an intercept. To begin, we generate a predictor `x` and a response `y` as follows.
+
+```{r}
+ set.seed (1)
+ x=rnorm(100)
+ y=2*x+rnorm(100)
 ```
-In this data set, what is $n$ and what is $p$? Write out the model used to generate the data in equation form.
 
-   (b) Create a scatterplot of $X$ against $Y$. Comment on what you find.
+(a) Perform a simple linear regression of `y` onto `x`, without an intercept. Report the coefficient estimate $\hat{\beta}$, the standard error of this coefficient estimate, and the t-statistic and p-value associated with the null hypothesis $H_0 : \beta =0$. Comment on these results. (You can perform regression without an intercept using the command `lm(y∼x+0)`.)
+(b) Now perform a simple linear regression of `x` onto `y` without an intercept, and report the coefficient estimate, its standard error, and the corresponding t-statistic and p-values associated with the null hypothesis $H_0 : \beta =0$. Comment on these results.
+(c) What is the relationship between the results obtained in (a) and (b)?
+(d) In `R`, show that when regression is performed with an intercept, the t-statistic for $H_0 : \beta_1 =0$ is the same for the regression of `y` onto `x` as it is for the regression of `x` onto `y`.
+
+## Exercise 3.5
+
+This problem involves simple linear regression without an intercept.
+
+(a) Generate an example in `R` with $n = 100$ observations in which the coefficient estimate for the regression of `X` onto `Y` is different from the coefficient estimate for the regression of `Y` onto `X`.
+(b) Generate an example in `R` with $n = 100$ observations in which the coefficient estimate for the regression of `X` onto `Y` is the same as the coefficient estimate for the regression of `Y` onto `X`.
+(c) Under what circumstance is the coefficient estimate for the regression of `X` onto `Y` the same as the coefficient estimate for the regression of `Y` onto `X`?
+  
+  
+## Exercise 3.6
+
+In this exercise you will create some simulated data and will fit simple linear regression models to it. Make sure to use `set.seed(1)` prior to starting part (a) to ensure consistent results.
+
+(a) Using the `rnorm()` function, create a vector, `x`, containing 100 observations drawn from a $N(0,1)$ distribution. This represents a feature, `X`.
+(b) Using the `rnorm()` function, create a vector, `eps`, containing 100 observations drawn from a $N(0,0.25)$ distribution i.e. a normal distribution with mean zero and variance 0.25.
+(c) Using `x` and `eps`, generate a vector `y` according to the model
+$$Y =−1+0.5X+\epsilon$$
+What is the length of the vector `y`? What are the values of $\beta_0$ and $\beta_1$ in this linear model?
+(d) Create a scatterplot displaying the relationship between `x` and `y`. Comment on what you observe.
+(e) Fit a least squares linear model to predict `y` using `x`. Comment on the model obtained. How do $\hat{\beta}_0$ and $\hat{\beta}_1$ compare to $\beta_0$ and $\beta_1$?
+(f) Display the least squares line on the scatterplot obtained in (d). Draw the population regression line on the plot, in a different color. Use the `legend()` command to create an appropriate legend.
+(g) Now fit a polynomial regression model that predicts $y$ using $x$ and $x^2$. Is there evidence that the quadratic term improves the model fit? Explain your answer.
+(h) Repeat (a)–(f) after modifying the data generation process in such a way that there is less noise in the data. The model should remain the same. You can do this by decreasing the variance of the normal distribution used to generate the error term $\epsilon$ in (b). Describe your results.
+(i) Repeat (a)–(f) after modifying the data generation process in such a way that there is more noise in the data. The model should remain the same. You can do this by increasing the variance of the normal distribution used to generate the error term $\epsilon$ in (b). Describe your results.
+(j) What are the confidence intervals for $\beta_0$ and $\beta_1$ based on the original data set, the noisier data set, and the less noisy data set? Comment on your results.
+
+  
+## Exercise 3.7
+
+This problem focuses on the collinearity problem.
+
+(a) Perform the following commands in `R`:
+
+```{r}
+set.seed(1)
+x1=runif(100)
+x2=0.5*x1+rnorm(100)/10
+y=2+2*x1+0.3*x2+rnorm(100)
+```
+
+The last line corresponds to creating a linear model in which `y` is a function of `x1` and `x2`. Write out the form of the linear model. What are the regression coefficients?
+
+(b) What is the correlation between `x1` and `x2`? Create a scatterplot displaying the relationship between the variables.
+
+(c) Using this data, fit a least squares regression to predict `y` using `x1` and `x2`. Describe the results obtained. What are $\hat{\beta}_0$, $\hat{\beta}_1$, and $\hat{\beta}_2$? How do these relate to the true $\beta_0$, $\beta_1$, and $\beta_2$? Can you reject the null hypothesis $H_0 : \beta_1 = 0$? How about the null hypothesis $H_0 : \beta_2 = 0$?
+
+(d) Now fit a least squares regression to predict `y` using only `x1`. Comment on your results. Can you reject the null hypothesis $H_0 : \beta_1 = 0$?
+
+(e) Now fit a least squares regression to predict `y` using only `x2`. Comment on your results. Can you reject the null hypothesis $H_0 : \beta_1 = 0$?
+
+(f) Do the results obtained in (c)–(e) contradict each other? Explain your answer.
+
+(g) Now suppose we obtain one additional observation, which was unfortunately mismeasured.
+```{r}
+x1=c(x1, 0.1) 
+x2=c(x2, 0.8) 
+y=c(y,6)
+```
+Re-fit the linear models from (c) to (e) using this new data. What effect does this new observation have on the each of the models? In each model, is this observation an outlier? A high-leverage point? Both? Explain your answers.
+  
+
+## Exercise 3.8
+
+This problem involves the `Boston` data set, which we saw in the lab earlier. We will now try to predict per capita crime rate using the other variables in this data set. In other words, per capita crime rate is the response, and the other variables are the predictors.
+
+(a) For each predictor, fit a simple linear regression model to predict the response. Describe your results. In which of the models is there a statistically significant association between the predictor and the response? Create some plots to back up your assertions.
+(b) Fit a multiple regression model to predict the response using all of the predictors. Describe your results. For which predictors can we reject the null hypothesis $H_0 : \beta_j = 0$?
+(c) How do your results from (a) compare to your results from (b)? Create a plot displaying the univariate regression coefficients from (a) on the $x$-axis, and the multiple regression coefficients from (b) on the $y$-axis. That is, each predictor is displayed as a single point in the plot. Its coefficient in a simple linear regression model is shown on the $x$-axis, and its coefficient estimate in the multiple linear regression model is shown on the $y$-axis.
+(d) Is there evidence of non-linear association between any of the predictors and the response? To answer this question, for each predictor $X$, fit a model of the form
+$$Y = \beta_0 + \beta_1 X + \beta_2 X^2 + \beta_3 X^3 + \epsilon.$$
+  
    
-   (c) Set a random seed, and then compute the LOOCV errors that result from fitting the following four models using least squares:
-   1. $Y = \beta_0 + \beta_1 X + \epsilon$
-   2. $Y = \beta_0 + \beta_1 X + \beta_2 X_2 + \epsilon$
-   3. $Y = \beta_0 + \beta_1 X + \beta_2 X_2 + \beta_3 X_3 + \epsilon$
-   4. $Y = \beta_0 + \beta_1 X + \beta_2 X_2 + \beta_3 X_3 + \beta_4 X_4 + \epsilon$.
-
-Note you may find it helpful to use the `data.frame()` function
-to create a single data set containing both $X$ and $Y$.
-
-   (d) Repeat (c) using another random seed, and report your results. Are your results the same as what you got in (c)? Why?
-   (e) Which of the models in (c) had the smallest LOOCV error? Is this what you expected? Explain your answer.
-   (f) Comment on the statistical significance of the coefficient estimates that results from fitting each of the models in (c) using least squares. Do these results agree with the conclusions drawn based on the cross-validation results?
-
-
-## Exercise 5
-
-We will now consider the [Boston](http://bit.ly/1M9I5Ro) housing data set, from the [MASS](http://bit.ly/1E6z7w6) package. 
-
-(a) Based on this data set, provide an estimate for the population mean of `medv`. Call this estimate $\hat{\mu}$.
-   
-(b) Provide an estimate of the standard error of $\hat{\mu}$. Interpret this result.
-*Hint: We can compute the standard error of the sample mean by dividing the sample standard deviation by the square root of the number of observations.*
-   
-(c) Now estimate the standard error of $\hat{\mu}$ using the bootstrap. How does this compare to your answer from (b)?
-   
-(d) Based on your bootstrap estimate from (c), provide a 95 % confidence interval for the mean of `medv`. Compare it to the results obtained using `t.test(Boston$medv)`.
-*Hint: You can approximate a 95% confidence interval using the formula [$\hat{\mu}$ − 2SE($\hat{\mu}$), $\hat{\mu}$ + 2SE($\hat{\mu}$)]*.
-   
-(e) Based on this data set, provide an estimate, $\hat{\mu}_{med}$, for the median value of `medv` in the population.
-   
-(f) We now would like to estimate the standard error of $\hat{\mu}_{med}$. Unfortunately, there is no simple formula for computing the standard error of the median. Instead, estimate the standard error of the median using the bootstrap. Comment on your findings.
-   
-(g) Based on this data set, provide an estimate for the tenth percentile of `medv` in Boston suburbs. Call this quantity $\hat{\mu}_{0.1}$. (You can use the [quantile()](http://bit.ly/1T07A6y) function.)
-
-(h) Use the bootstrap to estimate the standard error of $\hat{\mu}_{0.1}$. Comment on your findings.
-
-
-
-
-   
-   
-### References
+## References

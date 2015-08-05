@@ -1,5 +1,4 @@
-# ME114 Day 4
+# Chapter 4. Classification
 
-* [Lab](ME114_lab4.html)
-* [Exercise](ME114_exercise4_LASTNAME_FIRSTNAME.html)
-* [Solutions](ME114_solutions4.html)
+* [Lab](lab.html)
+* [Solutions](solutions.html)
