@@ -1,0 +1,558 @@
+---
+title: "ME114 Lab 4: Classification and non-linear models."
+author: "Ken Benoit and Slava Mikhaylov"
+output: html_document
+bibliography: ../bibliography/bibliography.bib
+---
+
+This lab session is based on lab exercises in @james2013 [Chapters 4 and 7]. The first part focuses on classification and the second part of the lab deals with additional non-linear models.
+
+## Part I: Classification
+
+### 4.1 The Stock Market Data
+
+Start by loading the `ISLR` package and attach to the `Smarket` dataset that we will be using throughout this exercise.
+
+```{r}
+library(ISLR)
+```
+
+```{r, message=FALSE, warning=FALSE}
+attach(Smarket)
+```
+
+```{r}
+names(Smarket)
+pairs(Smarket)
+```
+
+The [`cor()`](http://bit.ly/R_cor) function is used to show a matrix of all pairwise correlations among the predictors in the `Smarket` dataset.
+
+```{r}
+cor(Smarket[, -9])
+```
+
+Use the [`plot()`](http://bit.ly/R_plot) function to produce a scatter plot or the variable `Volume`.
+
+```{r}
+plot(Volume)
+```
+
+### 4.2 Logistic Regression
+
+The [`glm()`](http://bit.ly/R_glm) function can be used to fit a logistic regression model by specifying `family=binomial`. 
+
+```{r}
+glm.fit <- glm(Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + Volume, data = Smarket, family = binomial)
+summary(glm.fit)
+```
+
+Similar to linear models estimated with the [`lm()`](http://bit.ly/R_lm), the logistic regression model fitted with [`glm()`](http://bit.ly/R_glm) can be examined with the [`summary()`](http://bit.ly/R_summary) and [`coef()`](http://bit.ly/R_coef) 
+
+```{r}
+coef(glm.fit)
+summary(glm.fit)$coef
+summary(glm.fit)$coef[, 4]
+```
+
+The [`predict()`](http://bit.ly/R_predict) function is used similarly to generate predictions for the response variable.
+
+```{r}
+glm.probs <- predict(glm.fit, type = "response")
+glm.probs[1:10]
+```
+
+Use the [`contrasts()`](http://bit.ly/R_contrasts) function to see the dummy variables generated for values in the categorical variable `Direction`.
+
+```{r}
+contrasts(Direction)
+```
+
+Next we convert the predicted probabilities to either "Up" or "Down" based on whether the probability is less than or greater than 0.5.
+
+```{r}
+glm.pred <- rep("Down", 1250)
+glm.pred[glm.probs > 0.5] <- "Up"
+```
+
+We can generate a confusion matrix between the predicted direction and the actual direction from the variable `Direction` using the [`table()`](http://bit.ly/R_table) function.
+
+```{r}
+table(glm.pred, Direction)
+mean(glm.pred == Direction)
+```
+
+We then divide our dataset into training set and validation set. The training set will include observations from 2001-2004 and the validation set from the year 2005.
+
+```{r}
+train <- (Year < 2005)
+Smarket.2005= Smarket [! train ,]
+dim(Smarket.2005)
+Direction.2005=Direction[!train]
+```
+
+We can run the logistic regression again using  [`glm()`](http://bit.ly/R_glm) but this time restricting our training set to observations in the subset `train`.
+
+```{r}
+glm.fit <- glm(Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + Volume, data = Smarket, family = binomial, subset = train)
+glm.probs <- predict(glm.fit, Smarket.2005, type = "response")
+```
+
+Next we compare the predictions for 2005 based on the model generated from our `train` subset.
+
+```{r}
+glm.pred <- rep("Down", 252)
+glm.pred[glm.probs > 0.5] <- "Up"
+table(glm.pred, Direction.2005)
+mean(glm.pred == Direction.2005)
+mean(glm.pred != Direction.2005)
+```
+
+To improve the predictive performance, we can restrict the predictor variables to only those with the strongest relationship to the response variable. In this case, we limit the variables to `Lag1` and `Lag2`.
+
+```{r}
+glm.fit <- glm(Direction ~ Lag1 + Lag2, data = Smarket, family = binomial, subset = train)
+glm.probs <- predict(glm.fit, Smarket.2005, type = "response")
+glm.pred <- rep("Down", 252)
+glm.pred[glm.probs > 0.5] <- "Up"
+table(glm.pred, Direction.2005)
+mean(glm.pred == Direction.2005)
+```
+
+```{r}
+predict(glm.fit,newdata=data.frame(Lag1=c(1.2,1.5), Lag2=c(1.1,-0.8)),type="response")
+```
+
+### 4.3 Linear Discriminant Analysis
+
+Let's first load the `MASS` package so we can train an LDA model with the [`lda()`](http://bit.ly/R_lda) function. 
+
+```{r}
+library(MASS)
+lda.fit <- lda(Direction ~ Lag1 + Lag2, data = Smarket, subset = train)
+plot(lda.fit)
+```
+
+The [`predict()`](http://bit.ly/R_predict) function for an LDA model returns a list of three elements representing the predicted class, the posterior probabilities and the linear discriminants as shown below.
+
+```{r}
+lda.pred <- predict(lda.fit, Smarket.2005)
+names(lda.pred)
+```
+
+We can compare the predicted class with the predicted direction obtained from logistic regression in the previous section and stored in the vector `Direction.2005`.
+
+```{r}
+lda.class <- lda.pred$class
+table(lda.class, Direction.2005)
+mean(lda.class == Direction.2005)
+```
+
+```{r}
+sum(lda.pred$posterior[, 1] >= 0.5)
+sum(lda.pred$posterior[, 1] < 0.5)
+```
+
+We can inspect the posterior probabilities of the LDA model from the `posterior` vector of the fitted model.
+
+```{r}
+lda.pred$posterior[1:20, 1]
+lda.class[1:20]
+```
+
+We can also set the posterior probabilities to different thresholds for making predictions.
+
+```{r}
+sum(lda.pred$posterior[, 1] > 0.9)
+```
+
+### 4.4 Quadratic Discriminant Analysis
+
+In addition to Linear Discriminant Analysis (LDA), the MASS package also offers a Quadratic Discriminant Analysis (LDA) model that we can fit with the [`qda()`](http://bit.ly/R_qda) function.
+
+```{r}
+qda.fit <- qda(Direction ~ Lag1 + Lag2, data = Smarket, subset = train)
+qda.fit
+```
+
+We can make predictions using [`predict()`](http://bit.ly/R_predict) just as we did for an LDA model and compare them to the results from the logistic regression.
+
+```{r}
+qda.class <- predict(qda.fit, Smarket.2005)$class
+table(qda.class, Direction.2005)
+mean(qda.class == Direction.2005)
+```
+
+### 4.5 K-Nearest Neighbors
+
+The `class` package offers a number of classification algorithms including K-Nearest Neighbors. Before we can run the KNN algorithm, we need to split our dataset into training and test subsets. After splitting the dataset, the [`cbind()`](http://bit.ly/R_cbind) is used to bind the `Lag1` and `Lag2` variables into a matrix for each subset.
+
+```{r}
+library(class)
+train.X <- cbind(Lag1, Lag2)[train, ]
+test.X <- cbind(Lag1, Lag2)[!train, ]
+train.Direction <- Direction[train]
+```
+
+We initialize the random number generator with [set.seed()](http://bit.ly/R_set_seed) to ensure that repeated runs produce consistent results and then use [`knn()`](http://bit.ly/R_knn) to make predictions about the market direction in 2005.
+
+```{r}
+set.seed(1)
+knn.pred <- knn(train.X, test.X, train.Direction, k = 1)
+table(knn.pred, Direction.2005)
+(83 + 43)/252
+```
+
+We can repeat the fit with K = 3.
+
+```{r}
+knn.pred <- knn(train.X, test.X, train.Direction, k = 3)
+table(knn.pred, Direction.2005)
+mean(knn.pred == Direction.2005)
+```
+
+### 4.6 An Application to Caravan Insurance Data
+
+We first use the [`attach()`](http://bit.ly/R_attach) function to make the `Caravan` dataset available to us.
+
+```{r, message=FALSE, warning=FALSE}
+attach(Caravan)
+```
+
+Lets explore the dataset with the [`dim()`](http://bit.ly/R_dim) and [`summary()`](http://bit.ly/R_summary) functions.
+
+```{r}
+dim(Caravan)
+summary(Purchase)
+348/5822
+```
+
+We use the [`scale()`](http://bit.ly/R_scale) function to scale the dataset with a mean of zero and standard deviation of one.
+
+```{r}
+standardized.X <- scale(Caravan[, -86])
+var(Caravan[, 1])
+var(Caravan[, 2])
+var(standardized.X[, 1])
+var(standardized.X[, 2])
+```
+
+We use the procedure described in the previous section of splitting the dataset into training and test sets and making prediction about the response variable `Purchase` using a KNN model.
+
+```{r}
+test <- 1:1000
+train.X <- standardized.X[-test, ]
+test.X <- standardized.X[test, ]
+train.Y <- Purchase[-test]
+test.Y <- Purchase[test]
+set.seed(1)
+knn.pred <- knn(train.X, test.X, train.Y, k = 1)
+mean(test.Y != knn.pred)
+mean(test.Y != "No")
+```
+
+```{r}
+table(knn.pred, test.Y)
+9/(68 + 9)
+```
+
+We can repeat this process with different values of K, for example, K = 3 and K = 5.
+
+```{r}
+knn.pred <- knn(train.X, test.X, train.Y, k = 3)
+table(knn.pred, test.Y)
+5/26
+knn.pred <- knn(train.X, test.X, train.Y, k = 5)
+table(knn.pred, test.Y)
+4/15
+```
+
+Finally, we compare the KNN model with a logistic regression using  [`glm()`](http://bit.ly/R_glm) and `family = binomial`.
+
+```{r}
+glm.fit <- glm(Purchase ~ ., data = Caravan, family = binomial, subset = -test)
+glm.probs <- predict(glm.fit, Caravan[test, ], type = "response")
+glm.pred <- rep("No", 1000)
+glm.pred[glm.probs > 0.5] <- "Yes"
+table(glm.pred, test.Y)
+glm.pred <- rep("No", 1000)
+glm.pred[glm.probs > 0.25] <- " Yes"
+table(glm.pred, test.Y)
+11/(22 + 11)
+```
+
+## Part II: Non-linear models
+
+We continue with the `ISLR` package. Now, attach the `Wage` dataset that we will be using throughout this exercise.
+
+```{r, message=FALSE, warning=FALSE}
+library(ISLR)
+attach(Wage)
+```
+
+### 4.7 Polynomial Regression and Step Functions
+
+Let's fit a linear model to predict `wage` with a fourth-degree polynomial using the [`poly()`](http://bit.ly/R_poly)
+
+```{r}
+fit <- lm(wage ~ poly(age, 4), data = Wage)
+coef(summary(fit))
+```
+
+We can also obtain raw instead of orthogonal polynomials using the `raw = TRUE` argument to [`poly()`](http://bit.ly/R_poly)
+
+```{r}
+fit2 <- lm(wage ~ poly(age, 4, raw = T), data = Wage)
+coef(summary(fit2))
+```
+
+Finally, instead of using [`poly()`](http://bit.ly/R_poly), we can specify the polynomials directly in the formula as shown below.
+
+```{r}
+fit2a <- lm(wage ~ age + I(age^2) + I(age^3) + I(age^4), data = Wage)
+coef(fit2a)
+```
+
+A more compact version of the same example uses [`cbind()`](http://bit.ly/R_cbind) and eliminates the need to wrap each term in [`I()`](http://bit.ly/R_asis).
+
+```{r}
+fit2b <- lm(wage ~ cbind(age, age^2, age^3, age^4), data = Wage)
+```
+
+We can create an age grid for the targeted values of the prediction and pass the grid to [`predict()`](http://bit.ly/R_predict).
+
+```{r}
+agelims <- range(age)
+age.grid <- seq(from = agelims[1], to = agelims[2])
+preds <- predict(fit, newdata = list(age = age.grid), se = TRUE)
+se.bands <- cbind(preds$fit + 2 * preds$se.fit, preds$fit - 2 * preds$se.fit)
+```
+
+```{r}
+preds2 <- predict(fit2, newdata = list(age = age.grid), se = TRUE)
+max(abs(preds$fit - preds2$fit))
+```
+
+We can use [`anova()`](http://bit.ly/R_anova) to compare five different models of linear fit.
+
+```{r}
+fit.1 <- lm(wage ~ age, data = Wage)
+fit.2 <- lm(wage ~ poly(age, 2), data = Wage)
+fit.3 <- lm(wage ~ poly(age, 3), data = Wage)
+fit.4 <- lm(wage ~ poly(age, 4), data = Wage)
+fit.5 <- lm(wage ~ poly(age, 5), data = Wage)
+anova(fit.1, fit.2, fit.3, fit.4, fit.5)
+```
+
+The same p-values can also be obtained from the [`coef()`](http://bit.ly/R_coef) function.
+
+```{r}
+coef(summary(fit.5))
+```
+
+The [`anova()`](http://bit.ly/R_anova) function can also compare the variances when other terms are included as predictors.
+
+```{r}
+fit.1 <- lm(wage ~ education + age, data = Wage)
+fit.2 <- lm(wage ~ education + poly(age, 2), data = Wage)
+fit.3 <- lm(wage ~ education + poly(age, 3), data = Wage)
+anova(fit.1, fit.2, fit.3)
+```
+
+With [`glm()`](http://bit.ly/R_glm) we can also fit a polynomial logistic regression.
+
+```{r}
+fit <- glm(I(wage > 250) ~ poly(age, 4), data = Wage, family = binomial)
+```
+
+And use the same method for making predictions using [`predict()`](http://bit.ly/R_predict) as seen above.
+
+```{r}
+preds <- predict(fit, newdata = list(age = age.grid), se = T)
+```
+
+
+```{r}
+pfit <- exp(preds$fit)/(1 + exp(preds$fit))
+se.bands.logit <- cbind(preds$fit + 2 * preds$se.fit, preds$fit - 2 * preds$se.fit)
+se.bands <- exp(se.bands.logit)/(1 + exp(se.bands.logit))
+```
+
+
+```{r}
+preds <- predict(fit, newdata = list(age = age.grid), type = "response", se = T)
+```
+
+We can plot these results with the [`plot()`](http://bit.ly/R_plot) function as usual.
+
+```{r}
+par(mfrow = c(1, 2), mar = c(4.5, 4.5, 1, 1), oma = c(0, 0, 4, 0))
+plot(age, wage, xlim = agelims, cex = 0.5, col = "darkgrey")
+title("Degree -4 Polynomial ", outer = T)
+lines(age.grid, preds$fit, lwd = 2, col = "blue")
+matlines(age.grid, se.bands, lwd = 1, col = "blue", lty = 3)
+
+plot(age, I(wage > 250), xlim = agelims, type = "n", ylim = c(0, 0.2))
+points(jitter(age), I((wage > 250)/5), cex = 0.5, pch = "|", col = " darkgrey ")
+lines(age.grid, pfit, lwd = 2, col = "blue")
+matlines(age.grid, se.bands, lwd = 1, col = "blue", lty = 3)
+```
+
+In the above plot, the [`jitter()`](http://bit.ly/R_jitter) function is used to prevent the same age observations from overlapping each other.
+
+The [`cut()`](http://bit.ly/R_cut) functions creates cutpoints in the observations, which are then used as predictors for the linear model to fit a step function.
+
+```{r}
+table(cut(age, 4))
+fit <- lm(wage ~ cut(age, 4), data = Wage)
+coef(summary(fit))
+```
+
+### 4.8 Splines
+
+We use the `splines` package to run regression splines. 
+
+```{r}
+library(splines)
+```
+
+We first use [`bs()`](http://bit.ly/R_bs) to generate a basis matrix for a polynomial spline and fit a model with knots at age 25, 40 and 60.
+
+```{r}
+fit <- lm(wage ~ bs(age, knots = c(25, 40, 60)), data = Wage)
+pred <- predict(fit, newdata = list(age = age.grid), se = T)
+plot(age, wage, col = "gray")
+lines(age.grid, pred$fit, lwd = 2)
+lines(age.grid, pred$fit + 2 * pred$se, lty = "dashed")
+lines(age.grid, pred$fit - 2 * pred$se, lty = "dashed")
+```
+
+Alternatively, the [`df()`](http://bit.ly/R_dist) function can be used to produce a spline fit with knots at uniform intervals.
+
+```{r}
+dim(bs(age, knots = c(25, 40, 60)))
+dim(bs(age, df = 6))
+attr(bs(age, df = 6), "knots")
+```
+
+```{r}
+plot(age, wage, col = "gray")
+fit2 <- lm(wage ~ ns(age, df = 4), data = Wage)
+pred2 <- predict(fit2, newdata = list(age = age.grid), se = TRUE)
+lines(age.grid, pred2$fit, col = "red", lwd = 2)
+```
+
+We can fit a smoothing spline using [`smooth.spline()`](http://bit.ly/R_smooth_spline)
+
+```{r}
+plot(age, wage, xlim = agelims, cex = 0.5, col = "darkgrey")
+title(" Smoothing Spline ")
+fit <- smooth.spline(age, wage, df = 16)
+fit2 <- smooth.spline(age, wage, cv = TRUE)
+fit2$df
+lines(fit, col = "red", lwd = 2)
+lines(fit2, col = "blue", lwd = 2)
+legend("topright", legend = c("16 DF", "6.8 DF"), col = c("red", "blue"), lty = 1, lwd = 2, cex = 0.8)
+```
+
+We can use [`loess()`](http://bit.ly/R_loess) function for a local polynomial regression.
+
+```{r}
+plot(age, wage, xlim = agelims, cex = 0.5, col = "darkgrey")
+title(" Local Regression ")
+fit <- loess(wage ~ age, span = 0.2, data = Wage)
+fit2 <- loess(wage ~ age, span = 0.5, data = Wage)
+lines(age.grid, predict(fit, data.frame(age = age.grid)), col = "red", lwd = 2)
+lines(age.grid, predict(fit2, data.frame(age = age.grid)), col = "blue", lwd = 2)
+legend("topright", legend = c("Span=0.2", "Span=0.5"), col = c("red", "blue"), lty = 1, lwd = 2, cex = 0.8)
+```
+
+### 4.9 GAMs
+
+We can fit a GAM with [`lm()`](http://bit.ly/R_lm) when an appropriate basis function can used.
+
+```{r}
+gam1 <- lm(wage ~ ns(year, 4) + ns(age, 5) + education, data = Wage)
+```
+
+However, the `gam` package offers a general solution to fitting GAMs and is especially useful when splines cannot be easily expressed in terms of basis functions.
+
+```{r}
+library(gam)
+gam.m3 <- gam(wage ~ s(year, 4) + s(age, 5) + education, data = Wage)
+```
+
+The [`plot()`](http://bit.ly/R_plot) functions the same way as it does with [`lm()`](http://bit.ly/R_lm) and [`glm()`](http://bit.ly/R_glm).
+
+```{r}
+par(mfrow = c(1, 3))
+plot(gam.m3, se = TRUE, col = "blue")
+```
+
+```{r}
+plot.gam(gam1, se = TRUE, col = "red")
+```
+
+We can use [`annova()`](http://bit.ly/R_anova) to find the best performing model.
+
+```{r}
+gam.m1 <- gam(wage ~ s(age, 5) + education, data = Wage)
+gam.m2 <- gam(wage ~ year + s(age, 5) + education, data = Wage)
+anova(gam.m1, gam.m2, gam.m3, test = "F")
+```
+
+And use [`summary()`](http://bit.ly/R_summary) to generate a summary of the fitted model.
+
+```{r}
+summary(gam.m3)
+```
+
+We can make predictions using [`predict()`](http://bit.ly/R_predict) just as we did with linear and logistic regressions.
+
+```{r}
+preds <- predict(gam.m2, newdata = Wage)
+```
+
+We can use a loess fit as a smoothing term in a GAM formula using the [`lo()`](http://bit.ly/R_gam_lo) 
+
+```{r}
+gam.lo <- gam(wage ~ s(year, df = 4) + lo(age, span = 0.7) + education, data = Wage)
+plot.gam(gam.lo, se = TRUE, col = "green")
+```
+
+```{r}
+gam.lo.i <- gam(wage ~ lo(year, age, span = 0.5) + education, data = Wage)
+```
+
+The `akima` package can be used to plot two-dimensional surface plots. Make sure the package is part of your R installation or install it with [`install.packages()`](http://bit.ly/R_install_packages) if necessary.
+
+```{r}
+library(akima)
+plot(gam.lo.i)
+```
+
+The [`gam()`](http://bit.ly/R_gam) function also allows fitting logistic regression GAM with the `family = binomial` argument.
+
+```{r}
+gam.lr <- gam(I(wage > 250) ~ year + s(age, df = 5) + education, family = binomial, data = Wage)
+par(mfrow = c(1, 3))
+plot(gam.lr, se = T, col = "green")
+```
+
+```{r}
+table(education, I(wage > 250))
+```
+
+```{r}
+gam.lr.s <- gam(I(wage > 250) ~ year + s(age, df = 5) + education, family = binomial, data = Wage, subset = (education != "1. < HS Grad"))
+plot(gam.lr.s, se = T, col = "green")
+```
+
+
+## References
+
+
+
+
+
+ 
