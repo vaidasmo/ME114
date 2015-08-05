@@ -17,7 +17,7 @@ library(ISLR)
 
 ## Exercise 5.1
 
-Logistic regression may be used to predict the probability of `default` using `income` and `balance` on the [Default](http://bit.ly/1InG11P) data set. Here we will estimate the test error of this logistic regression model using the validation set approach. Do not forget to set a random seed before beginning your analysis.
+Logistic regression may be used to predict the probability of `default` using `income` and `balance` on the [Default](http://bit.ly/R_ISLR_Default) data set. Here we will estimate the test error of this logistic regression model using the validation set approach. Do not forget to set a random seed before beginning your analysis.
 
    (a) Fit a logistic regression model that uses `income` and `balance` to predict `default`.
    (b) Using the validation set approach, estimate the test error of this model. In order to do this, you must perform the following steps:
@@ -31,17 +31,17 @@ Logistic regression may be used to predict the probability of `default` using `i
 
 ## Exercise 5.2
 
-We continue to consider the use of a logistic regression model to predict the probability of `default` using `income` and `balance` on the [Default](http://bit.ly/1InG11P) data set. In particular, we will now compute estimates for the standard errors of the `income` and `balance` logistic regression coefficients in two different ways: (1) using the bootstrap, and (2) using the standard formula for computing the standard errors in the [glm()](http://bit.ly/R_glm) function. Do not forget to set a random seed before beginning your analysis.
+We continue to consider the use of a logistic regression model to predict the probability of `default` using `income` and `balance` on the [Default](http://bit.ly/R_ISLR_Default) data set. In particular, we will now compute estimates for the standard errors of the `income` and `balance` logistic regression coefficients in two different ways: (1) using the bootstrap, and (2) using the standard formula for computing the standard errors in the [glm()](http://bit.ly/R_glm) function. Do not forget to set a random seed before beginning your analysis.
 
    (a) Using the [summary()](http://bit.ly/R_summary) and [glm()](http://bit.ly/R_glm) functions, determine the estimated standard errors for the coefficients associated with income and balance in a multiple logistic regression model that uses both predictors.
-   (b) Write a function, `boot.fn()`, that takes as input the [Default](http://bit.ly/1InG11P) data set as well as an index of the observations, and that outputs the coefficient estimates for `income` and `balance` in the multiple logistic regression model.
+   (b) Write a function, `boot.fn()`, that takes as input the [Default](http://bit.ly/R_ISLR_Default) data set as well as an index of the observations, and that outputs the coefficient estimates for `income` and `balance` in the multiple logistic regression model.
    (c) Use the [boot()](http://bit.ly/R_boot) function together with your `boot.fn()` function to estimate the standard errors of the logistic regression coefficients for `income` and `balance`.
    (d) Comment on the estimated standard errors obtained using the [glm()](http://bit.ly/R_glm) function and using your bootstrap function.
 
 
 ## Exercise 5.3
 
-In Sections 5.3.2 and 5.3.3 in @james2013, we saw that the [cv.glm()](http://bit.ly/R_cv_glm) function can be used in order to compute the LOOCV test error estimate. Alternatively, one could compute those quantities using just the [glm()](http://bit.ly/R_glm) and `predict.glm()` functions, and a [for()](http://bit.ly/R_Control) loop. You will now take this approach in order to compute the LOOCV error for a simple logistic regression model on the [Weekly](http://bit.ly/1g5T3JN) data set. Recall that in the context of classification problems, the LOOCV error is given in (5.4).
+In Sections 5.3.2 and 5.3.3 in @james2013, we saw that the [cv.glm()](http://bit.ly/R_cv_glm) function can be used in order to compute the LOOCV test error estimate. Alternatively, one could compute those quantities using just the [glm()](http://bit.ly/R_glm) and `predict.glm()` functions, and a [for()](http://bit.ly/R_Control) loop. You will now take this approach in order to compute the LOOCV error for a simple logistic regression model on the [Weekly](http://bit.ly/R_ISLR_Weekly) data set. Recall how we covered the LOOCV error in the context of classification problems.
 
    (a) Fit a logistic regression model that predicts `Direction` using `Lag1` and `Lag2`.
    (b) Fit a logistic regression model that predicts `Direction` using `Lag1` and `Lag2` *using all but the first observation*.
@@ -84,7 +84,7 @@ to create a single data set containing both $X$ and $Y$.
 
 ## Exercise 5.5
 
-We will now consider the [Boston](http://bit.ly/1M9I5Ro) housing data set, from the [MASS](http://bit.ly/1E6z7w6) package. 
+We will now consider the [Boston](http://bit.ly/R_MASS_Boston) housing data set, from the [MASS](http://bit.ly/R_MASS) package. 
 
 (a) Based on this data set, provide an estimate for the population mean of `medv`. Call this estimate $\hat{\mu}$.
    
@@ -100,7 +100,7 @@ We will now consider the [Boston](http://bit.ly/1M9I5Ro) housing data set, from 
    
 (f) We now would like to estimate the standard error of $\hat{\mu}_{med}$. Unfortunately, there is no simple formula for computing the standard error of the median. Instead, estimate the standard error of the median using the bootstrap. Comment on your findings.
    
-(g) Based on this data set, provide an estimate for the tenth percentile of `medv` in Boston suburbs. Call this quantity $\hat{\mu}_{0.1}$. (You can use the [quantile()](http://bit.ly/1T07A6y) function.)
+(g) Based on this data set, provide an estimate for the tenth percentile of `medv` in Boston suburbs. Call this quantity $\hat{\mu}_{0.1}$. (You can use the [quantile()](http://bit.ly/R_quantile) function.)
 
 (h) Use the bootstrap to estimate the standard error of $\hat{\mu}_{0.1}$. Comment on your findings.
 
