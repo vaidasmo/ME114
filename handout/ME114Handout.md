@@ -285,7 +285,7 @@ on prediction.
 
 -   Zumel and Mount, Chapter 7.1.
 
-<!-- -->
+### Recommended Reading: {#recommended-reading-1 .unnumbered}
 
 -   Lantz, Chapter 6
 
@@ -302,8 +302,6 @@ This session will cover logistic regression, generalized additive models
 -   James et al. Chapters 4, 7.6–7.7.
 
 -   Zumel and Mount, Chapter 7.2.
-
-### Recommended Reading: {#recommended-reading-1 .unnumbered}
 
 ### Exercise 4: TBA {#exercise-4-tba .unnumbered}
 
