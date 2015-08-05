@@ -144,7 +144,7 @@ lm.fit <- lm(medv ~ ., data = Boston)
 summary(lm.fit)
 ```
 
-The Variance Inflation Factors (VIF) can be caculated using the `vif()` function from the `Companion to Applied Regression` or `car` package. You can install the `car` package using [`install.packages()`](http://bit.ly/R_install_packages) if it is not already installed.
+The Variance Inflation Factors (VIF) can be calculated using the `vif()` function from the `Companion to Applied Regression` or `car` package. You can install the `car` package using [`install.packages()`](http://bit.ly/R_install_packages) if it is not already installed.
 
 ```{r eval=FALSE}
 install.packages("ISLR")
@@ -162,7 +162,7 @@ lm.fit1 <- lm(medv ~ . - age, data = Boston)
 summary(lm.fit1)
 ```
 
-We can also update an existing fit with the [`update()`](http://bit.ly/R_update) function and specifiying a new formula.
+We can also update an existing fit with the [`update()`](http://bit.ly/R_update) function and specifying a new formula.
 
 ```{r}
 lm.fit1 <- update(lm.fit, ~. - age)
@@ -221,14 +221,14 @@ head(Carseats)
 names(Carseats)
 ```
 
-When dealing with qualitative or categorial variable, `R` automatically generates dummy variables for us. 
+When dealing with qualitative or categorical variable, `R` automatically generates dummy variables for us. 
 
 ```{r}
 lm.fit <- lm(Sales ~ . + Income:Advertising + Price:Age, data = Carseats)
 summary(lm.fit)
 ```
 
-To examine the coding for the qualitive variables, we can use the [`contrasts()`](http://bit.ly/R_contrasts) function.
+To examine the coding for the qualitative variables, we can use the [`contrasts()`](http://bit.ly/R_contrasts) function.
 
 ```{r}
 contrasts(ShelveLoc)
