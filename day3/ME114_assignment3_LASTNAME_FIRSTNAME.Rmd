@@ -1,13 +1,14 @@
 ---
-title: "Exercise Set 3 - Linear Regression"
+title: "Assignment 3 - Linear Regression"
 author: "Ken Benoit and Slava Mikhaylov"
 output: html_document
 bibliography: ../bibliography/bibliography.bib
 ---
 
-@james2013 provide a set of exercises (conceptual and applied) for each chapter in their book. Applied exercises focus on linking conceptual material with practical implementation in R. Below are the applied exercises for Chapter 3 "Linear Regression" [@james2013, pp. 121-126].
+Assignments for the course focus on practical aspects of the concepts covered in the lectures. Assignments are largely based on the material covered in @james2013. You will start working on the assignment in the lab sessions after the lectures, but may need to finish them after class.
 
-Please **submit this exercise by email as an html file**  by putting your answers prior to the  **deadline of 9pm on Wednesday, August XX**. 
+You will be asked to submit your assignments via Moodle by 7pm on the day of the class. We will subsequently open up solutions to the problem sets. 
+
 
 You will need to load the core library for the course textbook:
 ```{r}
@@ -50,7 +51,7 @@ This question involves the use of multiple linear regression on the `Auto` data 
 
 ## Exercise 3.3
 
-This question should be answered using the `Carseats` data set.
+This question should be answered using the `Carseats` dataset from the `ISLR` package.
 
 (a) Fit a multiple regression model to predict `Sales` using `Price`,
 `Urban`, and `US`.
@@ -141,7 +142,7 @@ Re-fit the linear models from (c) to (e) using this new data. What effect does t
 
 ## Exercise 3.8
 
-This problem involves the `Boston` data set, which we saw in the lab earlier. We will now try to predict per capita crime rate using the other variables in this data set. In other words, per capita crime rate is the response, and the other variables are the predictors.
+This problem involves the `Boston` dataset from the `MASS` package. We will try to predict per capita crime rate using the other variables in this data set. In other words, per capita crime rate is the response, and the other variables are the predictors.
 
 (a) For each predictor, fit a simple linear regression model to predict the response. Describe your results. In which of the models is there a statistically significant association between the predictor and the response? Create some plots to back up your assertions.
 (b) Fit a multiple regression model to predict the response using all of the predictors. Describe your results. For which predictors can we reject the null hypothesis $H_0 : \beta_j = 0$?

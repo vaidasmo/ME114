@@ -1,5 +1,0 @@
-# ME114 Day 6
-
-* [Lab](ME114_lab6.html)
-* [Exercise](ME114_exercise6_LASTNAME_FIRSTNAME.html)
-* [Solutions](ME114_solutions6.html)

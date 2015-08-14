@@ -1,13 +1,13 @@
 ---
-title: "Exercise Set 6 - Association rules and clustering"
+title: "Assignment 6 - Association rules and clustering"
 author: "Ken Benoit and Slava Mikhaylov"
 output: html_document
 bibliography: ../bibliography/bibliography.bib
 ---
 
-@james2013 provide a set of exercises (conceptual and applied) for each chapter in their book. Applied exercises focus on linking conceptual material with practical implementation in R. Below are some of the exercises for Chapter 10.3 "Association rules and clustering" [@james2013, pp. 413-418].
+Assignments for the course focus on practical aspects of the concepts covered in the lectures. Assignments are largely based on the material covered in @james2013. You will start working on the assignment in the lab sessions after the lectures, but may need to finish them after class.
 
-Please **submit this exercise by email as an html file**  by putting your answers prior to the  **deadline of 9pm on Friday, August XX**. 
+You will be asked to submit your assignments via Moodle by 7pm on the day of the class. We will subsequently open up solutions to the problem sets. 
 
 ## Exercise 6.1
 
@@ -22,10 +22,10 @@ $$\left[ \begin{array}{ccc}
 
 For instance, the dissimilarity between the first and second observations is 0.3, and the dissimilarity between the second and fourth observations is 0.8.
 
-(a) On the basis of this dissimilarity matrix, sketch the dendogram that results from hierarchically clustering these four observations using complete linkage. Be sure to indicate on the plot the height at which each fusion occurs, as well as the observations corresponding to each leaf in the dendrogram.
+(a) On the basis of this dissimilarity matrix, sketch the dendrogram that results from hierarchically clustering these four observations using complete linkage. Be sure to indicate on the plot the height at which each fusion occurs, as well as the observations corresponding to each leaf in the dendrogram.
 (b) Repeat (a), this time using single linkage clustering.
-(c) Suppose that we cut the dendogram obtained in (a) such that two clusters result. Which observations are in each cluster?
-(d) Suppose that we cut the dendogram obtained in (b) such that two clusters result. Which observations are in each cluster?
+(c) Suppose that we cut the dendrogram obtained in (a) such that two clusters result. Which observations are in each cluster?
+(d) Suppose that we cut the dendrogram obtained in (b) such that two clusters result. Which observations are in each cluster?
 (e) It is mentioned in this theoretical topic that at each fusion in the dendrogram, the position of the two clusters being fused can be swapped without changing the meaning of the dendrogram. Draw a dendrogram that is equivalent to the dendrogram in (a), for which two or more of the leaves are repositioned, but for which the meaning of the dendrogram is the same.
 
 ## Exercise 6.2
@@ -54,21 +54,19 @@ In this problem, you will perform K-means clustering manually, with $K = 2$, on 
 
 In the section, we mentioned the use of correlation-based distance and Euclidean distance as dissimilarity measures for hierarchical clustering. It turns out that these two measures are almost equivalent: if each observation has been centred to have mean zero and standard deviation one, and if we let $r_{ij}$ denote the correlation between the $i$ th and $j$ th observations, then the quantity $1 − r_{ij}$ is proportional to the squared Euclidean distance between the $i$ th and $j$ th observations.
 
-On the `USArrests` data, show that this proportionality holds.
+On the `USArrests` data, part of the base `R` distribution, show that this proportionality holds.
 
 *Hint: The Euclidean distance can be calculated using the `dist()` function, and correlations can be calculated using the `cor()` function.*
 
 
 ## Exercise 6.4
  
-Consider the `USArrests` data. We will now perform hierarchical clustering on the states.
+Consider the `USArrests` data, which is part of the base `R` distribution. We will now perform hierarchical clustering on the states.
 
 (a) Using hierarchical clustering with complete linkage and Euclidean distance, cluster the states.
 (b) Cut the dendrogram at a height that results in three distinct clusters. Which states belong to which clusters?
 (c) Hierarchically cluster the states using complete linkage and Euclidean distance, *after scaling the variables to have standard deviation one*.
 (d) What effect does scaling the variables have on the hierarchical clustering obtained? In your opinion, should the variables be scaled before the inter-observation dissimilarities are computed? Provide a justification for your answer. 
- 
- 
- 
+
    
 ### References

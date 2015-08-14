@@ -1,20 +1,19 @@
 ---
-title: "Exercise Set 8 - Unsupervised learning and dimensional reduction"
+title: "Assignment 8 - Unsupervised learning and dimensional reduction"
 author: "Ken Benoit and Slava Mikhaylov"
 output: html_document
 bibliography: ../bibliography/bibliography.bib
 ---
 
-@james2013 provide a set of exercises (conceptual and applied) for each chapter in their book. Applied exercises focus on linking conceptual material with practical implementation in R. Below are the applied exercises for Chapter 10.1-10.2 "Unsupervised learning" [@james2013, pp. 416-418] focusing on dimensional reduction.
+Assignments for the course focus on practical aspects of the concepts covered in the lectures. Assignments are largely based on the material covered in @james2013. You will start working on the assignment in the lab sessions after the lectures, but may need to finish them after class.
 
-Please **submit this exercise by email as an html file**  by putting your answers prior to the  **deadline of 9pm on Friday, August XX**. 
-
+You will be asked to submit your assignments via Moodle by 7pm on the day of the class. We will subsequently open up solutions to the problem sets. 
 
 ## Exercise 8.1
 
 In Section 10.2.3 @james2013, a formula for calculating PVE was given in Equation 10.8  [@james2013, pp. 383]. We also saw that the PVE can be obtained using the `sdev` output of the `prcomp()` function.
 
-On the `USArrests` data, calculate PVE in two ways:
+On the `USArrests` data, which is part of the base `R` distribution, calculate PVE in two ways:
 
 (a) Using the `sdev` output of the `prcomp()` function, as was done in Section 10.2.3.
 (b) By applying Equation 10.8 directly. That is, use the `prcomp()` function to compute the principal component loadings. Then, use those loadings in Equation 10.8 to obtain the PVE.

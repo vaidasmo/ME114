@@ -1,13 +1,13 @@
 ---
-title: "Exercise Set 7 - Machine Learning"
+title: "Assignment 7 - Machine Learning"
 author: "Ken Benoit and Slava Mikhaylov"
 output: html_document
 bibliography: ../bibliography/bibliography.bib
 ---
 
-@james2013 provide a set of exercises (conceptual and applied) for each chapter in their book. Applied exercises focus on linking conceptual material with practical implementation in R. Below are the applied exercises for Chapter 8 "Tree-Based Methods" [@james2013, pp. 333-335].
+Assignments for the course focus on practical aspects of the concepts covered in the lectures. Assignments are largely based on the material covered in @james2013. You will start working on the assignment in the lab sessions after the lectures, but may need to finish them after class.
 
-Please **submit this exercise by email as an html file**  by putting your answers prior to the  **deadline of 9pm on Friday, August XX**. 
+You will be asked to submit your assignments via Moodle by 7pm on the day of the class. We will subsequently open up solutions to the problem sets. 
 
 You will need to load the core library for the course textbook:
 ```{r}
@@ -17,11 +17,11 @@ library(ISLR)
 
 ## Exercise 7.1
 
-In the lab, we applied random forests to the `Boston` data using `mtry=6` and using `ntree=25` and `ntree=500`. Create a plot displaying the test error resulting from random forests on this data set for a more comprehensive range of values for `mtry` and `ntree`. You can model your plot after Figure 8.10 in @james2013 [Chapter 8]. Describe the results obtained.
+Apply random forests to the `Boston` data, part of `MASS` package, using `mtry=6` and using `ntree=25` and `ntree=500`. Create a plot displaying the test error resulting from random forests on this dataset for a more comprehensive range of values for `mtry` and `ntree`. You can model your plot after Figure 8.10 in @james2013 [Chapter 8]. Describe the results obtained.
 
 ## Exercise 7.2
 
-In the lab, a classification tree was applied to the `Carseats` data set after converting `Sales` into a qualitative response variable. Now we will seek to predict `Sales` using regression trees and related approaches, treating the response as a quantitative variable.
+Looking at the `Carseats` data from the `ISLR` package we will seek to predict `Sales` using regression trees and related approaches, treating the response as a quantitative variable.
 
 (a) Split the data set into a training set and a test set.
 (b) Fit a regression tree to the training set. Plot the tree, and interpret the results. What test error rate do you obtain?
@@ -31,7 +31,7 @@ In the lab, a classification tree was applied to the `Carseats` data set after c
 
 ## Exercise 7.3
 
-This problem involves the `OJ` data set which is part of the `ISLR` package.
+This problem involves the `OJ` dataset which is part of the `ISLR` package.
 
 (a) Create a training set containing a random sample of 800 observations, and a test set containing the remaining observations.
 (b) Fit a tree to the training data, with `Purchase` as the response and the other variables except for `Buy` as predictors. Use the `summary()` function to produce summary statistics about the tree, and describe the results obtained. What is the training error rate? How many terminal nodes does the tree have?
@@ -48,7 +48,7 @@ This problem involves the `OJ` data set which is part of the `ISLR` package.
 
 ## Exercise 7.3
 
-We now use boosting to predict `Salary` in the `Hitters` data set.
+We now use boosting to predict `Salary` in the `Hitters` dataset, which is part of the `ISLR` package.
 (a) Remove the observations for whom the salary information is unknown, and then log-transform the salaries.
 (b) Create a training set consisting of the first 200 observations, and a test set consisting of the remaining observations.
 (c) Perform boosting on the training set with 1,000 trees for a range of values of the shrinkage parameter $\lambda$. Produce a plot with different shrinkage values on the $x$-axis and the corresponding training set MSE on the $y$-axis.
@@ -59,13 +59,11 @@ We now use boosting to predict `Salary` in the `Hitters` data set.
 
 ## Exercise 7.4
 
-This question uses the `Caravan` data set.
+This question uses the `Caravan` dataset, part of the `ISRL` package.
 (a) Create a training set consisting of the first 1,000 observations,
 and a test set consisting of the remaining observations.
 (b) Fit a boosting model to the training set with `Purchase` as the response and the other variables as predictors. Use 1,000 trees, and a shrinkage value of 0.01. Which predictors appear to be the most important?
 (c) Use the boosting model to predict the response on the test data. Predict that a person will make a purchase if the estimated probability of purchase is greater than 20%. Form a confusion matrix. What fraction of the people predicted to make a purchase do in fact make one? How does this compare with the results obtained from applying KNN or logistic regression to this data set?
 
 
-
-   
 ### References

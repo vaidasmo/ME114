@@ -1,14 +1,13 @@
 ---
-title: "Exercise Set 4 - Classification and non-linear models"
+title: "Assignment 4 - Classification and non-linear models"
 author: "Ken Benoit and Slava Mikhaylov"
 output: html_document
 bibliography: ../bibliography/bibliography.bib
 ---
 
-@james2013 provide a set of exercises (conceptual and applied) for each chapter in their book. Applied exercises focus on linking conceptual material with practical implementation in R. Below are the applied exercises for two chapters covered in the lecture material. Part I below covers applied exercises for Chapter 4 "Classification" [@james2013, pp. 171-173] and Part II exercises for Chapter 7 "Moving Beyond Linearity" [@james2013, pp. 299-301].
+Assignments for the course focus on practical aspects of the concepts covered in the lectures. Assignments are largely based on the material covered in @james2013. You will start working on the assignment in the lab sessions after the lectures, but may need to finish them after class.
 
-
-Please **submit this exercise by email as an html file**  by putting your answers prior to the  **deadline of 9pm on Wednesday, August XX**. 
+You will be asked to submit your assignments via Moodle by 7pm on the day of the class. We will subsequently open up solutions to the problem sets. 
 
 You will need to load the core library for the course textbook:
 ```{r}
@@ -19,7 +18,7 @@ library(ISLR)
 
 ### Exercise 4.1
 
-This question should be answered using the `Weekly` data set, which is part of the `ISLR` package. This data is similar in nature to the `Smarket` data from today's lab, except that it contains 1,089 weekly returns for 21 years, from the beginning of 1990 to the end of 2010.
+This question should be answered using the `Weekly` data set, which is part of the `ISLR` package. This data contains 1,089 weekly stock returns for 21 years, from the beginning of 1990 to the end of 2010.
 
 (a) Produce some numerical and graphical summaries of the `Weekly` data. Do there appear to be any patterns?
 (b) Use the full data set to perform a logistic regression with `Direction` as the response and the five lag variables plus `Volume` as predictors. Use the summary function to print the results. Do any of the predictors appear to be statistically significant? If so, which ones?
@@ -34,7 +33,7 @@ this data?
 
 ### Exercise 4.2
 
-In this problem, you will develop a model to predict whether a given car gets high or low gas mileage based on the `Auto` data set.
+In this problem, you will develop a model to predict whether a given car gets high or low gas mileage based on the `Auto` dataset from the `ISLR` package.
 
 (a) Create a binary variable, `mpg01`, that contains a 1 if `mpg` contains a value above its median, and a 0 if `mpg` contains a value below its median. You can compute the median using the `median()` function. Note you may find it helpful to use the `data.frame()` function to create a single data set containing both `mpg01` and the other `Auto` variables.
 (b) Explore the data graphically in order to investigate the association between `mpg01` and the other features. Which of the other features seem most likely to be useful in predicting `mpg01`? Scatterplots and boxplots may be useful tools to answer this question. Describe your findings.
@@ -82,14 +81,14 @@ then a plot should be created with an $x$-axis taking on values $1,2,\dots ,10$,
 
 ### Exercise 4.4
 
-Using the `Boston` data set, fit classification models in order to predict whether a given suburb has a crime rate above or below the median. Explore logistic regression, LDA, and KNN models using various subsets of the predictors. Describe your findings.
+Using the `Boston` dataset the `MASS` package, fit classification models in order to predict whether a given suburb has a crime rate above or below the median. Explore logistic regression, LDA, and KNN models using various subsets of the predictors. Describe your findings.
 
 
 ## Part II: Moving Beyond Linearity
 
 ### Exercise 4.5
 
-In this exercise, you will further analyze the `Wage` data set coming with the `ISLR` package. 
+In this exercise, you will further analyze the `Wage` dataset coming with the `ISLR` package. 
 
 (a) Perform polynomial regression to predict `wage` using `age`. Use cross-validation to select the optimal degree $d$ for the polynomial. What degree was chosen, and how does this compare to the results of hypothesis testing using ANOVA? Make a plot of the resulting polynomial fit to the data.
 (b) Fit a step function to predict `wage` using `age`, and perform cross-validation to choose the optimal number of cuts. Make a plot of the fit obtained.
@@ -97,7 +96,7 @@ In this exercise, you will further analyze the `Wage` data set coming with the `
 
 ### Exercise 4.6
 
-This question uses the variables `dis` (the weighted mean of distances to five Boston employment centers) and `nox` (nitrogen oxides concentration in parts per 10 million) from the `Boston` data. We will treat `dis` as the predictor and `nox` as the response.
+This question uses the variables `dis` (the weighted mean of distances to five Boston employment centers) and `nox` (nitrogen oxides concentration in parts per 10 million) from the `Boston` data available as part of the `MASS` package. We will treat `dis` as the predictor and `nox` as the response.
 
 (a) Use the `poly()` function to fit a cubic polynomial regression to predict `nox` using `dis`. Report the regression output, and plot the resulting data and polynomial fits.
 (b) Plot the polynomial fits for a range of different polynomial degrees (say, from 1 to 10), and report the associated residual sum of squares.
@@ -109,16 +108,12 @@ This question uses the variables `dis` (the weighted mean of distances to five B
 
 ### Exercise 4.7
 
-This question relates to the `College` data set.
+This question relates to the `College` dataset from the `ISLR` package.
 
 (a) Split the data into a training set and a test set. Using out-of-state tuition as the response and the other variables as the predictors, perform forward stepwise selection on the training set in order to identify a satisfactory model that uses just a subset of the predictors.
 (b) Fit a GAM on the training data, using out-of-state tuition as the response and the features selected in the previous step as the predictors. Plot the results, and explain your findings.
 (c) Evaluate the model obtained on the test set, and explain the results obtained.
 (d) For which variables, if any, is there evidence of a non-linear relationship with the response?
-
-
-
-
 
 
 ## References
