@@ -6,7 +6,7 @@
 [Kenneth Benoit](kbenoit@lse.ac.uk), Department of Methodology, LSE  
 [Slava Mikhaylov](s.mikhaylov@ucl.ac.uk), University College London 
 
-**Version:** August 14, 2015
+**Version:** August 16, 2015
 
 This repository contains the class materials for the [LSE Methods Summer Programme](http://www.lse.ac.uk/study/summerSchools/Methods/home.aspx) course *ME114 Introduction to Data Science and Big Data Analytics* taught in August 2015 by Kenneth Benoit and Slava Mikhaylov.  
 
@@ -32,9 +32,7 @@ You can also subscribe to the repository if you have [a GitHub account](https://
 #### Monday, August 17: Overview and introduction to data science [KB, SM]
 
 - [Slides](day1/ME114_day1.pdf)
-- [R code from lecture](day1/ME114_day1.Rmd)
 - [Assignment 1 as R markdown](day1/ME114_assignment1_LASTNAME_FIRSTNAME.Rmd)
-- [Assignment 1 dataset: *<description here>*](day1/dataset.ext)
 
 #### Tuesday, August 18: Research design issues in data science [SM, KB]  
 
