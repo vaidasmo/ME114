@@ -52,6 +52,8 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 
 - [Lecture Notes](day1/ME114_day1.pdf)
 - [Assignment 1 as R markdown](day1/ME114_assignment1_LASTNAME_FIRSTNAME.Rmd)
+- [Assignment 1 **solution** as R markdown](day1/ME114_assignment1_solution.Rmd)
+- [Assignment 1 **solution** as R code](day1/ME114_assignment1_solution.R)
 
 #### Tuesday, August 18: Research design issues in data science [SM, KB]  
 
