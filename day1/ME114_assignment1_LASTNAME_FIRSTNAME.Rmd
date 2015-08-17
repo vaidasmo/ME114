@@ -49,7 +49,7 @@ Please **submit this exercise by email as an html file**  by putting your answer
 
     3.  Modify the object so that:
         *  `b` is integer
-        *  `d` is a factor
+        *  `d` is *not* a factor
         
 
     4.  Did you have trouble getting `b` to coerce to an integer, try first removing the "L"
