@@ -11,7 +11,7 @@ with some of the concepts from [Day 1](https://github.com/kbenoit/ME114/blob/mas
 The focus will be on exploring some of the data structures in R and on implementing some of the
 data restructuring from the `dplyr` and the `reshape2` packages.
 
-Please **submit this exercise by email as an html file**  by putting your answers prior to the  **deadline of Wednesday, Feb 25**. 
+Please **submit this exercise by email as an html file**  by putting your answers directly into this Rmd file, and submitting the html file as per the instructions on the course web page.
 
 1.  Installing R Studio
 
