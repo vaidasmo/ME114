@@ -4,9 +4,10 @@
 #### LSE Methods Summer Programme 2015
 
 [Kenneth Benoit](kbenoit@lse.ac.uk), Department of Methodology, LSE  
-[Slava Mikhaylov](s.mikhaylov@ucl.ac.uk), University College London 
+[Slava Mikhaylov](s.mikhaylov@ucl.ac.uk), University College London  
+[Paul Nulty](p.nulty@lse.ac.uk) (Labs), Department of Methodology, LSE  
 
-**Version:** August 16, 2015
+**Version:** August 17, 2015
 
 This repository contains the class materials for the [LSE Methods Summer Programme](http://www.lse.ac.uk/study/summerSchools/Methods/home.aspx) course *ME114 Introduction to Data Science and Big Data Analytics* taught in August 2015 by Kenneth Benoit and Slava Mikhaylov.  
 
@@ -26,6 +27,24 @@ You can also subscribe to the repository if you have [a GitHub account](https://
 
 - Detailed course handout in [pdf format](handout/ME114Handout.pdf)
 - Detailed course handout in [markdown/html](handout/ME114Handout.md)
+
+### Instructions for Submitting Homeworks ###
+
+Each homework will be a single file in the [RMarkdown](https://goo.gl/ZqOwUe) format.  The files linked below are *named very carefully*, to make it easy for us to identify your completed lab assignments.  
+
+1.  Obtaining the starter files.  
+
+    Each day below will link the name of a starter file for you to download and work with.  These are in the RMarkdown format.  You should embed your answers, with code, into your version of the instruction files.
+
+2.  Renaming the starter files.  
+    
+    For example, the first assignment file is named `ME114_assignment1_LASTNAME_FIRSTNAME.Rmd`, which you will need to rename by replacing the uppercase terms with your own last and first names, e.g.  `ME114_assignment1_Nulty_Paul.Rmd`.
+    
+3.  From RStudio, you can create an HTML outfile file with your evaluated code, figure, and text answers by clicking the "Knit HTML" button in the top of the editor pane in RStudio.  The resulting HTML file will be saved in your working directory.
+
+4.  You will need to upload the resulting HTML file -- renamed! -- to the [course Moodle page](https://shortcourses.lse.ac.uk/course/view.php?id=158), to the appropriate assignment folder.  
+
+We will walk you through this process in the Day 1 lab, so don't worry if it seems complicated the first time.  This sort of careful workflow process and file management is part of learning practical data science too!
 
 ### Resources for each day ###
 
