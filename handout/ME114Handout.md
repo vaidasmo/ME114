@@ -1,20 +1,3 @@
----
-author:
-- |
-    Kenneth Benoit\
-    Department of Methodology, LSE\
-    <kbenoit@lse.ac.uk>
-- |
-    Slava Mikhaylov\
-    University College London\
-    <s.mikhaylov@ucl.ac.uk>
-date: 'Version: '
-title: |
-    ME114 Introduction to Data Science and Big Data Analytics\
-    <span><http://www.kenbenoit.net/me114></span>\
-    LSE Methods Summer Programme 2015
-...
-
 Overview {#overview .unnumbered}
 ========
 
@@ -85,10 +68,6 @@ of the exercises. The course will cover the following topics:
 -   quantitative methods of text analysis, including mining social media
     and other online resources
 
--   social network analysis, covering the basics of social graph data
-    and analysing social networks data visualisation through a variety
-    of graphs.
-
 Prerequisites {#prerequisites .unnumbered}
 =============
 
@@ -123,7 +102,8 @@ Computer Software {#computer-software .unnumbered}
 Computer-based exercises will feature prominently in the course,
 especially in the lab sessions. The use of all software tools will be
 explained in the sessions, including how to download and install them.
-This year we will be working primarily in R, using the package.
+All of the class work will be done using R, using publicly available
+packages.
 
 Main Texts {#main-texts .unnumbered}
 ----------
@@ -220,8 +200,8 @@ Facebook API, JSON data, and examples.\
 Detailed Course Schedule {#detailed-course-schedule .unnumbered}
 ========================
 
-Monday, August 17: Overview and introduction to data science \[KB, SM\] {#monday-august-17-overview-and-introduction-to-data-science-kb-sm .unnumbered}
------------------------------------------------------------------------
+Monday, August 17: Overview and introduction to data science [KB, SM] {#monday-august-17-overview-and-introduction-to-data-science-kb-sm .unnumbered}
+---------------------------------------------------------------------
 
 We will use this session to get to know the range of interests and
 experience students bring to the class, as well as to survey the
@@ -255,8 +235,8 @@ software.
 
 This and subsequent exercises can be found from the .
 
-Tuesday, August 18: Research design issues in data science \[SM, KB\] {#tuesday-august-18-research-design-issues-in-data-science-sm-kb .unnumbered}
----------------------------------------------------------------------
+Tuesday, August 18: Research design issues in data science [SM, KB] {#tuesday-august-18-research-design-issues-in-data-science-sm-kb .unnumbered}
+-------------------------------------------------------------------
 
 This session will cover the topics of sampling, causal inference from
 observational data, differences with experimental settings, features,
@@ -273,8 +253,8 @@ selection.
 
 ### Exercise 2: TBA {#exercise-2-tba .unnumbered}
 
-Wednesday, August 19: Linear Regression \[SM\] {#wednesday-august-19-linear-regression-sm .unnumbered}
-----------------------------------------------
+Wednesday, August 19: Linear Regression [SM] {#wednesday-august-19-linear-regression-sm .unnumbered}
+--------------------------------------------
 
 This session will cover the basic linear regression model, with a focus
 on prediction.
@@ -291,8 +271,8 @@ on prediction.
 
 ### Exercise 3: TBA {#exercise-3-tba .unnumbered}
 
-Thursday, August 20: Generalized Linear Regression \[SM\] {#thursday-august-20-generalized-linear-regression-sm .unnumbered}
----------------------------------------------------------
+Thursday, August 20: Generalized Linear Regression [SM] {#thursday-august-20-generalized-linear-regression-sm .unnumbered}
+-------------------------------------------------------
 
 This session will cover logistic regression, generalized additive models
 (GAMs).
@@ -305,8 +285,8 @@ This session will cover logistic regression, generalized additive models
 
 ### Exercise 4: TBA {#exercise-4-tba .unnumbered}
 
-Friday, August 21: Resampling methods \[SM\] {#friday-august-21-resampling-methods-sm .unnumbered}
---------------------------------------------
+Friday, August 21: Resampling methods [SM] {#friday-august-21-resampling-methods-sm .unnumbered}
+------------------------------------------
 
 This session will introduce resampling methods. We will cover
 cross-validation and bootstrapping.
@@ -319,8 +299,8 @@ cross-validation and bootstrapping.
 
 ### Exercise 5: TBA {#exercise-5-tba .unnumbered}
 
-Monday, August 24: Association rules and clustering \[KB\] {#monday-august-24-association-rules-and-clustering-kb .unnumbered}
-----------------------------------------------------------
+Monday, August 24: Association rules and clustering [KB] {#monday-august-24-association-rules-and-clustering-kb .unnumbered}
+--------------------------------------------------------
 
 This session will cover cluster analysis, k-means clustering, and
 hierarchical clustering.
@@ -337,8 +317,8 @@ Lantz, Chapter 8
 
 ### Exercise 6: TBA {#exercise-6-tba .unnumbered}
 
-Tuesday, August 25: Machine Learning \[KB\] {#tuesday-august-25-machine-learning-kb .unnumbered}
--------------------------------------------
+Tuesday, August 25: Machine Learning [KB] {#tuesday-august-25-machine-learning-kb .unnumbered}
+-----------------------------------------
 
 This session will cover decision trees, k-Nearest Neighbor, Naive Bayes.
 We will also explore evaluation metrics, precision and recall, and
@@ -356,8 +336,8 @@ cross-validation.
 
 ### Exercise 7: TBA {#exercise-7-tba .unnumbered}
 
-Wednesday, August 26: Unsupervised learning and dimensional reduction \[KB\] {#wednesday-august-26-unsupervised-learning-and-dimensional-reduction-kb .unnumbered}
-----------------------------------------------------------------------------
+Wednesday, August 26: Unsupervised learning and dimensional reduction [KB] {#wednesday-august-26-unsupervised-learning-and-dimensional-reduction-kb .unnumbered}
+--------------------------------------------------------------------------
 
 This session will cover principal components analysis, correspondence
 analysis.
@@ -372,8 +352,8 @@ TBA
 
 ### Exercise 8: TBA {#exercise-8-tba .unnumbered}
 
-Thursday, August 27: Text analysis \[KB\] {#thursday-august-27-text-analysis-kb .unnumbered}
------------------------------------------
+Thursday, August 27: Text analysis [KB] {#thursday-august-27-text-analysis-kb .unnumbered}
+---------------------------------------
 
 This session will cover working with text as data in R, sentiment
 analysis, dictionary methods.
@@ -394,8 +374,8 @@ TBA
 
 ### Exercise 9: Analysing text using the  {#exercise-9-analysing-text-using-the .unnumbered}
 
-Friday, August 28: Mining the Social Web \[KB, SM\] {#friday-august-28-mining-the-social-web-kb-sm .unnumbered}
----------------------------------------------------
+Friday, August 28: Mining the Social Web [KB, SM] {#friday-august-28-mining-the-social-web-kb-sm .unnumbered}
+-------------------------------------------------
 
 This session will cover working with the Twitter API, Facebook API, JSON
 data.
