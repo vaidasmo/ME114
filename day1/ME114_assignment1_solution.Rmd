@@ -45,7 +45,7 @@ Please **submit this exercise by email as an html file**  by putting your answer
                              a  b    c    d 
                              1  2  4.3  Yes
                              3 4L  5.1   No
-                             ", header=TRUE)
+                             ", header=TRUE, stringsAsFactors=FALSE)
          ```
         
         **`stringsAsFactors=TRUE` reads in the non-numeric data as type `character` rather
