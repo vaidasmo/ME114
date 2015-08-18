@@ -2,7 +2,6 @@
 title: "Assignment 2 - Statistical Learning"
 author: "Ken Benoit and Slava Mikhaylov"
 output: html_document
-bibliography: ../bibliography/bibliography.bib
 ---
 
 Assignments for the course focus on practical aspects of the concepts covered in the lectures. Assignments are largely based on the material covered in @james2013. You will start working on the assignment in the lab sessions after the lectures, but may need to finish them after class.
@@ -81,7 +80,7 @@ Use the `summary()` function to see how many elite universities there are. Now u
 
 ### Exercise 2.2
 
-This exercise involves the `Auto` data set available as `Auto.csv` from the website for the main course textbook [@james2013] http://www-bcf.usc.edu/~gareth/ISL/data.html. Make sure that the missing values have been removed from the data.
+This exercise involves the `Auto` data set available as `Auto.csv` from the website for the main course textbook [@james2013] http://www-bcf.usc.edu/~gareth/ISL/data.html. Make sure that the missing values have been removed from the data. You should load that dataset as the first step of the exercise. *Hint: We used the command for that in the Introduction to R session in class today. Go back and look up how to read in a csv file.*
 
 (a) Which of the predictors are quantitative, and which are qualitative?
 (b) What is the *range* of each quantitative predictor? You can answer this using the `range()` function.
