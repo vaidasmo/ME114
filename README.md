@@ -54,7 +54,7 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 - [Assignment 1 as R markdown](day1/ME114_assignment1_LASTNAME_FIRSTNAME.Rmd)
 - [Assignment 1 **solution** as R markdown](day1/ME114_assignment1_solution.Rmd)
 - [Assignment 1 **solution** as R code](day1/ME114_assignment1_solution.R)
-- [The results of the data science quiz](day1/data_science_quiz.html) and the [anonymized dataset in .csv format](day1/data_science_quiz_results.csv).
+- [The results of the data science quiz](http://htmlpreview.github.com/?https://github.com/kbenoit/ME114/blob/master/day1/data_science_quiz.html) and the [anonymized dataset in .csv format](day1/data_science_quiz_results.csv).
 
 
 #### Tuesday, August 18: Research design issues in data science [SM, KB]  
