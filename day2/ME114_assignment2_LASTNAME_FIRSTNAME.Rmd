@@ -98,7 +98,7 @@ with(Auto, table(originf, origin))
 (f) Suppose that we wish to predict gas mileage (`mpg`) on the basis of the other variables. Do your plots suggest that any of the other variables might be useful in predicting `mpg`? Justify your answer.
 
  
-### Exercise 2.3
+### Exercise 2.3 (Optional)
 
 This exercise involves the `Boston` housing data set.
 
