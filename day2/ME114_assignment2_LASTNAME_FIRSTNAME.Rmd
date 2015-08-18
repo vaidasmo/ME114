@@ -2,7 +2,6 @@
 title: "Assignment 2 - Statistical Learning"
 author: "Ken Benoit and Slava Mikhaylov"
 output: html_document
-bibliography: ../bibliography/bibliography.bib
 ---
 
 Assignments for the course focus on practical aspects of the concepts covered in the lectures. Assignments are largely based on the material covered in @james2013.  You will start working on the assignment in the lab sessions after the lectures, but may need to finish them after class.
