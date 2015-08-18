@@ -1,0 +1,88 @@
+---
+title: "ME114 Quick Background Quiz Results"
+author: "Ken Benoit and Slava Mikhaylov"
+output: html_document
+---
+
+**A Quick Background Quiz on Data Science**
+
+**ME114 2015**
+
+Circle the correct answer.  **Correct answers are in bold type.**
+
+1.  $\hat{y}_i$ means
+
+    1.  the error in predicting $y_i$
+
+    2.  **predicted $y_i$**
+
+    3.  the letter $y$ in old French
+
+    4.  the mean of $y$
+
+2.  Numerical precision refers to
+
+    1.  a measure of the detail with which a quantity is expressed
+
+    2.  a reference to the digits of a number that carry meaning, and
+        can be defined in terms of the number of decimal places in a
+        number
+
+    3.  the closeness of a computer’s representation of a number to an
+        actual quantity
+
+    4.  **all of the above**
+
+3.  JSON is
+
+    1.  a popular programming language
+
+    2.  the name of the killer in *Friday the 13th*
+
+    3.  **short for Javascript Object Notation, a data format**
+
+    4.  a API for querying databases
+
+4.  In R, which of the following results when this statement is
+    evaluated:    `mean(c(TRUE, FALSE, TRUE, TRUE))`
+
+    1.  `TRUE`
+
+    2.  `FALSE`
+
+    3.  `0.5`  **(closest)**
+
+    4.  `NA`
+
+    **This was a "trick question" since the actual answer evaluates to 0.75.  So 0.50 was (sort of) closest to being correct.**
+
+5.  Naive Bayes is the name of
+
+    1.  a clustering algorithm
+
+    2.  **a method for machine learning**
+
+    3.  a method for fitting logistic regression models
+
+    4.  the shy nerd you sat next to in high school science class
+
+Your Name (Optional):
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+### Distribution of answers: ###
+
+```{r}
+results <- read.csv("data_science_quiz_results.csv")
+summary(results)
+```
+
+A possibly easier way to view the results would be to convert the data into "long" format using the `reshape2` package, and then tabulate the answers by question using `table()`.
+```{r}
+require(reshape2)
+results$id <- 1:nrow(results)
+resultsMelted <- melt(results, id.vars = "id", variable.name= "q", value.name = "answer")
+with(resultsMelted, table(q, answer, useNA = "ifany"))
+```
+
+
