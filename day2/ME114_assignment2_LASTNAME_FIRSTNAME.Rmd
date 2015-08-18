@@ -2,9 +2,10 @@
 title: "Assignment 2 - Statistical Learning"
 author: "Ken Benoit and Slava Mikhaylov"
 output: html_document
+bibliography: ../bibliography/bibliography.bib
 ---
 
-Assignments for the course focus on practical aspects of the concepts covered in the lectures. Assignments are largely based on the material covered in @james2013.  You will start working on the assignment in the lab sessions after the lectures, but may need to finish them after class.
+Assignments for the course focus on practical aspects of the concepts covered in the lectures. Assignments are largely based on the material covered in @james2013. You will start working on the assignment in the lab sessions after the lectures, but may need to finish them after class.
 
 You will be asked to submit your assignments via Moodle by 7pm on the day of the class. We will subsequently open up solutions to the problem sets. 
 
@@ -13,26 +14,25 @@ You will be asked to submit your assignments via Moodle by 7pm on the day of the
 
 This exercise relates to the `College` data set, which can be found in the file `College.csv` on the website for the main course textbook (James et al 2013) http://www-bcf.usc.edu/~gareth/ISL/data.html. It contains a number of variables for 777 different universities and colleges in the US.   
 
-The variables are:  
-
-*   `Private` : Public/private indicator  
-*   `Apps` : Number of applications received  
-*   `Accept` : Number of applicants accepted
-*   `Enroll` : Number of new students enrolled
-*   `Top10perc` : New students from top 10% of high school class 
-*   `Top25perc` : New students from top 25% of high school class 
-*   `F.Undergrad` : Number of full-time undergraduates
-*   `P.Undergrad` : Number of part-time undergraduates
-*   `Outstate` : Out-of-state tuition
-*   `Room.Board` : Room and board costs
-*   `Books` : Estimated book costs
-*   `Personal` : Estimated personal spending
-*   `PhD` : Percent of faculty with Ph.D.'s
-*   `Terminal` : Percent of faculty with terminal degree
-*   `S.F.Ratio` : Student/faculty ratio
-*   `perc.alumni` : Percent of alumni who donate
-*   `Expend` : Instructional expenditure per student
-*   `Grad.Rate` : Graduation rate
+The variables are  
+* `Private` : Public/private indicator
+* `Apps` : Number of applications received
+* `Accept` : Number of applicants accepted
+* `Enroll` : Number of new students enrolled
+* `Top10perc` : New students from top 10% of high school class 
+* `Top25perc` : New students from top 25% of high school class 
+* `F.Undergrad` : Number of full-time undergraduates
+* `P.Undergrad` : Number of part-time undergraduates
+* `Outstate` : Out-of-state tuition
+* `Room.Board` : Room and board costs
+* `Books` : Estimated book costs
+* `Personal` : Estimated personal spending
+* `PhD` : Percent of faculty with Ph.D.'s
+* `Terminal` : Percent of faculty with terminal degree
+* `S.F.Ratio` : Student/faculty ratio
+* `perc.alumni` : Percent of alumni who donate
+* `Expend` : Instructional expenditure per student
+* `Grad.Rate` : Graduation rate
 
 Before reading the data into R, it can be viewed in Excel or a text editor, if you find that convenient.
 
@@ -41,17 +41,17 @@ Before reading the data into R, it can be viewed in Excel or a text editor, if y
 college <- read.csv("http://www-bcf.usc.edu/~gareth/ISL/College.csv")
 ```
 
-(b) Look at the data using the `View()` function.  This loads a matrix or data.frame object into the spreadhseet-like viewer in RStudio, just clicking the name of the object will do in the Environment panel.  You should notice that the first column is just the name of each university. We don't really want `R` to treat this as data. However, it may be handy to have these names for later. Try the following commands:
+(b) Look at the data using the `fix()` function. You should notice that the first column is just the name of each university. We don't really want `R` to treat this as data. However, it may be handy to have these names for later. Try the following commands:
 ```{r, eval=FALSE}
 rownames(college) <- college[, 1] 
-View(college)
+fix(college)
 ```
 
 You should see that there is now a `row.names` column with the name of each university recorded. This means that `R` has given each row a name corresponding to the appropriate university. `R` will not try to perform calculations on the row names. However, we still need to eliminate the first column in the data where the names are stored. Try
 
 ```{r, eval=FALSE}
 college <- college[, -1] 
-View(college)
+fix(college)
 ```
 
 Now you should see that the first data column is `Private`. Note that another column labeled `row.names` now appears before the `Private` column. However, this is not a data column but rather the name that `R` is giving to each row.
@@ -61,14 +61,16 @@ Now you should see that the first data column is `Private`. Note that another co
    
    ii. Use the `pairs()` function to produce a scatterplot matrix of the first ten columns or variables of the data. Recall that you can reference the first ten columns of a matrix `A` using `A[,1:10]`.
    
-   iii. Use the `plot()` function to produce side-by-side boxplots of `Outstate` according to the two categories of the `Private` variable.
+   iii. Use the `plot()` function to produce side-by-side boxplots of `Outstate` versus `Private`.
    
    iv. Create a new qualitative variable, called `Elite`, by *binning* the `Top10perc` variable. We are going to divide universities into two groups based on whether or not the proportion of students coming from the top 10% of their high school classes exceeds 50%.
 
-    ```{r, eval=FALSE} 
-    college$Elite <- ifelse(college$Top10perc > 50, "Yes", "No")
-    college$Elite <- as.factor(Elite)  # make into a factor variable
-    ```
+```{r, eval=FALSE} 
+Elite <- rep("No", nrow(college))
+Elite[college$Top10perc > 50] <- "Yes"
+Elite <- as.factor(Elite)
+college <- data.frame(college, Elite)
+```
 
 Use the `summary()` function to see how many elite universities there are. Now use the `plot()` function to produce side-by-side boxplots of `Outstate` versus `Elite`.
    
@@ -82,14 +84,6 @@ Use the `summary()` function to see how many elite universities there are. Now u
 This exercise involves the `Auto` data set available as `Auto.csv` from the website for the main course textbook [@james2013] http://www-bcf.usc.edu/~gareth/ISL/data.html. Make sure that the missing values have been removed from the data.
 
 (a) Which of the predictors are quantitative, and which are qualitative?
-
-Note: Sometimes when you load a dataset, a qualitative variable might have a numeric value.  For instance, the `origin` variable is qualitative, but has integer values of 1, 2, 3.  From mysterious sources (Googling), we know that this variable is coded `1 = usa; 2 = europe; 3 = japan`.  So we can covert it into a factor, using:
-
-```{r}
-Auto$originf <- factor(Auto$origin, labels = c("usa", "europe", "japan"))
-with(Auto, table(originf, origin))
-```
-
 (b) What is the *range* of each quantitative predictor? You can answer this using the `range()` function.
 (c) What is the mean and standard deviation of each quantitative predictor?
 (d) Now remove the 10th through 85th observations. What is the range, mean, and standard deviation of each predictor in the subset of the data that remains?
@@ -97,25 +91,29 @@ with(Auto, table(originf, origin))
 (f) Suppose that we wish to predict gas mileage (`mpg`) on the basis of the other variables. Do your plots suggest that any of the other variables might be useful in predicting `mpg`? Justify your answer.
 
  
-### Exercise 2.3 (Optional)
+### Exercise 2.3
 
 This exercise involves the `Boston` housing data set.
 
 (a) To begin, load in the `Boston` data set. The `Boston` data set is
-part of the `MASS` *package* in `R`, and you can load by executing: 
+part of the `MASS` *library* in `R`. 
 
-```{r} 
-data(Boston, package = "MASS")
-```
-
-Now the data set is contained in the object `Boston`.   You can view the help page for this dataset using
 ```{r, eval=FALSE} 
-help(Boston, package = "MASS")
+library(MASS)
 ```
 
+Now the data set is contained in the object `Boston`. 
+```{r, eval=FALSE} 
+Boston
+```
 
+Read about the data set:
 
-How many *rows* are in this data set? How many *columns*? What do the rows and columns represent?
+```{r, eval=FALSE} 
+?Boston
+```
+
+How many rows are in this data set? How many columns? What do the rows and columns represent?
 
 (b) Make some pairwise scatterplots of the predictors (columns) in this data set. Describe your findings.
 
