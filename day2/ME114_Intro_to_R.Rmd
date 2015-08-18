@@ -54,7 +54,7 @@ To get help on any function, we can use the `?` operator.
 A matrix is defined using the [`matrix()`](http://bit.ly/R_matrix) function.
 
 ```{r}
-x=matrix(data=c(1,2,3,4), nrow=2, ncol=2)
+x <- matrix(data=c(1,2,3,4), nrow=2, ncol=2)
 x
 ```
 
@@ -212,7 +212,7 @@ head(Auto)
 The [`read.table()`](http://bit.ly/R_read_table) and  [`read.csv()`](http://bit.ly/R_read_table) family of functions offer a number of options for controlling how the data are imported, such as control over header rows, blank rows, or missing values.
 
 ```{r}
-Auto <- read.csv("http://www-bcf.usc.edu/~gareth/ISL/Auto.csv", header = T, na.strings = "?")
+Auto <- read.csv("http://www-bcf.usc.edu/~gareth/ISL/Auto.csv", header = TRUE, na.strings = "?")
 head(Auto)
 dim(Auto)
 Auto[1:4, ]
@@ -255,9 +255,9 @@ Categorical variables are automatically plotted as box-plots by R.
 ```{r}
 plot(cylinders, mpg)
 plot(cylinders, mpg, col = "red")
-plot(cylinders, mpg, col = "red", varwidth = T)
-plot(cylinders, mpg, col = "red", varwidth = T, horizontal = T)
-plot(cylinders, mpg, col = "red", varwidth = T, xlab = "cylinders", ylab = " MPG ")
+plot(cylinders, mpg, col = "red", varwidth = TRUE)
+plot(cylinders, mpg, col = "red", varwidth = TRUE, horizontal = TRUE)
+plot(cylinders, mpg, col = "red", varwidth = TRUE, xlab = "cylinders", ylab = " MPG ")
 ```
 
 We can also get a histogram of the data with the  [`hist()`](http://bit.ly/R_hist) function.
@@ -272,7 +272,7 @@ To generate a matrix of scatterplots, we can use the  [`pairs()`](http://bit.ly/
 
 ```{r}
 pairs(Auto)
-pairs(~mpg + displacement + horsepower + weight + acceleration, Auto)
+pairs(~ mpg + displacement + horsepower + weight + acceleration, Auto)
 ```
 
 The [`identify()`](http://bit.ly/R_identify) function can be used to identify specific points on a plot. In an interactive session in R-Studio, [`identify()`](http://bit.ly/R_identify) allows you to click on specific points and labels them on screen for convenient identification.
