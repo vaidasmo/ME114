@@ -62,7 +62,7 @@ Please **submit this exercise by email as an html file**  by putting your answer
                              a  b    c    d 
                              1  2  4.3  Yes
                              3 4L  5.1   No
-                             ", header=TRUE, stringsAsFactors=FALSE)
+                             ", header=TRUE, stringsAsFactors=TRUE)
         obj3_1$b <- as.integer(obj3_1$b)
         obj3_1$d <- factor(obj3_1$d)
         str(obj3_1)
