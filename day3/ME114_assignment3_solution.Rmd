@@ -1,0 +1,301 @@
+---
+title: "ME114 Day 3: Solutions for Assignment 3"
+author: "Ken Benoit and Slava Mikhaylov"
+output: html_document
+---
+
+
+```{r}
+library(ISLR)
+```
+
+## Exercise 3.1
+
+This question involves the use of simple linear regression on the `Auto` data set that comes together with the `ISLR` package.
+
+(a) Use the `lm()` function to perform a simple linear regression with `mpg` as the response and `horsepower` as the predictor. Use the `summary()` function to print the results. 
+
+```{r}
+lm.fit <-  lm(mpg ~ horsepower, data=Auto)
+summary(lm.fit)
+```
+
+Comment on the output. For example:
+
+    i. Is there a relationship between the predictor and the response?
+
+**Yes, there is a relationship between horsepower and mpg.**
+
+    ii. How strong is the relationship between the predictor and the response?
+
+**Interpret R2 statistic**
+
+    iii. Is the relationship between the predictor and the response positive or negative?
+**Negative**    
+
+    iv. What is the predicted `mpg` associated with a `horsepower` of 98? What are the associated 95 % confidence and prediction intervals?
+
+```{r}
+predict(lm.fit, data.frame(horsepower=c(98)), interval="confidence")
+predict(lm.fit, data.frame(horsepower=c(98)), interval="prediction")
+```
+
+(b) Plot the response and the predictor. Use the `abline()` function to display the least squares regression line.
+
+```{r}
+plot(Auto$horsepower, Auto$mpg)
+abline(lm.fit)
+```
+
+(c) Use the `plot()` function to produce diagnostic plots of the least squares regression fit. Comment on any problems you see with the fit.
+
+```{r}
+par(mfrow=c(2,2))
+plot(lm.fit)
+```
+
+**Some evidence of non-linearity.**
+
+
+
+## Exercise 3.2
+
+This question involves the use of multiple linear regression on the `Auto` data set.
+
+(a) Produce a scatterplot matrix which includes all of the variables in the data set.
+
+```{r}
+pairs(Auto)
+```
+
+(b) Compute the matrix of correlations between the variables using the function `cor()`. You will need to exclude the `name` variable, which is qualitative.
+
+```{r}
+cor(subset(Auto, select = -name))
+```
+
+(c) Use the `lm()` function to perform a multiple linear regression with `mpg` as the response and all other variables except `name` as the predictors. Use the `summary()` function to print the results. Comment on the output. For instance:
+
+```{r}
+lm.fit1 <-  lm(mpg ~ .-name, data=Auto)
+summary(lm.fit1)
+```
+
+    i. Is there a relationship between the predictors and the response?
+
+Yes.
+
+    ii. Which predictors appear to have a statistically significant relationship to the response?
+
+**displacement, weight, year, and origin**
+
+    iii. What does the coefficient for the `year` variable suggest?
+
+**coefficient for year, `r coefficients(lm.fit1)["year"]`, suggests that for every one year, mpg increases by the coefficient.**
+
+(d) Use the `plot()` function to produce diagnostic plots of the linear regression fit. Comment on any problems you see with the fit. Do the residual plots suggest any unusually large outliers? Does the leverage plot identify any observations with unusually high leverage?
+
+```{r}
+par(mfrow=c(2,2))
+plot(lm.fit1)
+```
+**Seems to be non-linear pattern, linear model not the best fit. From the leverage plot, point 14 appears to have high leverage, although not a high magnitude residual.**
+
+```{r}
+plot(predict(lm.fit1), rstudent(lm.fit1))
+```
+**There are possible outliers as seen in the plot of studentized residuals because there are data with a value greater than 3.**
+
+(e) Use the `*` and `:` symbols to fit linear regression models with interaction effects. Do any interactions appear to be statistically significant?
+
+```{r}
+lm.fit2 <-  lm(mpg ~ cylinders * displacement + displacement * weight, data=Auto)
+summary(lm.fit2)
+```
+
+**Interaction between displacement and weight is statistically signifcant, while the interactiion between cylinders and displacement is not.**
+
+(f) Try a few different transformations of the variables, such as $log(X)$, $\sqrt{X}$, $X^2$. Comment on your findings.
+
+
+```{r}
+lm.fit3 <-  lm(mpg ~ log(weight) + sqrt(horsepower) + acceleration + I(acceleration^2), data=Auto)
+summary(lm.fit3)
+par(mfrow=c(2,2))
+plot(lm.fit3)
+```
+
+
+## Exercise 3.3
+
+This question should be answered using the `Carseats` dataset from the `ISLR` package.
+
+(a) Fit a multiple regression model to predict `Sales` using `Price`,
+`Urban`, and `US`.
+
+```{r}
+library(ISLR)
+summary(Carseats)
+attach(Carseats)
+lm.fit <-  lm(Sales ~ Price + Urban + US)
+summary(lm.fit)
+```
+
+(b) Provide an interpretation of each coefficient in the model. Be
+careful—some of the variables in the model are qualitative!
+
+**Price: suggests a relationship between price and sales given the low p-value of the t-statistic. The coefficient states a negative relationship between Price and Sales: as Price increases, Sales decreases.**
+
+**UrbanYes: The linear regression suggests that there is not enough evidence for arelationship between the location of the store and the number of sales based.**
+
+**USYes: Suggests there is a relationship between whether the store is in the US or not and the amount of sales. A positive relationship between USYes and Sales: if the store is in the US, the sales will increase by approximately 1201 units.**
+
+(c) Write out the model in equation form, being careful to handle the qualitative variables properly.
+
+**Sales = 13.04 + -0.05 Price + -0.02 UrbanYes + 1.20 USYes**
+
+(d) For which of the predictors can you reject the null hypothesis $H_0 : \beta_j =0$?
+
+**Price and USYes**
+
+(e) On the basis of your response to the previous question, fit a smaller model that only uses the predictors for which there is evidence of association with the outcome.
+
+```{r}
+lm.fit2 <-  lm(Sales ~ Price + US)
+summary(lm.fit2)
+```
+
+(f) How well do the models in (a) and (e) fit the data?
+
+**Based on the R^2 of the linear regressions, they both fit the data similarly, with linear regression from (e) fitting the data slightly better.**
+
+(g) Using the model from (e), obtain 95% confidence intervals for the coefficient(s).
+
+```{r}
+confint(lm.fit2)
+```
+
+(h) Is there evidence of outliers or high leverage observations in the model from (e)?
+
+```{r}
+plot(predict(lm.fit2), rstudent(lm.fit2))
+```
+
+**All studentized residuals appear to be bounded by -3 to 3, so not potential outliers are suggested from the linear regression.**
+
+```{r}
+par(mfrow=c(2,2))
+plot(lm.fit2)
+```
+**There are a few observations that greatly exceed $(p+1)/n$ (``r 3/397``) on the leverage-statistic plot that suggest that the corresponding points have high leverage.**
+
+
+## Exercise 3.4 (Optional)
+
+In this exercise you will create some simulated data and will fit simple linear regression models to it. Make sure to use `set.seed(1)` prior to starting part (a) to ensure consistent results.
+
+(a) Using the `rnorm()` function, create a vector, `x`, containing 100 observations drawn from a $N(0,1)$ distribution. This represents a feature, `X`.
+
+```{r}
+set.seed(1)
+x <- rnorm(100)
+```
+
+(b) Using the `rnorm()` function, create a vector, `eps`, containing 100 observations drawn from a $N(0,0.25)$ distribution i.e. a normal distribution with mean zero and variance 0.25.
+
+```{r}
+eps <- rnorm(100, 0, sqrt(0.25))
+```
+
+(c) Using `x` and `eps`, generate a vector `y` according to the model
+$$Y =−1+0.5X+\epsilon$$
+What is the length of the vector `y`? What are the values of $\beta_0$ and $\beta_1$ in this linear model?
+
+```{r}
+y = -1 + 0.5*x + eps
+```
+
+**y is of length 100. $\beta_0$ is -1, $\beta_1$ is 0.5.**
+
+
+(d) Create a scatterplot displaying the relationship between `x` and `y`. Comment on what you observe.
+
+```{r}
+plot(x, y)
+```
+
+**A linear relationship between x and y with a positive slope, with a variance as is to be expected.**
+
+(e) Fit a least squares linear model to predict `y` using `x`. Comment on the model obtained. How do $\hat{\beta}_0$ and $\hat{\beta}_1$ compare to $\beta_0$ and $\beta_1$?
+
+```{r}
+lm.fit <-  lm(y ~ x)
+summary(lm.fit)
+```
+
+**The linear regression fits a model close to the true value of the coefficients as was constructed. The model has a large F-statistic with a near-zero p-value so the null hypothesis can be rejected.**
+
+(f) Display the least squares line on the scatterplot obtained in (d). Draw the population regression line on the plot, in a different color. Use the `legend()` command to create an appropriate legend.
+
+```{r}
+plot(x, y)
+abline(lm.fit, lwd=3, col=2)
+abline(-1, 0.5, lwd=3, col=3)
+legend(-1, legend = c("model fit", "pop. regression"), col=2:3, lwd=3)
+```
+
+
+(g) Now fit a polynomial regression model that predicts $y$ using $x$ and $x^2$. Is there evidence that the quadratic term improves the model fit? Explain your answer.
+
+```{r}
+lm.fit_sq <-  lm(y ~ x + I(x^2))
+summary(lm.fit_sq)
+```
+
+**There is evidence that model fit has increased over the training data given the slight increase in $R^2$. Although, the p-value of the t-statistic suggests that there isn't a relationship between y and $x^2$.**
+
+(h) Repeat (a)–(f) after modifying the data generation process in such a way that there is less noise in the data. The model should remain the same. You can do this by decreasing the variance of the normal distribution used to generate the error term $\epsilon$ in (b). Describe your results.
+
+```{r}
+set.seed(1)
+eps1 <-  rnorm(100, 0, 0.125)
+x1 <-  rnorm(100)
+y1 <-  -1 + 0.5*x1 + eps1
+plot(x1, y1)
+lm.fit1 <-  lm(y1 ~ x1)
+summary(lm.fit1)
+abline(lm.fit1, lwd=3, col=2)
+abline(-1, 0.5, lwd=3, col=3)
+legend(-1, legend = c("model fit", "pop. regression"), col=2:3, lwd=3)
+```
+
+**As expected, the error observed in the values of $R^2$ decreases considerably.**
+
+
+(i) Repeat (a)–(f) after modifying the data generation process in such a way that there is more noise in the data. The model should remain the same. You can do this by increasing the variance of the normal distribution used to generate the error term $\epsilon$ in (b). Describe your results.
+
+```{r}
+set.seed(1)
+eps2 <-  rnorm(100, 0, 0.5)
+x2 <-  rnorm(100)
+y2 <-  -1 + 0.5*x2 + eps2
+plot(x2, y2)
+lm.fit2 <-  lm(y2 ~ x2)
+summary(lm.fit2)
+abline(lm.fit2, lwd=3, col=2)
+abline(-1, 0.5, lwd=3, col=3)
+legend(-1, legend = c("model fit", "pop. regression"), col=2:3, lwd=3)
+```
+
+**As expected, the error observed in $R^2$ and $RSE$ increases considerably.**
+
+(j) What are the confidence intervals for $\beta_0$ and $\beta_1$ based on the original data set, the noisier data set, and the less noisy data set? Comment on your results.
+
+```{r}
+confint(lm.fit)
+confint(lm.fit1)
+confint(lm.fit2)
+```
+
+**All intervals seem to be centered on approximately 0.5, with the second fit's interval being narrower than the first fit's interval and the last fit's interval being wider than the first fit's interval.**
+
