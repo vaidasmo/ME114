@@ -67,6 +67,7 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 
 - [Lecture Notes](day3/ME114_day3.pdf)
 - [Assignment 3 as R markdown](day3/ME114_assignment3_LASTNAME_FIRSTNAME.Rmd)
+- [Assignment 3 **solution** as R markdown](day3/ME114_assignment3_solution.Rmd)
 
 #### Thursday, August 20: Generalized Linear Regression [SM] 
 
