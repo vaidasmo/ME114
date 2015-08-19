@@ -7,7 +7,7 @@
 [Slava Mikhaylov](s.mikhaylov@ucl.ac.uk), University College London  
 [Paul Nulty](p.nulty@lse.ac.uk) (Labs), Department of Methodology, LSE  
 
-**Version:** August 17, 2015
+**Version:** August 19, 2015
 
 This repository contains the class materials for the [LSE Methods Summer Programme](http://www.lse.ac.uk/study/summerSchools/Methods/home.aspx) course *ME114 Introduction to Data Science and Big Data Analytics* taught in August 2015 by Kenneth Benoit and Slava Mikhaylov.  
 
@@ -61,52 +61,45 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 
 - [Lecture Notes](day2/ME114_day2.pdf)
 - [Assignment 2 as R markdown](day2/ME114_assignment2_LASTNAME_FIRSTNAME.Rmd)
+- [Assignment 2 **solution** as R markdown](day1/ME114_assignment2_solution.Rmd)
 
 #### Wednesday, August 19: Linear Regression [SM] 
 
 - [Lecture Notes](day3/ME114_day3.pdf)
-- [R code from lecture](day3/ME114_day3.Rmd)
 - [Assignment 3 as R markdown](day3/ME114_assignment3_LASTNAME_FIRSTNAME.Rmd)
 
 #### Thursday, August 20: Generalized Linear Regression [SM] 
 
 - [Lecture Notes](day4/ME114_day4.pdf)
-- [R code from lecture](day4/ME114_day4.Rmd)
 - [Assignment 4 as R markdown](day4/ME114_assignment4_LASTNAME_FIRSTNAME.Rmd)
 
 #### Friday, August 21: Resampling Methods [SM]
 
 - [Lecture Notes](day5/ME114_day5.pdf)
-- [R code from lecture](day5/ME114_day5.Rmd)
 - [Assignment 5 as R markdown](day5/ME114_assignment5_LASTNAME_FIRSTNAME.Rmd)
 
 #### Monday, August 24: Association rules and clustering [KB]
 
 - [Lecture Notes](day6/ME114_day6.pdf)
-- [R code from lecture](day6/ME114_day6.Rmd)
 - [Assignment 6 as R markdown](day6/ME114_assignment1_LASTNAME_FIRSTNAME.Rmd)
 
 #### Tuesday, August 25: Machine Learning [KB]
 
 - [Lecture Notes](day7/ME114_day7.pdf)
-- [R code from lecture](day7/ME114_day7.Rmd)
 - [Assignment 7 as R markdown](day7/ME114_assignment7_LASTNAME_FIRSTNAME.Rmd)
 
 #### Wednesday, August 26: Unsupervised learning and dimensional reduction [KB]
 
 - [Lecture Notes](day8/ME114_day8.pdf)
-- [R code from lecture](day8/ME114_day8.Rmd)
 - [Assignment 8 as R markdown](day8/ME114_assignment8_LASTNAME_FIRSTNAME.Rmd)
 
 #### Thursday, August 27: Text analysis [KB]
 
 - [Lecture Notes](day9/ME114_day9.pdf)
-- [R code from lecture](day9/ME114_day9.Rmd)
 - [Assignment 9 as R markdown](day9/ME114_assignment9_LASTNAME_FIRSTNAME.Rmd)
 
 #### Friday, August 28: Mining the Social Web [KB, SM]
 
 - [Lecture Notes](day10/ME114_day10.pdf)
-- [R code from lecture](day10/ME114_day10.Rmd)
 - [Assignment 10 as R markdown](day10/ME114_assignment10_LASTNAME_FIRSTNAME.Rmd)
 
