@@ -61,7 +61,7 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 
 - [Lecture Notes](day2/ME114_day2.pdf)
 - [Assignment 2 as R markdown](day2/ME114_assignment2_LASTNAME_FIRSTNAME.Rmd)
-- [Assignment 2 **solution** as R markdown](day1/ME114_assignment2_solution.Rmd)
+- [Assignment 2 **solution** as R markdown](day2/ME114_assignment2_solution.Rmd)
 
 #### Wednesday, August 19: Linear Regression [SM] 
 
