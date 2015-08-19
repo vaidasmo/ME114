@@ -2,7 +2,6 @@
 title: "Assignment 3 - Linear Regression"
 author: "Ken Benoit and Slava Mikhaylov"
 output: html_document
-bibliography: ../bibliography/bibliography.bib
 ---
 
 Assignments for the course focus on practical aspects of the concepts covered in the lectures. Assignments are largely based on the material covered in @james2013. You will start working on the assignment in the lab sessions after the lectures, but may need to finish them after class.
@@ -10,7 +9,7 @@ Assignments for the course focus on practical aspects of the concepts covered in
 You will be asked to submit your assignments via Moodle by 7pm on the day of the class. We will subsequently open up solutions to the problem sets. 
 
 
-You will need to load the core library for the course textbook:
+You will need to load the core package for the course textbook:
 ```{r}
 library(ISLR)
 ```
@@ -18,7 +17,7 @@ library(ISLR)
 
 ## Exercise 3.1
 
-This question involves the use of simple linear regression on the `Auto` data set.
+This question involves the use of simple linear regression on the `Auto` data set that comes together with the `ISLR` package.
 
 (a) Use the `lm()` function to perform a simple linear regression with `mpg` as the response and `horsepower` as the predictor. Use the `summary()` function to print the results. Comment on the output. For example:
 
@@ -64,31 +63,8 @@ careful—some of the variables in the model are qualitative!
 (g) Using the model from (e), obtain 95% confidence intervals for the coefficient(s).
 (h) Is there evidence of outliers or high leverage observations in the model from (e)?
 
+
 ## Exercise 3.4
-
-In this problem we will investigate the t-statistic for the null hypothesis $H_0 : \beta =0$ in simple linear regression without an intercept. To begin, we generate a predictor `x` and a response `y` as follows.
-
-```{r}
- set.seed (1)
- x=rnorm(100)
- y=2*x+rnorm(100)
-```
-
-(a) Perform a simple linear regression of `y` onto `x`, without an intercept. Report the coefficient estimate $\hat{\beta}$, the standard error of this coefficient estimate, and the t-statistic and p-value associated with the null hypothesis $H_0 : \beta =0$. Comment on these results. (You can perform regression without an intercept using the command `lm(y∼x+0)`.)
-(b) Now perform a simple linear regression of `x` onto `y` without an intercept, and report the coefficient estimate, its standard error, and the corresponding t-statistic and p-values associated with the null hypothesis $H_0 : \beta =0$. Comment on these results.
-(c) What is the relationship between the results obtained in (a) and (b)?
-(d) In `R`, show that when regression is performed with an intercept, the t-statistic for $H_0 : \beta_1 =0$ is the same for the regression of `y` onto `x` as it is for the regression of `x` onto `y`.
-
-## Exercise 3.5
-
-This problem involves simple linear regression without an intercept.
-
-(a) Generate an example in `R` with $n = 100$ observations in which the coefficient estimate for the regression of `X` onto `Y` is different from the coefficient estimate for the regression of `Y` onto `X`.
-(b) Generate an example in `R` with $n = 100$ observations in which the coefficient estimate for the regression of `X` onto `Y` is the same as the coefficient estimate for the regression of `Y` onto `X`.
-(c) Under what circumstance is the coefficient estimate for the regression of `X` onto `Y` the same as the coefficient estimate for the regression of `Y` onto `X`?
-  
-  
-## Exercise 3.6
 
 In this exercise you will create some simulated data and will fit simple linear regression models to it. Make sure to use `set.seed(1)` prior to starting part (a) to ensure consistent results.
 
@@ -105,50 +81,3 @@ What is the length of the vector `y`? What are the values of $\beta_0$ and $\bet
 (i) Repeat (a)–(f) after modifying the data generation process in such a way that there is more noise in the data. The model should remain the same. You can do this by increasing the variance of the normal distribution used to generate the error term $\epsilon$ in (b). Describe your results.
 (j) What are the confidence intervals for $\beta_0$ and $\beta_1$ based on the original data set, the noisier data set, and the less noisy data set? Comment on your results.
 
-  
-## Exercise 3.7
-
-This problem focuses on the collinearity problem.
-
-(a) Perform the following commands in `R`:
-
-```{r}
-set.seed(1)
-x1=runif(100)
-x2=0.5*x1+rnorm(100)/10
-y=2+2*x1+0.3*x2+rnorm(100)
-```
-
-The last line corresponds to creating a linear model in which `y` is a function of `x1` and `x2`. Write out the form of the linear model. What are the regression coefficients?
-
-(b) What is the correlation between `x1` and `x2`? Create a scatterplot displaying the relationship between the variables.
-
-(c) Using this data, fit a least squares regression to predict `y` using `x1` and `x2`. Describe the results obtained. What are $\hat{\beta}_0$, $\hat{\beta}_1$, and $\hat{\beta}_2$? How do these relate to the true $\beta_0$, $\beta_1$, and $\beta_2$? Can you reject the null hypothesis $H_0 : \beta_1 = 0$? How about the null hypothesis $H_0 : \beta_2 = 0$?
-
-(d) Now fit a least squares regression to predict `y` using only `x1`. Comment on your results. Can you reject the null hypothesis $H_0 : \beta_1 = 0$?
-
-(e) Now fit a least squares regression to predict `y` using only `x2`. Comment on your results. Can you reject the null hypothesis $H_0 : \beta_1 = 0$?
-
-(f) Do the results obtained in (c)–(e) contradict each other? Explain your answer.
-
-(g) Now suppose we obtain one additional observation, which was unfortunately mismeasured.
-```{r}
-x1=c(x1, 0.1) 
-x2=c(x2, 0.8) 
-y=c(y,6)
-```
-Re-fit the linear models from (c) to (e) using this new data. What effect does this new observation have on the each of the models? In each model, is this observation an outlier? A high-leverage point? Both? Explain your answers.
-  
-
-## Exercise 3.8
-
-This problem involves the `Boston` dataset from the `MASS` package. We will try to predict per capita crime rate using the other variables in this data set. In other words, per capita crime rate is the response, and the other variables are the predictors.
-
-(a) For each predictor, fit a simple linear regression model to predict the response. Describe your results. In which of the models is there a statistically significant association between the predictor and the response? Create some plots to back up your assertions.
-(b) Fit a multiple regression model to predict the response using all of the predictors. Describe your results. For which predictors can we reject the null hypothesis $H_0 : \beta_j = 0$?
-(c) How do your results from (a) compare to your results from (b)? Create a plot displaying the univariate regression coefficients from (a) on the $x$-axis, and the multiple regression coefficients from (b) on the $y$-axis. That is, each predictor is displayed as a single point in the plot. Its coefficient in a simple linear regression model is shown on the $x$-axis, and its coefficient estimate in the multiple linear regression model is shown on the $y$-axis.
-(d) Is there evidence of non-linear association between any of the predictors and the response? To answer this question, for each predictor $X$, fit a model of the form
-$$Y = \beta_0 + \beta_1 X + \beta_2 X^2 + \beta_3 X^3 + \epsilon.$$
-  
-   
-## References
