@@ -75,7 +75,7 @@ careful—some of the variables in the model are qualitative!
 (h) Is there evidence of outliers or high leverage observations in the model from (e)?
 
 
-## Exercise 3.4
+## Exercise 3.4 (Optional)
 
 In this exercise you will create some simulated data and will fit simple linear regression models to it. Make sure to use `set.seed(1)` prior to starting part (a) to ensure consistent results.
 
