@@ -73,6 +73,7 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 
 - [Lecture Notes](day4/ME114_day4.pdf)
 - [Assignment 4 as R markdown](day4/ME114_assignment4_LASTNAME_FIRSTNAME.Rmd)
+- [Assignment 4 **solution** as R markdown](day4/ME114_assignment4_solution.Rmd)
 
 #### Friday, August 21: Resampling Methods [SM]
 
