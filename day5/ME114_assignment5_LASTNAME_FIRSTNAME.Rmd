@@ -31,17 +31,17 @@ Logistic regression may be used to predict the probability of `default` using `i
    (c) Repeat the process in (b) three times, using three different splits of the observations into a training set and a validation set. Comment on the results obtained.
    (d) Now consider a logistic regression model that predicts the probability of `default` using `income`, `balance`, and a dummy variable for `student`. Estimate the test error for this model using the validation set approach. Comment on whether or not including a dummy variable for `student` leads to a reduction in the test error rate.
 ```{r}
-testdata <- Default[1:10, ]  # select just the first 10 rows of Default
-testdata
+exampledata <- Default[1:10, ]  # select just the first 10 rows of Default
+exampledata
 ```
 The create a random index variable and sample the dataframe accordingly.  `nrow()` will give you the row dimension (total number of rows) of a matrix or data.frame object.
 ```{r}
 set.seed(100)
-sampleIndex <- sample(nrow(testdata), 5)
+sampleIndex <- sample(nrow(exampledata), 5)
 sampleIndex
 
-testdata[sampleIndex, ]   # just the rows randomly chosen
-testdata[-sampleIndex, ]  # just the rows NOT randomly chosen
+exampledata[sampleIndex, ]   # just the rows randomly chosen
+exampledata[-sampleIndex, ]  # just the rows NOT randomly chosen
 ```
 Use this approach to split the data into two sets, a training set, and a test set.
 
