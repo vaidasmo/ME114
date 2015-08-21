@@ -39,8 +39,6 @@ The create a random index variable and sample the dataframe accordingly.  `nrow(
 set.seed(100)
 sampleIndex <- sample(nrow(testdata), 5)
 sampleIndex
-testdata <- Default[1:10, ]  # select just the first 10 rows of Default
-testdata
 
 testdata[sampleIndex, ]   # just the rows randomly chosen
 testdata[-sampleIndex, ]  # just the rows NOT randomly chosen
@@ -126,7 +124,7 @@ In Sections 5.3.2 and 5.3.3 in James et al (2013), it is shown that [cv.glm()](h
    (e) Take the average of the $n$ numbers obtained in (d)iv in order to obtain the LOOCV estimate for the test error. Comment on the results.
    
    
-## Extra-credit 2: Cross-validation on a simulated dataset
+## Extra Credit 2: Cross-validation on a simulated dataset
 
 We will now perform cross-validation on a simulated data set.
 

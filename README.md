@@ -28,6 +28,12 @@ You can also subscribe to the repository if you have [a GitHub account](https://
 - Detailed course handout in [pdf format](handout/ME114Handout.pdf)
 - Detailed course handout in [markdown/html](handout/ME114Handout.md)
 
+### Office Hours ###
+
+- Ken: Tues 26 Aug, Thurs 28 Aug, 13:00 - 14:00, Columbia House B8.11  
+- Slava: Mon 25 Aug, Wed 25 Aug, 13:00 - 14:00, Columbia House B8.05
+
+
 ### Instructions for Submitting Homeworks ###
 
 Each homework will be a single file in the [RMarkdown](https://goo.gl/ZqOwUe) format.  The files linked below are *named very carefully*, to make it easy for us to identify your completed lab assignments.  
