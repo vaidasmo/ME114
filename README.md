@@ -85,6 +85,8 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 
 - [Lecture Notes](day5/ME114_day5.pdf)
 - [Assignment 5 as R markdown](day5/ME114_assignment5_LASTNAME_FIRSTNAME.Rmd)
+- [Assignment 4 **solution** as R markdown](day5/ME114_assignment5_solution.Rmd)
+- [Assignment 4 **solution** as HTML](day5/ME114_assignment5_solution.html)
 
 #### Monday, August 24: Association rules and clustering [KB]
 
