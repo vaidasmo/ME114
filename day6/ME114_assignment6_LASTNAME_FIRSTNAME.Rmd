@@ -4,7 +4,7 @@ author: "Ken Benoit and Slava Mikhaylov"
 output: html_document
 ---
 
-Assignments for the course focus on practical aspects of the concepts covered in the lectures. Assignments are largely based on the material covered in @james2013. You will start working on the assignment in the lab sessions after the lectures, but may need to finish them after class.
+Assignments for the course focus on practical aspects of the concepts covered in the lectures. Assignments are largely based on the material covered in James et al. (2013). You will start working on the assignment in the lab sessions after the lectures, but may need to finish them after class.
 
 You will be asked to submit your assignments via Moodle by 7pm on the day of the class. We will subsequently open up solutions to the problem sets. 
 
@@ -21,20 +21,20 @@ $$\left[ \begin{array}{ccc}
 
 For instance, the dissimilarity between the first and second observations is 0.3, and the dissimilarity between the second and fourth observations is 0.8.
 
-(a) On the basis of this dissimilarity matrix, sketch the dendrogram that results from hierarchically clustering these four observations.  Use any type of *linkage* that you wish, but try to indicate which you have used.  (See @james2013 pp395-396)
+(a) On the basis of this dissimilarity matrix, sketch the dendrogram that results from hierarchically clustering these four observations.  Use any type of *linkage* that you wish, but try to indicate which you have used.  (See James et al. 2013, pp395-396)
 
-(b) Compare these result to the plot of the dendrogram in R.  You can use `hclust()` to create the clusters, and the `plot()` method for this object to plot it.  See `?hclust` to see the options for linkage.  To get you started:  
+(b) Compare these result to the plot of the dendrogram in R.  You can use `hclust()` to create the clusters, and the `plot()` method for this object to plot it.  See `?hclust` to see the options for linkage.  To get you started: 
+
 ```{r}
-DM <- matrix(data = c(0, 0.3, 0.4, 0.7, 
-                      0.3, 0, 0.5, 0.8, 
-                      0.4, 0.5, 0, 0.45, 
-                      0.7, 0.8, 0.45, 0), nrow = 4, ncol = 4, byrow = TRUE)
-hc1 <- hclust(as.dist(DM))
+d <-  as.dist(matrix(c(0, 0.3, 0.4, 0.7, 
+                     0.3, 0, 0.5, 0.8,
+                     0.4, 0.5, 0.0, 0.45,
+                     0.7, 0.8, 0.45, 0.0), nrow=4))
+hc1 <- hclust(d, method="complete")
 ```
 
-(c) Suppose that we cut the dendrogram obtained in (a) such that two clusters result. Which observations are in each cluster?
-(d) Suppose that we cut the dendrogram obtained in (b) such that two clusters result. Which observations are in each cluster?
-(e) It is mentioned in this theoretical topic that at each fusion in the dendrogram, the position of the two clusters being fused can be swapped without changing the meaning of the dendrogram. Draw a dendrogram that is equivalent to the dendrogram in (a), for which two or more of the leaves are repositioned, but for which the meaning of the dendrogram is the same.
+(c) Suppose that we cut the dendrogram obtained in (b) such that two clusters result. Which observations are in each cluster?
+(d) It is mentioned in this theoretical topic that at each fusion in the dendrogram, the position of the two clusters being fused can be swapped without changing the meaning of the dendrogram. Draw a dendrogram that is equivalent to the dendrogram in (a), for which two or more of the leaves are repositioned, but for which the meaning of the dendrogram is the same.
 
 ## Exercise 6.2
 
