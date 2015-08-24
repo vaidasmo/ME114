@@ -2,7 +2,6 @@
 title: "Assignment 6 - Association rules and clustering"
 author: "Ken Benoit and Slava Mikhaylov"
 output: html_document
-bibliography: ../bibliography/bibliography.bib
 ---
 
 Assignments for the course focus on practical aspects of the concepts covered in the lectures. Assignments are largely based on the material covered in @james2013. You will start working on the assignment in the lab sessions after the lectures, but may need to finish them after class.
@@ -81,6 +80,3 @@ apply(USArrestsStandardized, 2, mean)  # are these now zero?
 apply(USArrestsStandardized, 2, sd)    # are these now one?
 ```
 (d) What effect does scaling the variables have on the hierarchical clustering obtained? In your opinion, should the variables be scaled before the inter-observation dissimilarities are computed? Provide a justification for your answer. 
-
-   
-### References
