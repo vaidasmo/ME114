@@ -22,15 +22,24 @@ $$\left[ \begin{array}{ccc}
 
 For instance, the dissimilarity between the first and second observations is 0.3, and the dissimilarity between the second and fourth observations is 0.8.
 
-(a) On the basis of this dissimilarity matrix, sketch the dendrogram that results from hierarchically clustering these four observations using complete linkage. Be sure to indicate on the plot the height at which each fusion occurs, as well as the observations corresponding to each leaf in the dendrogram.
-(b) Repeat (a), this time using single linkage clustering.
+(a) On the basis of this dissimilarity matrix, sketch the dendrogram that results from hierarchically clustering these four observations.  Use any type of *linkage* that you wish, but try to indicate which you have used.  (See @james2013 pp395-396)
+
+(b) Compare these result to the plot of the dendrogram in R.  You can use `hclust()` to create the clusters, and the `plot()` method for this object to plot it.  See `?hclust` to see the options for linkage.  To get you started:  
+```{r}
+DM <- matrix(data = c(0, 0.3, 0.4, 0.7, 
+                      0.3, 0, 0.5, 0.8, 
+                      0.4, 0.5, 0, 0.45, 
+                      0.7, 0.8, 0.45, 0), nrow = 4, ncol = 4, byrow = TRUE)
+hc1 <- hclust(as.dist(DM))
+```
+
 (c) Suppose that we cut the dendrogram obtained in (a) such that two clusters result. Which observations are in each cluster?
 (d) Suppose that we cut the dendrogram obtained in (b) such that two clusters result. Which observations are in each cluster?
 (e) It is mentioned in this theoretical topic that at each fusion in the dendrogram, the position of the two clusters being fused can be swapped without changing the meaning of the dendrogram. Draw a dendrogram that is equivalent to the dendrogram in (a), for which two or more of the leaves are repositioned, but for which the meaning of the dendrogram is the same.
 
 ## Exercise 6.2
 
-In this problem, you will perform K-means clustering manually, with $K = 2$, on a small example with $n = 6$ observations and $p = 2$ features. The observations are as follows.
+In this problem, you will perform $K$-means clustering manually, with $K = 2$, on a small example with $n = 6$ observations and $p = 2$ features. The observations are as follows.
 
 |Obs.|X1|X2|
 |--|--|--|
@@ -42,7 +51,7 @@ In this problem, you will perform K-means clustering manually, with $K = 2$, on 
 |6 |4 |0 |
 
 
-(a) Plot the observations.
+(a) Plot the observations with $X1$ on the $x$-axis and $X2$ on the $y$-axis.
 (b) Randomly assign a cluster label to each observation. You can use the `sample()` command in R to do this. Report the cluster labels for each observation.
 (c) Compute the centroid for each cluster.
 (d) Assign each observation to the centroid to which it is closest, in terms of Euclidean distance. Report the cluster labels for each observation.
@@ -65,7 +74,12 @@ Consider the `USArrests` data, which is part of the base `R` distribution. We wi
 
 (a) Using hierarchical clustering with complete linkage and Euclidean distance, cluster the states.
 (b) Cut the dendrogram at a height that results in three distinct clusters. Which states belong to which clusters?
-(c) Hierarchically cluster the states using complete linkage and Euclidean distance, *after scaling the variables to have standard deviation one*.
+(c) Hierarchically cluster the states using complete linkage and Euclidean distance, *after scaling the variables to have standard deviation one*.  (You can use the `scale()` command for this.
+```{r}
+USArrestsStandardized <- scale(USArrests)
+apply(USArrestsStandardized, 2, mean)  # are these now zero?
+apply(USArrestsStandardized, 2, sd)    # are these now one?
+```
 (d) What effect does scaling the variables have on the hierarchical clustering obtained? In your opinion, should the variables be scaled before the inter-observation dissimilarities are computed? Provide a justification for your answer. 
 
    

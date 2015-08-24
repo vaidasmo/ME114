@@ -79,8 +79,15 @@ img {
 \end{array} \right]\]</span></p>
 <p>For instance, the dissimilarity between the first and second observations is 0.3, and the dissimilarity between the second and fourth observations is 0.8.</p>
 <ol style="list-style-type: lower-alpha">
-<li>On the basis of this dissimilarity matrix, sketch the dendrogram that results from hierarchically clustering these four observations using complete linkage. Be sure to indicate on the plot the height at which each fusion occurs, as well as the observations corresponding to each leaf in the dendrogram.</li>
-<li>Repeat (a), this time using single linkage clustering.</li>
+<li><p>On the basis of this dissimilarity matrix, sketch the dendrogram that results from hierarchically clustering these four observations. Use any type of <em>linkage</em> that you wish, but try to indicate which you have used. (See <span class="citation">James et al. (2013)</span> pp395-396)</p></li>
+<li><p>Compare these result to the plot of the dendrogram in R. You can use <code>hclust()</code> to create the clusters, and the <code>plot()</code> method for this object to plot it. See <code>?hclust</code> to see the options for linkage. To get you started:</p></li>
+</ol>
+<pre class="r"><code>DM &lt;- matrix(data = c(0, 0.3, 0.4, 0.7, 
+                      0.3, 0, 0.5, 0.8, 
+                      0.4, 0.5, 0, 0.45, 
+                      0.7, 0.8, 0.45, 0), nrow = 4, ncol = 4, byrow = TRUE)
+hc1 &lt;- hclust(as.dist(DM))</code></pre>
+<ol start="3" style="list-style-type: lower-alpha">
 <li>Suppose that we cut the dendrogram obtained in (a) such that two clusters result. Which observations are in each cluster?</li>
 <li>Suppose that we cut the dendrogram obtained in (b) such that two clusters result. Which observations are in each cluster?</li>
 <li>It is mentioned in this theoretical topic that at each fusion in the dendrogram, the position of the two clusters being fused can be swapped without changing the meaning of the dendrogram. Draw a dendrogram that is equivalent to the dendrogram in (a), for which two or more of the leaves are repositioned, but for which the meaning of the dendrogram is the same.</li>
@@ -88,7 +95,7 @@ img {
 </div>
 <div id="exercise-6.2" class="section level2">
 <h2>Exercise 6.2</h2>
-<p>In this problem, you will perform K-means clustering manually, with <span class="math">\(K = 2\)</span>, on a small example with <span class="math">\(n = 6\)</span> observations and <span class="math">\(p = 2\)</span> features. The observations are as follows.</p>
+<p>In this problem, you will perform <span class="math">\(K\)</span>-means clustering manually, with <span class="math">\(K = 2\)</span>, on a small example with <span class="math">\(n = 6\)</span> observations and <span class="math">\(p = 2\)</span> features. The observations are as follows.</p>
 <table>
 <thead>
 <tr class="header">
@@ -155,8 +162,8 @@ img {
 <li>What effect does scaling the variables have on the hierarchical clustering obtained? In your opinion, should the variables be scaled before the inter-observation dissimilarities are computed? Provide a justification for your answer.</li>
 </ol>
 <div class="references">
-<h3 id="references">References</h3>
-<p>James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013. <em>An Introduction to Statistical Learning: with Applications in R</em>. Springer Texts in Statistics. Springer New York. doi:<a href="http://dx.doi.org/10.1007/978-1-4614-7138-7">10.1007/978-1-4614-7138-7</a>. <a href="http://doi.org/10.1007/978-1-4614-7138-7" class="uri">http://doi.org/10.1007/978-1-4614-7138-7</a>.</p>
+<h3 id="references" class="unnumbered">References</h3>
+<p>James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013. <em>An Introduction to Statistical Learning: With Applications in R</em>. Springer Texts in Statistics. Springer New York. doi:<a href="http://dx.doi.org/10.1007/978-1-4614-7138-7">10.1007/978-1-4614-7138-7</a>.</p>
 </div>
 </div>
 
