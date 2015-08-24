@@ -91,7 +91,10 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 #### Monday, August 24: Association rules and clustering [KB]
 
 - [Lecture Notes](day6/ME114_day6.pdf)
-- [Assignment 6 as R markdown](day6/ME114_assignment1_LASTNAME_FIRSTNAME.Rmd)
+- [Assignment 6 as R markdown](day6/ME114_assignment6_LASTNAME_FIRSTNAME.Rmd)
+- Association rule mining code example
+    - [R code](day6/apriori_example.R)
+    - [book dataset for example](https://github.com/WinVector/zmPDSwR/raw/master/Bookdata/bookdata.tsv.gz)
 
 #### Tuesday, August 25: Machine Learning [KB]
 
