@@ -7,7 +7,7 @@
 [Slava Mikhaylov](s.mikhaylov@ucl.ac.uk), University College London  
 [Paul Nulty](p.nulty@lse.ac.uk) (Labs), Department of Methodology, LSE  
 
-**Version:** August 19, 2015
+**Version:** August 24, 2015
 
 This repository contains the class materials for the [LSE Methods Summer Programme](http://www.lse.ac.uk/study/summerSchools/Methods/home.aspx) course *ME114 Introduction to Data Science and Big Data Analytics* taught in August 2015 by Kenneth Benoit and Slava Mikhaylov.  
 
@@ -62,7 +62,6 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 - [Assignment 1 **solution** as R code](day1/ME114_assignment1_solution.R)
 - [The results of the data science quiz](http://htmlpreview.github.com/?https://github.com/kbenoit/ME114/blob/master/day1/data_science_quiz.html) and the [anonymized dataset in .csv format](day1/data_science_quiz_results.csv).
 
-
 #### Tuesday, August 18: Research design issues in data science [SM, KB]  
 
 - [Lecture Notes](day2/ME114_day2.pdf)
@@ -92,14 +91,16 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 
 - [Lecture Notes](day6/ME114_day6.pdf)
 - [Assignment 6 as R markdown](day6/ME114_assignment6_LASTNAME_FIRSTNAME.Rmd)
-- Association rule mining code example
-    - [R code](day6/apriori_example.R)
-    - [book dataset for example](https://github.com/WinVector/zmPDSwR/raw/master/Bookdata/bookdata.tsv.gz)
+- [Assignment 6 **solution** as R markdown](day6/ME114_assignment6_solution.Rmd)
+- [Assignment 6 **solution** as HTML](http://htmlpreview.github.io/?https://github.com/kbenoit/ME114/blob/master/day6/ME114_assignment6_solution.html)
 
 #### Tuesday, August 25: Machine Learning [KB]
 
 - [Lecture Notes](day7/ME114_day7.pdf)
 - [Assignment 7 as R markdown](day7/ME114_assignment7_LASTNAME_FIRSTNAME.Rmd)
+- Association rule mining code example
+    - [R code](day7/apriori_example.R)
+    - [book dataset for example](https://github.com/WinVector/zmPDSwR/raw/master/Bookdata/bookdata.tsv.gz)
 
 #### Wednesday, August 26: Unsupervised learning and dimensional reduction [KB]
 

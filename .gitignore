@@ -1,4 +1,4 @@
-.Rproj.user
+\\.Rproj.*
 .Rhistory
 .RData
 ME114_assignment6_solution.Rmd
@@ -7,3 +7,4 @@ ME114_assignment8_solution.Rmd
 ME114_assignment9_solution.Rmd
 ME114_assignment10_solution.Rmd
 
+.Rproj.user
