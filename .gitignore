@@ -1,4 +1,11 @@
-\\.Rproj.*
+.R*
+ME_114_Ken_github.Rproj
+*.Rproj
+.Rd2pdf*
+__MACOSX
+.DS_Store
+.Rproj.user
+inst/doc
 .Rhistory
 .RData
 ME114_assignment7_solution.*
@@ -6,4 +13,3 @@ ME114_assignment8_solution.*
 ME114_assignment9_solution.*
 ME114_assignment10_solution.*
 *UNUSED.Rmd
-.Rproj.user
