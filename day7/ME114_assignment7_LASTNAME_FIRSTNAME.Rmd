@@ -22,10 +22,13 @@ dail2002 <- read.dta("http://www.kenbenoit.net/files/dail2002.dta")
     a subset of the data, and using the fitted model to predict the outcomes from the "left out" set 
     and using that to evaluate root mean squared error (RMSE) or accuracy.
     
-    1. Use the `sample()` command to draw a random sample of one-fifth of the observations in the `dail2002.dta` dataset.
+    Use the `sample()` command to draw a random sample of one-fifth of the observations in the `dail2002.dta` dataset as a test set, and four-fifths to be a training set.
+    ```{r}
+    dail2002$tclass <- sample(c("test", "train"), nrow(dail2002), replace = TRUE, prob = c(.2, .8))
+    ```
     
-    2. For the categorical predictions, we will also assess predictive ability based on "leave-one-out" testing and using "folds", which are groups of observations that have been left out of the training set, and then attempting to predict them with accuracy.  You will need to use indexing to partition the dataset to carry this out, and you can use the `sample()` function as we did on Friday.
-
+    We will use this indicator variable `tclass` to partition the dataset in the questions below.  Be sure you understand how we used the `sample()` command this way!
+    
 2.  **OLS regression for prediction.**
 
     1.  Fit a regression from the dataset to predict `votes1st`.  You may use any combination of
