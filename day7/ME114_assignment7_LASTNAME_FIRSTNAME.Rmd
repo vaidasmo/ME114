@@ -2,10 +2,9 @@
 title: "Assignment 7 - Machine Learning"
 author: "Ken Benoit and Slava Mikhaylov"
 output: html_document
-bibliography: ../bibliography/bibliography.bib
 ---
 
-Assignments for the course focus on practical aspects of the concepts covered in the lectures. Assignments are largely based on the material covered in @james2013. You will start working on the assignment in the lab sessions after the lectures, but may need to finish them after class.
+Assignments for the course focus on practical aspects of the concepts covered in the lectures. Assignments are largely based on the material covered in James et al. (2013). You will start working on the assignment in the lab sessions after the lectures, but may need to finish them after class.
 
 You will be asked to submit your assignments via Moodle by 7pm on the day of the class. We will subsequently open up solutions to the problem sets. 
 
@@ -67,7 +66,4 @@ dail2002 <- read.dta("http://www.kenbenoit.net/files/dail2002.dta")
         
     2.  Experiment with two more settings of $k$ to see how this affects prediction, reporting the percent
         correctly predicted.
-
-#### References
-
 
