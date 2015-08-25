@@ -9,61 +9,65 @@ Assignments for the course focus on practical aspects of the concepts covered in
 
 You will be asked to submit your assignments via Moodle by 7pm on the day of the class. We will subsequently open up solutions to the problem sets. 
 
-You will need to load the core library for the course textbook:
+### Exercise summary
+
+This exercise revisits regression as a "machine learning" tool, both for linear and logisitic regression, as well as simple machine learning using the Naive Bayes and kNN algorithms.   
+
+For this execise we will use the Stata dataset  `dail2002.dta` from the article Kenneth Benoit and Michael Marsh. 2008. "[The Campaign Value of Incumbency: A New Solution to the Puzzle of Less Effective Incumbent Spending.](http://www.kenbenoit.net/pdfs/ajps_348.pdf)" *American Journal of Political Science* 52(4, October): 874-890.  This is available directly  [here](http://www.kenbenoit.net/files/dail2002.dta).  To load this into R, you will need the `read.dta` command from the `foreign` package.  (Note that you can load straight from the URL using this command.)  Call this data object `dail2002`. 
 ```{r}
-library(ISLR)
+require(foreign, quietly = TRUE)
+dail2002 <- read.dta("http://www.kenbenoit.net/files/dail2002.dta")
 ```
+    
+1.  **Partitioning the dataset into "folds".**  For this exercise, we will be fitting a model from 
+    a subset of the data, and using the fitted model to predict the outcomes from the "left out" set 
+    and using that to evaluate root mean squared error (RMSE) or accuracy.
+    
+    1. Use the `sample()` command to draw a random sample of one-fifth of the observations in the `dail2002.dta` dataset.
+    
+    2. For the categorical predictions, we will also assess predictive ability based on "leave-one-out" testing and using "folds", which are groups of observations that have been left out of the training set, and then attempting to predict them with accuracy.  You will need to use indexing to partition the dataset to carry this out, and you can use the `sample()` function as we did on Friday.
+
+2.  **OLS regression for prediction.**
+
+    1.  Fit a regression from the dataset to predict `votes1st`.  You may use any combination of
+        regressors that you wish.  Save the model object to `reg2_1`.
+        
+    2.  Predict the `votes1st` from the same sample to which you fitted the regression.  What is the 
+        Root Mean Squared Error (RMSE) and how would you interpret this?
+        
+    3.  Drop the incumbency variable -- that you hopefully included in your answer to 2.1! -- and
+        repeat steps 2.1--2.2.  Compute a new RMSE and compare this to the previous one.  Which
+        is a better predictor?
+        
+3.  **Logistic regression for prediction**.
+
+    1.  Fit a logistic regression (hint: use `glm()`) to predict the outcome variable `wonseat`.  Use 
+        any specification that you think provides a good prediction.
+    
+    2.  For the full sample, compute:
+        
+        *  a table of actual `wonseat` by predicted `wonseat`
+        *  percent correctly predicted
+        *  precision
+        *  recall
+    
+    3.  Comparing two models.
+    
+        *  Compute an 8-fold validation, where for 8 different training sets consisting of 7/8 of the observations, you predict the other held-out 1/8 and compare the actual to predicted for the 1/8 test set.  Compute an average F1 score for the 8 models.
+        
+        *  Now drop a variable or two, and repeat the previous step to compare the average F1 score for this model.
+        
+        *  Why is it valuable to use the different folds here, rather than simply comparing the F1 score for the predicted outcome of the entire sample, fit to the entire sample?
+    
+    
+4.  **kNN prediction.**
+
+    1.  Fit a $k=1$ kNN model to predict the same specification as in your logistic regression.  Compare the 
+        percent correctly predicted.  Which model worked better?  (Note: You can use the whole sample here, so that this will compare the results to those from 3.1).
+        
+    2.  Experiment with two more settings of $k$ to see how this affects prediction, reporting the percent
+        correctly predicted.
+
+#### References
 
 
-## Exercise 7.1
-
-Apply random forests to the `Boston` data, part of `MASS` package, using `mtry=6` and using `ntree=25` and `ntree=500`. Create a plot displaying the test error resulting from random forests on this dataset for a more comprehensive range of values for `mtry` and `ntree`. You can model your plot after Figure 8.10 in @james2013 [Chapter 8]. Describe the results obtained.
-
-## Exercise 7.2
-
-Looking at the `Carseats` data from the `ISLR` package we will seek to predict `Sales` using regression trees and related approaches, treating the response as a quantitative variable.
-
-(a) Split the data set into a training set and a test set.
-(b) Fit a regression tree to the training set. Plot the tree, and interpret the results. What test error rate do you obtain?
-(c) Use cross-validation in order to determine the optimal level of tree complexity. Does pruning the tree improve the test error rate?
-(d) Use the bagging approach in order to analyze this data. What test error rate do you obtain? Use the `importance()` function to determine which variables are most important.
-(e) Use random forests to analyze this data. What test error rate do you obtain? Use the `importance()` function to determine which variables are most important. Describe the effect of $m$, the number of variables considered at each split, on the error rate obtained.
-
-## Exercise 7.3
-
-This problem involves the `OJ` dataset which is part of the `ISLR` package.
-
-(a) Create a training set containing a random sample of 800 observations, and a test set containing the remaining observations.
-(b) Fit a tree to the training data, with `Purchase` as the response and the other variables except for `Buy` as predictors. Use the `summary()` function to produce summary statistics about the tree, and describe the results obtained. What is the training error rate? How many terminal nodes does the tree have?
-(c) Type in the name of the tree object in order to get a detailed text output. Pick one of the terminal nodes, and interpret the information displayed.
-(d) Create a plot of the tree, and interpret the results.
-(e) Predict the response on the test data, and produce a confusion matrix comparing the test labels to the predicted test labels. What is the test error rate?
-(f) Apply the `cv.tree()` function to the training set in order to determine the optimal tree size.
-(g) Produce a plot with tree size on the $x$-axis and cross-validated classification error rate on the $y$-axis.
-(h) Which tree size corresponds to the lowest cross-validated classification error rate?
-(i) Produce a pruned tree corresponding to the optimal tree size obtained using cross-validation. If cross-validation does not lead to selection of a pruned tree, then create a pruned tree with five terminal nodes.
-(j) Compare the training error rates between the pruned and unpruned trees. Which is higher?
-(k) Compare the test error rates between the pruned and unpruned trees. Which is higher?
-
-
-## Exercise 7.3
-
-We now use boosting to predict `Salary` in the `Hitters` dataset, which is part of the `ISLR` package.
-(a) Remove the observations for whom the salary information is unknown, and then log-transform the salaries.
-(b) Create a training set consisting of the first 200 observations, and a test set consisting of the remaining observations.
-(c) Perform boosting on the training set with 1,000 trees for a range of values of the shrinkage parameter $\lambda$. Produce a plot with different shrinkage values on the $x$-axis and the corresponding training set MSE on the $y$-axis.
-(d) Produce a plot with different shrinkage values on the $x$-axis and the corresponding test set MSE on the $y$-axis.
-(e) Compare the test MSE of boosting to the test MSE that results from applying two of the regression approaches seen in our discussions of regression models.
-(f) Which variables appear to be the most important predictors in the boosted model?
-(g) Now apply bagging to the training set. What is the test set MSE for this approach?
-
-## Exercise 7.4
-
-This question uses the `Caravan` dataset, part of the `ISRL` package.
-(a) Create a training set consisting of the first 1,000 observations,
-and a test set consisting of the remaining observations.
-(b) Fit a boosting model to the training set with `Purchase` as the response and the other variables as predictors. Use 1,000 trees, and a shrinkage value of 0.01. Which predictors appear to be the most important?
-(c) Use the boosting model to predict the response on the test data. Predict that a person will make a purchase if the estimated probability of purchase is greater than 20%. Form a confusion matrix. What fraction of the people predicted to make a purchase do in fact make one? How does this compare with the results obtained from applying KNN or logistic regression to this data set?
-
-
-### References
