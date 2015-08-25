@@ -58,34 +58,32 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 
 - [Lecture Notes](day1/ME114_day1.pdf)
 - [Assignment 1 as R markdown](day1/ME114_assignment1_LASTNAME_FIRSTNAME.Rmd)
-- [Assignment 1 **solution** as R markdown](day1/ME114_assignment1_solution.Rmd)
-- [Assignment 1 **solution** as R code](day1/ME114_assignment1_solution.R)
+- Assignment 1 **solution** as [R markdown](day1/ME114_assignment1_solution.Rmd) or [R code](day1/ME114_assignment1_solution.R)
 - [The results of the data science quiz](http://htmlpreview.github.com/?https://github.com/kbenoit/ME114/blob/master/day1/data_science_quiz.html) and the [anonymized dataset in .csv format](day1/data_science_quiz_results.csv).
 
 #### Tuesday, August 18: Research design issues in data science [SM, KB]  
 
 - [Lecture Notes](day2/ME114_day2.pdf)
 - [Assignment 2 as R markdown](day2/ME114_assignment2_LASTNAME_FIRSTNAME.Rmd)
-- [Assignment 2 **solution** as R markdown](day2/ME114_assignment2_solution.Rmd)
+- Assignment 2 **solution** as [R markdown](day2/ME114_assignment2_solution.Rmd)
 
 #### Wednesday, August 19: Linear Regression [SM] 
 
 - [Lecture Notes](day3/ME114_day3.pdf)
 - [Assignment 3 as R markdown](day3/ME114_assignment3_LASTNAME_FIRSTNAME.Rmd)
-- [Assignment 3 **solution** as R markdown](day3/ME114_assignment3_solution.Rmd)
+- Assignment 3 **solution** as [R markdown](day3/ME114_assignment3_solution.Rmd)
 
 #### Thursday, August 20: Generalized Linear Regression [SM] 
 
 - [Lecture Notes](day4/ME114_day4.pdf)
-- [Assignment 4 as R markdown](day4/ME114_assignment4_LASTNAME_FIRSTNAME.Rmd)
-- [Assignment 4 **solution** as R markdown](day4/ME114_assignment4_solution.Rmd)
+- [Assignment 4 as R markdown](day4/ME114_assignment4_LASTNAME_FIRSTNAME.Rmd) 
+- Assignment 4 **solution** as [R markdown](day4/ME114_assignment4_solution.Rmd) or [html](http://htmlpreview.github.io/?https://github.com/kbenoit/ME114/blob/master/day4/ME114_assignment4_solution.html)
 
 #### Friday, August 21: Resampling Methods [SM]
 
 - [Lecture Notes](day5/ME114_day5.pdf)
 - [Assignment 5 as R markdown](day5/ME114_assignment5_LASTNAME_FIRSTNAME.Rmd)
-- [Assignment 5 **solution** as R markdown](day5/ME114_assignment5_solution.Rmd)
-- [Assignment 5 **solution** as HTML](http://htmlpreview.github.io/?https://github.com/kbenoit/ME114/blob/master/day5/ME114_assignment5_solution.html)
+- Assignment 5 **solution** as [R markdown](day5/ME114_assignment5_solution.Rmd) or [html](http://htmlpreview.github.io/?https://github.com/kbenoit/ME114/blob/master/day5/ME114_assignment5_solution.html)
 
 #### Monday, August 24: Association rules and clustering [KB]
 
@@ -96,7 +94,7 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 #### Tuesday, August 25: Machine Learning [KB]
 
 - [Lecture Notes](day7/ME114_day7.pdf)
-- Assignment 7 as [R markdown](day7/ME114_assignment7_LASTNAME_FIRSTNAME.Rmd) or [html]- Assignment 6 as [R markdown](day6/ME114_assignment6_LASTNAME_FIRSTNAME.Rmd) or [html](http://htmlpreview.github.io/?https://github.com/kbenoit/ME114/blob/master/day7/ME114_assignment7_LASTNAME_FIRSTNAME.html)
+- Assignment 7 as [R markdown](day7/ME114_assignment7_LASTNAME_FIRSTNAME.Rmd) or [html](http://htmlpreview.github.io/?https://github.com/kbenoit/ME114/blob/master/day7/ME114_assignment7_LASTNAME_FIRSTNAME.html)
 - Association rule mining code example
     - [R code](day7/apriori_example.R)
     - [book dataset for example](https://github.com/WinVector/zmPDSwR/raw/master/Bookdata/bookdata.tsv.gz)
