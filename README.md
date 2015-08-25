@@ -90,14 +90,13 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 #### Monday, August 24: Association rules and clustering [KB]
 
 - [Lecture Notes](day6/ME114_day6.pdf)
-- [Assignment 6 as R markdown](day6/ME114_assignment6_LASTNAME_FIRSTNAME.Rmd)
-- [Assignment 6 **solution** as R markdown](day6/ME114_assignment6_solution.Rmd)
-- [Assignment 6 **solution** as HTML](http://htmlpreview.github.io/?https://github.com/kbenoit/ME114/blob/master/day6/ME114_assignment6_solution.html)
+- Assignment 6 as [R markdown](day6/ME114_assignment6_LASTNAME_FIRSTNAME.Rmd) or [html](http://htmlpreview.github.io/?https://github.com/kbenoit/ME114/blob/master/day6/ME114_assignment6_LASTNAME_FIRSTNAME.html)
+- Assignment 6 **solution** as [R markdown](day6/ME114_assignment6_solution.Rmd) or [html](http://htmlpreview.github.io/?https://github.com/kbenoit/ME114/blob/master/day6/ME114_assignment6_solution.html)
 
 #### Tuesday, August 25: Machine Learning [KB]
 
 - [Lecture Notes](day7/ME114_day7.pdf)
-- [Assignment 7 as R markdown](day7/ME114_assignment7_LASTNAME_FIRSTNAME.Rmd)
+- Assignment 7 as [R markdown](day7/ME114_assignment7_LASTNAME_FIRSTNAME.Rmd) or [html]- Assignment 6 as [R markdown](day6/ME114_assignment6_LASTNAME_FIRSTNAME.Rmd) or [html](http://htmlpreview.github.io/?https://github.com/kbenoit/ME114/blob/master/day7/ME114_assignment7_LASTNAME_FIRSTNAME.html)
 - Association rule mining code example
     - [R code](day7/apriori_example.R)
     - [book dataset for example](https://github.com/WinVector/zmPDSwR/raw/master/Bookdata/bookdata.tsv.gz)
