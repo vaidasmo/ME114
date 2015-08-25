@@ -25,6 +25,7 @@ dail2002 <- read.dta("http://www.kenbenoit.net/files/dail2002.dta")
     Use the `sample()` command to draw a random sample of one-fifth of the observations in the `dail2002.dta` dataset as a test set, and four-fifths to be a training set.
     ```{r}
     dail2002$tclass <- sample(c("test", "train"), nrow(dail2002), replace = TRUE, prob = c(.2, .8))
+    reg2_1 <- lm(votes1st ~ spend_total * incumb, data = dail2002, subset = (tclass=="train"))
     ```
     
     We will use this indicator variable `tclass` to partition the dataset in the questions below.  Be sure you understand how we used the `sample()` command this way!

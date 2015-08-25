@@ -99,15 +99,15 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
     - [R code](day7/apriori_example.R)
     - [book dataset for example](https://github.com/WinVector/zmPDSwR/raw/master/Bookdata/bookdata.tsv.gz)
 
-#### Wednesday, August 26: Unsupervised learning and dimensional reduction [KB]
+#### Wednesday, August 26: Text analysis [KB]
 
 - [Lecture Notes](day8/ME114_day8.pdf)
-- [Assignment 8 as R markdown](day8/ME114_assignment8_LASTNAME_FIRSTNAME.Rmd)
+- [Assignment 9 as R markdown](day8/ME114_assignment8_LASTNAME_FIRSTNAME.Rmd)
 
-#### Thursday, August 27: Text analysis [KB]
+#### Thursday, August 27: Unsupervised learning and dimensional reduction [KB]
 
-- [Lecture Notes](day9/ME114_day9.pdf)
-- [Assignment 9 as R markdown](day9/ME114_assignment9_LASTNAME_FIRSTNAME.Rmd)
+- [Lecture Notes](day8/ME114_day9.pdf)
+- [Assignment 8 as R markdown](day9/ME114_assignment9_LASTNAME_FIRSTNAME.Rmd)
 
 #### Friday, August 28: Mining the Social Web [PN]
 
