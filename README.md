@@ -7,7 +7,7 @@
 [Slava Mikhaylov](s.mikhaylov@ucl.ac.uk), University College London  
 [Paul Nulty](p.nulty@lse.ac.uk) (Labs), Department of Methodology, LSE  
 
-**Version:** August 24, 2015
+**Version:** August 25, 2015
 
 This repository contains the class materials for the [LSE Methods Summer Programme](http://www.lse.ac.uk/study/summerSchools/Methods/home.aspx) course *ME114 Introduction to Data Science and Big Data Analytics* taught in August 2015 by Kenneth Benoit and Slava Mikhaylov.  
 
@@ -109,7 +109,7 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 - [Lecture Notes](day9/ME114_day9.pdf)
 - [Assignment 9 as R markdown](day9/ME114_assignment9_LASTNAME_FIRSTNAME.Rmd)
 
-#### Friday, August 28: Mining the Social Web [KB, SM]
+#### Friday, August 28: Mining the Social Web [PN]
 
 - [Lecture Notes](day10/ME114_day10.pdf)
 - [Assignment 10 as R markdown](day10/ME114_assignment10_LASTNAME_FIRSTNAME.Rmd)
