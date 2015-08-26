@@ -30,7 +30,7 @@ You can also subscribe to the repository if you have [a GitHub account](https://
 
 ### Office Hours ###
 
-- Ken: Tues 26 Aug, Thurs 28 Aug, 13:00 - 14:00, Columbia House B8.11  
+- Ken: Tues 26 Aug, Wed 27 Aug, and Thurs 28 Aug, 13:00 - 14:00, Columbia House B8.11  
 - Slava: Mon 25 Aug, Wed 25 Aug, 13:00 - 14:00, Columbia House B8.05
 
 
@@ -115,5 +115,12 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 #### Friday, August 28: Mining the Social Web [PN]
 
 - [Lecture Notes](day10/ME114_day10.pdf)
-- [Assignment 10 as R markdown](day10/ME114_assignment10_LASTNAME_FIRSTNAME.Rmd)
+- [Assignment 10 as R markdown](day10/ME114_assignment10_LASTNAME_FIRSTNAME.Rmd).  Note: This is a take-home set only, as there is no lab on Day 10.
+
+#### Exam: Friday, August 28, 14:00 - 16:00, Room: TBA
+
+- **Instructions:**  Complete and submit the exam just as you would any lab assignment: by renaming the file, editing the R Markdown, and submitting through Moodle. 
+- **Formatting:**  Put your own textual answers in boldface (using `**boldface type**` in RMarkdown), so that we can easily identify them.
+- **Deadline: **: TBA.
+- The exam in R Markdown...
 
