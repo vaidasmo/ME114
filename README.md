@@ -98,6 +98,7 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 - Association rule mining code example
     - [R code](day7/apriori_example.R)
     - [book dataset for example](https://github.com/WinVector/zmPDSwR/raw/master/Bookdata/bookdata.tsv.gz)
+- Assignment 7 **solution** as [R markdown](day7/ME114_assignment7_solution.Rmd) or [html](http://htmlpreview.github.io/?https://github.com/kbenoit/ME114/blob/master/day7/ME114_assignment7_solution.html)
 
 #### Wednesday, August 26: Text analysis [KB]
 
