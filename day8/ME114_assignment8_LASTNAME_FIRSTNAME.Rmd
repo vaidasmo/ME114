@@ -108,6 +108,9 @@ This exercise is designed to get you working with [quanteda](http://github.com/k
     Note that this groups Theodore and Franklin D. Roosevelt together -- to separate them we
     would have needed to add a firstname variable using `docvars()` and grouped on that as well.
    
+    Do this to aggregate the Irish budget corpus (`ie2010Corpus`) by political party, when
+    creating a dfm.
+
 1.  Explore the ability to subset a corpus.  
 
     There is a `subset()` method defined for a corpus, which works just like R's normal
@@ -115,7 +118,7 @@ This exercise is designed to get you working with [quanteda](http://github.com/k
     to subset the corpus first:
    
     ```{r}
-    obamadfm <- dfm(subset(inaugCorpus, President=="Obama"), stopwords=TRUE)
+    obamadfm <- dfm(subset(inaugCorpus, President=="Obama"))
     plot(obamadfm)
     ```
 
@@ -128,7 +131,7 @@ This exercise is designed to get you working with [quanteda](http://github.com/k
     
         It is common to "clean" texts before processing, usually by removing
         punctuation,  digits, and converting to lower case. Look at the 
-        documentation for **quanteda**}'s `clean` command `?clean` and use the
+        documentation for `toLower()` and use the
         command on the `exampleString` text (you can load this from 
         **quantedaData** using `data(exampleString)`. Can you think of cases 
         where cleaning could introduce homonymy?
@@ -137,8 +140,7 @@ This exercise is designed to get you working with [quanteda](http://github.com/k
 
         In order to count word frequencies, we first need to split the text 
         into words through a process known as **tokenization**.  Look at the
-        documentation for **quanteda**'s `tokenize` command using the
-        built in help function (`?` before any object/command).  Use the 
+        documentation for **quanteda**'s `tokenize()` function.  Use the 
         `tokenize` command on `exampleString`, and examine the results.  Are 
         there cases where it is unclear where the boundary between two words lies?
         You can experiment with the options to `tokenize`.  
@@ -221,7 +223,7 @@ This exercise is designed to get you working with [quanteda](http://github.com/k
     1.  Examine the most frequent word features using `topfeatures()`.  What are
         the five most frequent word in the corpus? 
 
-    5.  `summary` `quanteda` provides a function to count syllables in a
+    5.  **quanteda** provides a function to count syllables in a
         word — `syllables`. Try the function at the prompt. The
         code below will apply this function to all the words in the
         corpus, to give you a count of the total syllables in the
@@ -233,6 +235,9 @@ This exercise is designed to get you working with [quanteda](http://github.com/k
         # sum the syllable counts 
         totalSyls <- sum(textSyls)                           
         ```
+        
+        How would you get the total syllables per text?
+        
         
 3.  **Lexical Diversity over Time**
 
@@ -249,21 +254,14 @@ This exercise is designed to get you working with [quanteda](http://github.com/k
         Note the quotation marks around the value for `number`.  Why are these required here?
 
     2.  Get the type-token ratio for each text from this subset, and
-        plot the resulting vector of TTRs as a function of the year.
-        
-    3.  Now compare the results from the `lexdiv` function applied to the 
-        texts.  Are the results the same?
+        plot the resulting vector of TTRs as a function of the year.  Hint: See `?lexdiv`.        
 
 4.  **Document and word associations**
 
-    1.  Load the presidential inauguration corpus selecting from 1900-1050,
+    1.  Load the presidential inauguration corpus selecting from 1900-1950,
         and create a dfm from this corpus.
-    
-    2.  Measure the document similarities using `similarity()`.  Compare the results
-        for Euclidean, Euclidean on the term frequency standardized dfm,
-        cosine, and Jaccard.
-        
-    3.  Measure the term similarities for the following words: *economy*, *health*,
+
+    2.  Measure the term similarities for the following words: *economy*, *health*,
         *women*.
         
 
@@ -287,37 +285,12 @@ This exercise is designed to get you working with [quanteda](http://github.com/k
         posDfm[1:10,]
         ```
         
-        Weight the `posDfm` by term frequency using `tf()`, and plot the values of articles
+        Weight the `posDfm` by term frequency using `weight()`, and plot the values of articles
         and conjunctions (actually, here just the coordinating conjunctions) across the speeches.
         (**Hint:** you can use `docvars(inaugCorpus, "Year"))` for the *x*-axis.)
         
         Is the distribution of normalized articles and conjunctions relatively constant across
         years, as you would expect?
-
-    1.  **Replicating a published dictionary analysis**
-    
-        Here we will create and implement the populism dictionary from Rooduijn, Matthijs, and Teun 
-        Pauwels. 2011. "Measuring Populism: Comparing Two Methods of Content Analysis." *West European
-        Politics* 34(6): 1272–83.  Appendix B of that paper provides the term entries for a dictionary
-        key for the concept *populism*.  Implement this as a dictionary, and apply it to the same
-        UK manifestos as in the article.
-        
-        Hint: You can get a corpus of the UK manifestos from their article using the following:
-        ```{r}
-        data(ukManifestos, package="quantedaData")
-        ukPopCorpus <- subset(ukManifestos, (Year %in% c(1992, 2001, 2005) & 
-                                            (Party %in% c("Lab", "LD", "Con", "BNP", "UKIP"))))
-        summary(ukPopCorpus)
-        ```
-        
-        Create a dfm of the populism dictionary on the UK manifestos.  Use this dfm to reproduce
-        the *x*-axis for the UK-based parties from Figure 1 in the article.  Suggestion: Use 
-        `dotchart()`.  You will need to normalize the values first by term frequency within 
-        document.  Hint: Use `weight(x, "relFreq")` on the dfm.
-        
-        You can explore some of these terms within the corpus to see whether you think they are 
-        appropriate measures of populism.  How can you search the corpus for the regular expression
-        `politici*` as a "keyword in context"?
 
 1.  Settle a Scrabble word value dispute.
 
