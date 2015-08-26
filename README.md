@@ -105,6 +105,7 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 - [Lecture Notes](day8/ME114_day8.pdf)
 - Assignment 8 as [R markdown](day8/ME114_assignment8_LASTNAME_FIRSTNAME.Rmd) or [html](http://htmlpreview.github.io/?https://github.com/kbenoit/ME114/blob/master/day8/ME114_assignment8_LASTNAME_FIRSTNAME.html)
     - sample zip file [`UKimmigTexts.zip`](day8/UKimmigTexts.zip) of texts for building a corpus
+- Assignment 8 **solution** as [R markdown](day8/ME114_assignment8_solution.Rmd) or [html](http://htmlpreview.github.io/?https://github.com/kbenoit/ME114/blob/master/day8/ME114_assignment8_solution.html)
 
 #### Thursday, August 27: Unsupervised learning and dimensional reduction [KB]
 
