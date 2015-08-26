@@ -22,13 +22,15 @@ This exercise is designed to get you working with [quanteda](http://github.com/k
     # needs the devtools package for this to work
     if (!require(devtools)) install.packages("devtools", dependencies=TRUE)
     # PREFERABLY: install the latest version from GitHub
+    # see the installation instructions on http://github.com/kbenoit/quanteda
     devtools::install_github("kbenoit/quanteda")
     # and quantedaData
     devtools::install_github("quantedaData", username="kbenoit")
     ```
 1.  Exploring **quanteda** functions.
 
-    You can try running `demo(quanteda)`, and also use the `example()` function for any 
+    Look at the Quick Start vignette, and browse the manual for quanteda.  You can use
+    `example()` function for any 
     function in the package, to run the examples and see how the function works.  Of course
     you should also browse the documentation, especially `?corpus` to see the structure
     and operations of how to construct a corpus.
@@ -48,26 +50,28 @@ This exercise is designed to get you working with [quanteda](http://github.com/k
       
     1.  From a directory of text files.
    
-        The `corpus()` function can take as its main argument the name of a directory,
-        if you wrap the path to the directory within a `directory()` call.  (See `?directory`
-        for an example.)  If you call `directory()` with no arguments, then it should allow
-        you to choose the directory interactively (you will need to have installed the
-        `tcltk2` package first though.)
+        The `textfile()` function can read (almost) any set of files into an object
+        that you can then call the corpus()` function on, to create a corpus.  (See `?textfile`
+        for an example.)
       
         Here you are encouraged to select any directory of plain text files of your own.  
         How did it work?  Try using `docvars()` to assign a set of document-level variables.
+        If you do not have a set of text files to work with, then you can use the UK 2010 manifesto texts on immigration, in the Day 8 folder, like this:
       
-        Note that if you document level metadata in your filenames, then this can be 
-        automatically parsed by `corpus.directory()` into `docvars`.
-      
-        ```{r}
+        ```{r, echo=FALSE}
+        require(quanteda, quietly = TRUE, warn.conflicts = FALSE)
+        ```
+
+
+        ```{r, eval=FALSE}
         require(quanteda)
-        mydir <- textfile("~/Dropbox/QUANTESS/corpora/ukManRenamed/*.txt")
-        mycorpus <- corpus(mydir)
-        summary(mycorpus, 5)
+        manfiles <- textfile("https://github.com/kbenoit/ME114/raw/master/day8/UKimmigTexts.zip")
+        mycorpus <- corpus(manfiles)
         ```
    
     1.  From `.csv` or `.json` files --- see the documentation with `?textfile`.
+    
+        Here you can try one of your own examples, or just file this in your mental catalogue for future reference.
     
  
 1.  Explore some phrases in the text.  
