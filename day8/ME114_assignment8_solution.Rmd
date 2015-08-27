@@ -368,14 +368,14 @@ require(quanteda, quietly = TRUE, warn.conflicts = FALSE)
     speech, for instance we could define a dictionary consisting of articles and conjunctions,
     using:
     ```{r}
-    posDict <- dictionary(list(articles = c("the", "a", "and"),
+    posDict <- dictionary(list(articles = c("the", "a", "an"),
                                conjunctions = c("and", "but", "or", "nor", "for", "yet", "so")))
     ```
     
     To let this define a set of features, we can use this dictionary when we create a `dfm`, 
     for instance:
     ```{r}
-    posDfm <- dfm(inaugCorpus, dictionary = posDict)
+    posDfm <- dfm(inaugCorpus, dictionary = posDict, groups=(c('President')))
     posDfm[1:10,]
     ```
     
