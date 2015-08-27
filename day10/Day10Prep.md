@@ -20,6 +20,8 @@ https://dev.twitter.com/streaming/overview
 
 ####Recommended readings: 
 
+[Earthquake shakes Twitter users: real-time event detection by social sensors](Sakaki_Earthquake.pdf)
+
 http://rcrastinate.blogspot.co.uk/2015/02/mapping-world-with-tweets-including-gif.html
 
 https://github.com/twitter/AnomalyDetection
