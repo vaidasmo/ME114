@@ -1,0 +1,72 @@
+---
+title: "Assignment 9 - Unsupervised learning and dimensional reduction"
+author: "Ken Benoit and Slava Mikhaylov"
+output: html_document
+---
+
+Assignments for the course focus on practical aspects of the concepts covered in the lectures. Assignments are largely based on the material covered in James et al. (2013). You will start working on the assignment in the lab sessions after the lectures, but may need to finish them after class.
+
+You will be asked to submit your assignments via Moodle by 7pm on the day of the class. We will subsequently open up solutions to the problem sets. 
+
+
+## Exercise 9.1
+
+In this exercise, you will generate simulated data, and then perform PCA and K-means clustering on the data.
+
+(a) Generate a simulated data set with 20 observations in each of three classes (i.e. 60 observations total), and 50 variables.
+*Hint: There are a number of functions in `R` that you can use to generate data. One example is the `rnorm()` function; `runif()` is another option. Be sure to add a mean shift to the observations in each class so that there are three distinct classes.*
+
+You can do something like below:
+```{r eval=FALSE}
+set.seed(2)
+x <-  matrix(rnorm(20*3*50, mean=0, sd=0.001), ncol=50)
+x[1:20, 2] <-  1
+x[21:40, 1] <-  2
+x[21:40, 2] <-  2
+x[41:60, 1] <-  1
+```
+
+
+(b) Perform PCA on the 60 observations and plot the first two principal component score vectors using `prcomp()` function. Use a different color to indicate the observations in each of the three classes. If the three classes appear separated in this plot, then continue on to part (c). If not, then return to part (a) and modify the simulation so that there is greater separation between the three classes. Do not continue to part (c) until the three classes show at least some separation in the first two principal component score vectors.
+
+(c) Perform $K$-means clustering of the observations with $K = 3$. How well do the clusters that you obtained in $K$-means clustering compare to the true class labels?
+*Hint: You can use the `table()` function in `R` to compare the true class labels to the class labels obtained by clustering. Be careful how you interpret the results: K-means clustering will arbitrarily number the clusters, so you cannot simply check whether the true class labels and clustering labels are the same.*
+
+(d) Perform $K$-means clustering with $K = 2$. Describe your results.
+
+(e) Now perform $K$-means clustering with $K = 4$, and describe your
+results.
+
+(f) Now perform $K$-means clustering with $K = 3$ on the first two principal component score vectors, rather than on the raw data. That is, perform $K$-means clustering on the $60 \times 2$ matrix of which the first column is the first principal component score vector, and the second column is the second principal component score vector. Comment on the results.
+
+(g) Using the `scale()` function, perform $K$-means clustering with $K = 3$ on the data *after scaling each variable to have standard deviation one*. How do these results compare to those obtained in (b)? Explain.
+
+
+## Exercise 9.2
+
+In the Section 8.3.1 in James et al. (2013, p.324), a classification tree was applied to the `Carseats` dataset from `ISLR` library after converting `Sales` into a qualitative response variable (see discussion in the textbook for a walk-through). Now we will seek to predict `Sales` using regression trees and related approaches, treating the response as a quantitative variable.
+
+(a) Split the data set into a training set and a test set.
+(b) Fit a regression tree to the training set (you will need library `tree`). Plot the tree, and interpret the results. What test error rate do you obtain?
+(c) Use cross-validation in order to determine the optimal level of tree complexity. Does pruning the tree improve the test error rate? *Hint: you can use `cv.tree()` function.*
+(d) Use the bagging approach in order to analyze this data. What test error rate do you obtain? Use the `importance()` function to determine which variables are most important. *Hint: you can use `randomForest` library here.*
+(e) Use random forests to analyze this data. What test error rate do you obtain? Use the `importance()` function to determine which variables are most important. Describe the effect of $m$, the number of variables considered at each split, on the error rate obtained.
+
+
+## Exercise 9.3 (Optional)
+
+In Section 10.2.3 James et al. 2013, a formula for calculating PVE was given in Equation 10.8  (pp. 383). We also saw that the PVE can be obtained using the `sdev` output of the `prcomp()` function.
+
+On the `USArrests` data, which is part of the base `R` distribution, calculate PVE in two ways:
+
+(a) Using the `sdev` output of the `prcomp()` function, as was done in Section 10.2.3.
+(b) By applying Equation 10.8 directly. That is, use the `prcomp()` function to compute the principal component loadings. Then, use those loadings in Equation 10.8 to obtain the PVE.
+
+These two approaches should give the same results.
+
+*Hint: You will only obtain the same results in (a) and (b) if the same data is used in both cases. For instance, if in (a) you performed `prcomp()` using centered and scaled variables, then you must center and scale the variables before applying Equation 10.8 in (b). You may find the functions `apply()` and `sweep()` useful here.*
+
+
+## Exercise 9.4 (Optional)
+
+Apply random forests to the `Boston` data, part of `MASS` package, using `mtry=6` and using `ntree=25` and `ntree=500` (see Chapter 8 for in James et al. for a walk-through example how to do it). Create a plot displaying the test error resulting from random forests on this dataset for a more comprehensive range of values for `mtry` and `ntree`. You can model your plot after Figure 8.10 in James et al. (2013, Chapter 8). Describe the results obtained.
