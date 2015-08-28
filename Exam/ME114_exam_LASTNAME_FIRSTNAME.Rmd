@@ -26,7 +26,7 @@ a.  logistic regression
 b.  kNN
 c.  (**bonus**) Naive Bayes predictors of your outcome.  (Use the **e1071** package for this, following the example from class.)
 
-
+**Note:** You do not have to split the data into test and training sets here.  Just predict on the training sample, which consists of the entire dataset.
 
 ### Question 3
 
