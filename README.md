@@ -110,7 +110,8 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 #### Thursday, August 27: Unsupervised learning and dimensional reduction [KB]
 
 - [Lecture Notes](day9/ME114_day9.pdf)
-- [Assignment 8 as R markdown](day9/ME114_assignment9_LASTNAME_FIRSTNAME.Rmd)
+- [Assignment 9 as R markdown](day9/ME114_assignment9_LASTNAME_FIRSTNAME.Rmd)
+- Assignment 9 **solution** as [R markdown](day9/ME114_assignment9_solution.Rmd) or [html](http://htmlpreview.github.io/?https://github.com/kbenoit/ME114/blob/master/day9/ME114_assignment9_solution.html)
 
 #### Friday, August 28: Mining the Social Web [PN]
 

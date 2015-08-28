@@ -1,0 +1,34 @@
+---
+title: "Assignment 10 - Working wth Twitter Data"
+author: "Ken Benoit and Paul Nulty"
+output: html_document
+---
+
+In this exercise we will step through the process of accessing data through the twitter API, and working witht the data in R.
+
+
+## Exercise 10
+
+To begin, we will try to set you up with your own twitter API key. 
+
+(a) Follow the instructions provided in the twitter dev documentation and the walkthrough provided on the [readings](Day10prep.html) page.
+
+The authentication for the API uses the four keys that you got after completing the application form on the twitter developers page. The function `setup_twitter_oauth()` in the R twitter api will connect your R application using these:
+```{r, eval = FALSE}
+library(twitteR)
+setup_twitter_oauth(consumer_key = '',
+                    consumer_secret ='',
+                    access_token='',
+                    access_secret='')
+```
+
+(b) Look at the documentation for the `twitteR` package and perform a simple search for a term.
+
+```{r}
+results <- searchTwitter('juncker', n=50)
+#transform the results object into a data frame for inspection
+df <- as.data.frame(t(sapply(results, as.data.frame)))
+```
+
+(c) Retrieve information about one of the users in the returned search results using the `getUser()` function. 
+
