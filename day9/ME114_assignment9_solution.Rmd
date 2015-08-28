@@ -33,7 +33,7 @@ plot(x[,1:2])
 ```{r}
 pca.out <-  prcomp(x)
 summary(pca.out)
-plot([x[,1:2]])
+plot(x[,1:2])
 pca.out$x[,1:2]
 plot(pca.out$x[,1:2], col=2:4, xlab="Z1", ylab="Z2", pch=19) 
 ```
