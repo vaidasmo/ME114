@@ -117,6 +117,8 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 
 - [Lecture Notes](day10/ME114_day10.pdf)
 - [Readings](day10/Day10Prep.md)
+- [Streaming example code](streamRExample.R)
+- [Rest Example code](restExample.R)
 - [Assignment 10 as R markdown](day10/ME114_assignment10_LASTNAME_FIRSTNAME.Rmd).  Note: This is a take-home set only, as there is no lab on Day 10.
 
 #### Exam: Friday, August 28, 14:00 - 16:00, Room: TBA
