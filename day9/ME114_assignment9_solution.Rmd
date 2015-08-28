@@ -1,0 +1,241 @@
+---
+title: "Assignment 9 - Unsupervised learning and dimensional reduction"
+author: "Ken Benoit and Slava Mikhaylov"
+output: html_document
+---
+
+Assignments for the course focus on practical aspects of the concepts covered in the lectures. Assignments are largely based on the material covered in James et al. (2013). You will start working on the assignment in the lab sessions after the lectures, but may need to finish them after class.
+
+You will be asked to submit your assignments via Moodle by 7pm on the day of the class. We will subsequently open up solutions to the problem sets. 
+
+
+## Exercise 9.1
+
+In this exercise, you will generate simulated data, and then perform PCA and K-means clustering on the data.
+
+(a) Generate a simulated data set with 20 observations in each of three classes (i.e. 60 observations total), and 50 variables.
+*Hint: There are a number of functions in `R` that you can use to generate data. One example is the `rnorm()` function; `runif()` is another option. Be sure to add a mean shift to the observations in each class so that there are three distinct classes.*
+
+```{r}
+set.seed(2)
+x <-  matrix(rnorm(20*3*50, mean=0, sd=0.001), ncol=50)
+x[1:20, 2]  <-  1
+x[21:40, 1] <-  2
+x[21:40, 2] <-  2
+x[41:60, 1] <-  1
+plot(x[,1:2])
+```
+
+**The concept here is to separate the three classes amongst two dimensions.**
+
+(b) Perform PCA on the 60 observations and plot the first two principal component score vectors. Use a different color to indicate the observations in each of the three classes. If the three classes appear separated in this plot, then continue on to part (c). If not, then return to part (a) and modify the simulation so that there is greater separation between the three classes. Do not continue to part (c) until the three classes show at least some separation in the first two principal component score vectors.
+
+```{r}
+pca.out <-  prcomp(x)
+summary(pca.out)
+plot([x[,1:2]])
+pca.out$x[,1:2]
+plot(pca.out$x[,1:2], col=2:4, xlab="Z1", ylab="Z2", pch=19) 
+```
+(c) Perform $K$-means clustering of the observations with $K = 3$. How well do the clusters that you obtained in $K$-means clustering compare to the true class labels?
+*Hint: You can use the `table()` function in `R` to compare the true class labels to the class labels obtained by clustering. Be careful how you interpret the results: K-means clustering will arbitrarily number the clusters, so you cannot simply check whether the true class labels and clustering labels are the same.*
+
+```{r}
+km.out <-  kmeans(x, 3, nstart=20)
+table(km.out$cluster, c(rep(1,20), rep(2,20), rep(3,20)))
+```
+
+**Perfect match.**
+
+(d) Perform $K$-means clustering with $K = 2$. Describe your results.
+
+```{r}
+km.out <-  kmeans(x, 2, nstart=20)
+km.out$cluster
+```
+
+**All of one previous class absorbed into a single class.**
+
+(e) Now perform $K$-means clustering with $K = 4$, and describe your
+results.
+
+```{r}
+km.out <-  kmeans(x, 4, nstart=20)
+km.out$cluster
+```
+
+**All of one previous cluster split into two clusters.**
+
+(f) Now perform $K$-means clustering with $K = 3$ on the first two principal component score vectors, rather than on the raw data. That is, perform $K$-means clustering on the $60 \times 2$ matrix of which the first column is the first principal component score vector, and the second column is the second principal component score vector. Comment on the results.
+
+```{r}
+km.out <-  kmeans(pca.out$x[,1:2], 3, nstart = 20)
+table(km.out$cluster, c(rep(1,20), rep(2,20), rep(3,20)))
+```
+
+**Perfect match, once again.**
+
+(g) Using the `scale()` function, perform $K$-means clustering with $K = 3$ on the data *after scaling each variable to have standard deviation one*. How do these results compare to those obtained in (b)? Explain.
+
+```{r}
+km.out <- kmeans(scale(x), 3, nstart=20)
+km.out$cluster
+```
+
+**Poorer results than (b): the scaling of the observations effects the distance between them.**
+
+
+## Exercise 9.2
+
+In the Section 8.3.1 in James et al. (2013, p.324), a classification tree was applied to the `Carseats` dataset from `ISLR` library after converting `Sales` into a qualitative response variable (see discussion in the textbook for a walk-through). Now we will seek to predict `Sales` using regression trees and related approaches, treating the response as a quantitative variable.
+
+(a) Split the data set into a training set and a test set.
+
+```{r}
+library(ISLR)
+attach(Carseats)
+set.seed(1)
+
+train <-  sample(dim(Carseats)[1], dim(Carseats)[1] / 2)
+Carseats.train <-  Carseats[train, ]
+Carseats.test <-  Carseats[-train, ]
+```
+
+(b) Fit a regression tree to the training set. Plot the tree, and interpret the results. What test error rate do you obtain?
+
+```{r}
+library(tree)
+tree.carseats <-  tree(Sales ~ . , data = Carseats.train)
+summary(tree.carseats)
+plot(tree.carseats)
+text(tree.carseats, pretty=0)
+pred.carseats <-  predict(tree.carseats, Carseats.test)
+mean((Carseats.test$Sales - pred.carseats)^2)
+```
+
+**The test MSE is about 4.15.**
+
+(c) Use cross-validation in order to determine the optimal level of tree complexity. Does pruning the tree improve the test error rate?
+
+```{r}
+cv.carseats <-  cv.tree(tree.carseats, FUN = prune.tree)
+par(mfrow=c(1, 2))
+plot(cv.carseats$size, cv.carseats$dev, type="b")
+plot(cv.carseats$k, cv.carseats$dev, type="b")
+
+# Best size = 9
+pruned.carseats <-  prune.tree(tree.carseats, best=9)
+par(mfrow=c(1, 1))
+plot(pruned.carseats)
+text(pruned.carseats, pretty=0)
+pred.pruned <-  predict(pruned.carseats, Carseats.test)
+mean((Carseats.test$Sales - pred.pruned)^2)
+```
+
+**Pruning the tree in this case increases the test MSE to 4.99.**
+
+(d) (*OPTIONAL*) Use the bagging approach in order to analyze this data. What test error rate do you obtain? Use the `importance()` function to determine which variables are most important.
+
+```{r}
+library(randomForest)
+bag.carseats <-  randomForest(Sales ~ . , data = Carseats.train, mtry=10, ntree=500, importance=TRUE)
+bag.pred <-  predict(bag.carseats, Carseats.test)
+mean((Carseats.test$Sales - bag.pred)^2)
+importance(bag.carseats)
+```
+
+**Bagging improves the test MSE to 2.58. We also see that `Price`, `ShelveLoc` and `Age` are three most important predictors of `Sale`.**
+
+(e) Use random forests to analyze this data. What test error rate do you obtain? Use the `importance()` function to determine which variables are most important. Describe the effect of $m$, the number of variables considered at each split, on the error rate obtained.
+
+```{r}
+rf.carseats <-  randomForest(Sales ~ . , data = Carseats.train, mtry = 5, ntree = 500, importance=TRUE)
+rf.pred <-  predict(rf.carseats, Carseats.test)
+mean((Carseats.test$Sales - rf.pred)^2)
+importance(rf.carseats)
+```
+
+**In this case, random forest worsens the MSE on test set to 2.87. Changing $m$ varies test MSE between 2.6 to 3. We again see that `Price`, `ShelveLoc` and `Age` are three most important predictors of `Sale`.**
+
+
+## Exercise 9.3 (Optional)
+
+In Section 10.2.3 James et al. 2013, a formula for calculating PVE was given in Equation 10.8  (p. 383). We also saw that the PVE can be obtained using the `sdev` output of the `prcomp()` function.
+
+On the `USArrests` data, which is part of the base `R` distribution, calculate PVE in two ways:
+
+```{r}
+library(ISLR)
+set.seed(1)
+```
+
+(a) Using the `sdev` output of the `prcomp()` function, as was done in Section 10.2.3.
+
+```{r}
+pr.out <-  prcomp(USArrests, center=TRUE, scale=TRUE)
+pr.var = pr.out$sdev^2
+pve = pr.var / sum(pr.var)
+pve
+```
+
+(b) By applying Equation 10.8 directly. That is, use the `prcomp()` function to compute the principal component loadings. Then, use those loadings in Equation 10.8 to obtain the PVE.
+
+These two approaches should give the same results.
+
+*Hint: You will only obtain the same results in (a) and (b) if the same data is used in both cases. For instance, if in (a) you performed `prcomp()` using centered and scaled variables, then you must center and scale the variables before applying Equation 10.8 in (b)*.
+
+```{r}
+loadings <-  pr.out$rotation
+pve2 <-  rep(NA, 4)
+dmean <-  apply(USArrests, 2, mean)
+dsdev <-  sqrt(apply(USArrests, 2, var))
+dsc <-  sweep(USArrests, MARGIN=2, dmean, "-")
+dsc <-  sweep(dsc, MARGIN=2, dsdev, "/")
+for (i in 1:4) {
+  proto_x <-  sweep(dsc, MARGIN=2, loadings[,i], "*")
+  pc_x <-  apply(proto_x, 1, sum)
+  pve2[i] <-  sum(pc_x^2)
+}
+pve2 <-  pve2/sum(dsc^2)
+pve2
+```
+
+
+## Exercise 9.4 (Optional)
+
+Apply random forests to the `Boston` data, part of `MASS` package, using `mtry=6` and using `ntree=25` and `ntree=500` (see Chapter 8 for in James et al. for a walk-through example how to do it). Create a plot displaying the test error resulting from random forests on this dataset for a more comprehensive range of values for `mtry` and `ntree`. You can model your plot after Figure 8.10 in James et al. (2013, Chapter 8). Describe the results obtained.
+
+**We will try a range of `ntree` from 1 to 500 and `mtry` taking typical values of $p$, $p/2$, $\sqrt{p}$. For Boston data, $p = 13$. We use an alternate call to `randomForest` which takes `xtest` and `ytest` as additional arguments and computes test MSE on-the-fly. Test MSE of all tree sizes can be obtained by accessing `mse` list member of `test` list member of the model.**
+
+```{r}
+library(MASS)
+library(randomForest)
+set.seed(1101)
+
+# Construct the train and test matrices
+train <-  sample(dim(Boston)[1], dim(Boston)[1] / 2)
+X.train <-  Boston[train, -14]
+X.test <-  Boston[-train, -14]
+Y.train <-  Boston[train, 14]
+Y.test <-  Boston[-train, 14]
+
+p <-  dim(Boston)[2] - 1
+p.2 <-  p / 2
+p.sq <-  sqrt(p)
+
+rf.boston.p <-  randomForest(X.train, Y.train, xtest=X.test, ytest=Y.test, mtry=p, ntree=500)
+
+rf.boston.p.2 <-  randomForest(X.train, Y.train, xtest=X.test, ytest=Y.test, mtry=p.2, ntree=500)
+
+rf.boston.p.sq <-  randomForest(X.train, Y.train, xtest=X.test, ytest=Y.test, mtry=p.sq, ntree=500)
+
+plot(1:500, rf.boston.p$test$mse, col="green", type="l", xlab="Number of Trees", ylab="Test MSE", ylim=c(10, 19))
+
+lines(1:500, rf.boston.p.2$test$mse, col="red", type="l")
+
+lines(1:500, rf.boston.p.sq$test$mse, col="blue", type="l")
+
+legend("topright", c("m=p", "m=p/2", "m=sqrt(p)"), col=c("green", "red", "blue"), cex=1, lty=1)
+```
+
+**The plot shows that test MSE for single tree is quite high (around 18). It is reduced by adding more trees to the model and stabilizes around a few hundred trees. Test MSE for including all variables at split is slightly higher (around 11) as compared to both using half or square-root number of variables (both slightly less than 10).** 
