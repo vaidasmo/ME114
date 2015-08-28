@@ -1,0 +1,62 @@
+---
+title: "ME114 2015 Exam"
+author: "Ken Benoit and Slava Mikhaylov"
+output: html_document
+---
+
+**INSTRUCTIONS:** Answer **four** of the **five** questions.  If you answer five, we will base your grade on the best four of five.  Each of your four best questions is weighted equally in the determination of your overall grade.
+
+
+### Question 1
+
+Using the `Boston` dataset (`MASS` package), predict the per capita crime rate using the other variables in this data set.  In other words, per capita crime rate is the response, and the other variables are the predictors.
+
+(a) For each predictor, fit a simple (single-variable) linear regression model to predict the response.  In which of the models is there a statistically significant association between the predictor and the response? 
+
+(b) Fit a multiple regression model to predict the response using all of the predictors. Describe your results. For which predictors can we reject the null hypothesis $H_0 : \beta_j = 0$?
+
+(c) How do your results from (a) compare to your results from (b)? Create a plot displaying the univariate regression coefficients from (a) on the $x$-axis, and the multiple regression coefficients from (b) on the $y$-axis. That is, each predictor is displayed as a single point in the plot. Its coefficient in a simple linear regression model is shown on the $x$-axis, and its coefficient estimate in the multiple linear regression model is shown on the $y$-axis.  Hint: To get the coefficients from a fitted regression model, you can use `coef()`.  Note that you are not interested in the intercept.
+
+
+### Question 2
+
+Using the `Boston` data set, fit classification models in order to predict whether a given suburb has a crime rate above or below the median.  Produce a confusion matrix for, and describe the findings from your model, for each of:
+
+a.  logistic regression
+b.  kNN
+c.  (**bonus**) Naive Bayes predictors of your outcome.  (Use the **e1071** package for this, following the example from class.)
+
+
+
+### Question 3
+
+(a) Give the standard error of the median for the `crim` variable from `data(Boston, package = "MASS")`.
+
+(b) Estimate a bootstrapped standard error for the coefficient of `medv` in a logistic regression model of the above/below median of crime binary variable from question 2, with `medv`, `indus`, `age`, `black`, and `ptratio` as predictors.  Compare this to the asymptotic standard error from the maximum likelihood estimation (reported by `summary.glm()`).
+
+
+### Question 4
+
+Using `quanteda`, construct an English language dictionary for "populism" for English, using the word patterns found in Appendix B of [Rooduijn, Matthijs, and Teun Pauwels. 2011. "Measuring Populism: Comparing Two Methods of Content Analysis."  *West European Politics* 34(6): 1272–83.](Exam/Populism_2011.pdf)
+
+Use this dictionary to measure the relative amount of populism, as a total of all words in, the `ie2010Corpus` when these are grouped by political party.  Hint: You will need to make two dfm objects, one for all words, and one for the dictionary, and get a proportion.  Plot the proportions by party using a dotchart.
+
+### Question 5
+
+Here we will use kmeans clustering to see if we can produce groupings by party of the 1984 US House of Representatives, based on their voting records from 16 votes.  This data is the object `HouseVotes84` from the `mlbench` package.  Since this is stored as a list of factors, use the following code to transform it into a method that will work with the `kmeans()` function.
+```{r}
+data(HouseVotes84, package = "mlbench") 
+HouseVotes84num <- as.data.frame(lapply(HouseVotes84[, -1], unclass))
+HouseVotes84num[is.na(HouseVotes84num)] <- 0
+set.seed(2)  # make sure you do this before step b below
+```
+
+a.  What does each line of that code snippet do, and why was this operation needed?  What is the `-1` indexing for?
+
+b.  Perform a kmeans clustering on the votes only data, for 2 classes, after setting the seed to 100 as per above.  Construct a table comparing the actual membership of the Congressperson's party (you will find this as one of the variables in the `HouseVotes84` data) to the cluster assigned by the kmeans procedure.  Report the 
+    i.   accuracy  
+    ii.  precision  
+    iii.  recall  
+
+c.  Repeat b twice more to produce three more confusion matrix tables, comparing the results.  Are they the same?  If not, why not?
+
