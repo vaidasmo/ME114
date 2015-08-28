@@ -125,6 +125,6 @@ We will walk you through this process in the Day 1 lab, so don't worry if it see
 
 - **Instructions:**  Complete and submit the exam just as you would any lab assignment: by renaming the file, editing the R Markdown, and submitting through Moodle. 
 - **Formatting:**  Put your own textual answers in boldface (using `**boldface type**` in RMarkdown), so that we can easily identify them.
-- **Deadline:**: TBA.
-- The exam in R Markdown... 
+- **Deadline:** Monday 30 September 17:00 London time (GMT+1)
+- **The exam** in [R Markdown](Exam/ME114_exam_LASTNAME_FIRSTNAME.Rmd) and [html](Exam/ME114_exam_LASTNAME_FIRSTNAME.html)
 
