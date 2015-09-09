@@ -1,0 +1,285 @@
+---
+title: "Exam - Introduction to Data Science and Big Data Analytics"
+author: "Ken Benoit and Slava Mikhaylov"
+output: html_document
+---
+
+
+## Question 1
+
+Using the `Boston` data set predict per capita crime rate using the other variables in this data set. In other words, per capita crime rate is the response, and the other variables are the predictors.
+
+(a) For each predictor, fit a simple linear regression model to predict the response. Describe your results. In which of the models is there a statistically significant association between the predictor and the response? Create some plots to back up your assertions.
+
+```{r}
+data(Boston, package = "MASS")
+summary(Boston)
+Boston$chas <- factor(Boston$chas, labels = c("N", "Y"))
+summary(Boston)
+attach(Boston)
+lm.zn <-  lm(crim ~ zn)
+summary(lm.zn) # yes
+lm.indus <-  lm(crim ~ indus)
+summary(lm.indus) # yes
+lm.chas <-  lm(crim ~ chas) 
+summary(lm.chas) # no
+lm.nox <-  lm(crim ~ nox)
+summary(lm.nox) # yes
+lm.rm <-  lm(crim ~ rm)
+summary(lm.rm) # yes
+lm.age <-  lm(crim ~ age)
+summary(lm.age) # yes
+lm.dis <-  lm(crim ~ dis)
+summary(lm.dis) # yes
+lm.rad <-  lm(crim ~ rad)
+summary(lm.rad) # yes
+lm.tax <-  lm(crim ~ tax)
+summary(lm.tax) # yes
+lm.ptratio <-  lm(crim ~ ptratio)
+summary(lm.ptratio) # yes
+lm.black <-  lm(crim ~ black)
+summary(lm.black) # yes
+lm.lstat <-  lm(crim ~ lstat)
+summary(lm.lstat) # yes
+lm.medv <-  lm(crim ~ medv)
+summary(lm.medv) # yes
+```
+**All, except chas. Plot each linear regression using `plot(lm)` to see residuals.**
+
+(b) Fit a multiple regression model to predict the response using all of the predictors. Describe your results. For which predictors can we reject the null hypothesis $H_0 : \beta_j = 0$?
+
+```{r}
+lm.all <-  lm(crim ~ . , data = Boston)
+summary(lm.all)
+```
+
+**n, dis, rad, black, medv**
+
+
+(c) How do your results from (a) compare to your results from (b)? Create a plot displaying the univariate regression coefficients from (a) on the $x$-axis, and the multiple regression coefficients from (b) on the $y$-axis. That is, each predictor is displayed as a single point in the plot. Its coefficient in a simple linear regression model is shown on the $x$-axis, and its coefficient estimate in the multiple linear regression model is shown on the $y$-axis.
+
+```{r}
+x <-  c(coefficients(lm.zn)[2],
+      coefficients(lm.indus)[2],
+      coefficients(lm.chas)[2],
+      coefficients(lm.nox)[2],
+      coefficients(lm.rm)[2],
+      coefficients(lm.age)[2],
+      coefficients(lm.dis)[2],
+      coefficients(lm.rad)[2],
+      coefficients(lm.tax)[2],
+      coefficients(lm.ptratio)[2],
+      coefficients(lm.black)[2],
+      coefficients(lm.lstat)[2],
+      coefficients(lm.medv)[2])
+y <-  coefficients(lm.all)[2:14]
+plot(x, y)
+```
+**Coefficient for `nox` is approximately -10 in univariate model and 31 in multiple regression model.**
+
+
+## Question 2
+
+Using the `Boston` data set, fit classification models in order to predict whether a given suburb has a crime rate above or below the median. Explore logistic regression, and KNN models using various subsets of the predictors. Describe your findings.
+
+```{r}
+attach(Boston)
+crime01 <- as.factor(ifelse(crim > median(crim), "Above", "Below"))
+
+train <-  1:(dim(Boston)[1]/2)
+test <-  (dim(Boston)[1]/2 + 1):dim(Boston)[1]
+Boston.train <-  Boston[train, ]
+Boston.test <-  Boston[test, ]
+crime01.test <-  crime01[test]
+```
+
+
+
+```{r}
+# logistic regression
+glm.fit <-  glm(crime01 ~ . - crime01 - crim, data = Boston, family = binomial, 
+                                             subset = train)
+```
+
+
+```{r}
+glm.probs <-  predict(glm.fit, Boston.test, type = "response")
+glm.pred <-  rep(0, length(glm.probs))
+glm.pred[glm.probs > 0.5] <-  1
+mean(glm.pred != crime01.test)
+```
+
+**18.2% test error rate.**
+
+
+```{r}
+glm.fit <-  glm(crime01 ~ . - crime01 - crim - chas - tax, data = Boston, family = binomial, subset = train)
+```
+
+
+```{r}
+glm.probs <-  predict(glm.fit, Boston.test, type = "response")
+glm.pred <-  rep(0, length(glm.probs))
+glm.pred[glm.probs > 0.5] <-  1
+mean(glm.pred != crime01.test)
+```
+
+
+**18.6% test error rate.**
+
+
+```{r}
+# KNN
+library(class)
+train.X <-  cbind(zn, indus, chas, nox, rm, age, dis, rad, tax, ptratio, black, 
+    lstat, medv)[train, ]
+test.X <-  cbind(zn, indus, chas, nox, rm, age, dis, rad, tax, ptratio, black, 
+    lstat, medv)[test, ]
+train.crime01 <-  crime01[train]
+set.seed(1)
+# KNN(k=1)
+knn.pred <-  knn(train.X, test.X, train.crime01, k = 1)
+mean(knn.pred != crime01.test)
+```
+
+**45.8% test error rate.**
+
+
+```{r}
+# KNN(k=10)
+knn.pred <-  knn(train.X, test.X, train.crime01, k = 10)
+mean(knn.pred != crime01.test)
+```
+
+**11.1% test error rate.**
+
+
+```{r}
+# KNN(k=100)
+knn.pred <-  knn(train.X, test.X, train.crime01, k = 100)
+mean(knn.pred != crime01.test)
+```
+
+**49.0% test error rate.**
+
+
+```{r}
+# KNN(k=10) with subset of variables
+train.X <-  cbind(zn, nox, rm, dis, rad, ptratio, black, medv)[train, ]
+test.X <-  cbind(zn, nox, rm, dis, rad, ptratio, black, medv)[test, ]
+knn.pred <-  knn(train.X, test.X, train.crime01, k = 10)
+mean(knn.pred != crime01.test)
+```
+
+**28.5% test error rate.**
+
+
+## Question 3
+
+Using the `Boston` housing data set, from the `MASS` library.
+
+```{r}
+library(MASS)
+summary(Boston)
+set.seed(1)
+```
+
+a) Standard error of median of crim:
+
+```{r}
+nreplicates <- 1000
+bsresult <- numeric(nreplicates)  # set up a results variable, length 1000
+for (i in 1:nreplicates) {
+    bsresult[i] <- median(sample(Boston$crim, replace = TRUE))
+}
+sd(bsresult)
+
+# or:
+
+require(boot)
+boot.fn <-  function(data, index) return(median(data[index]))
+boot(Boston$crim, boot.fn, 1000)
+```
+
+b) Estimate a bootstrapped standard error for the coefficient of medv in a logistic regression model of the above/below median of crime binary variable from question 2, with medv, indus, age, black, and ptratio as predictors. Compare this to the asymptotic standard error from the maximum likelihood estimation (reported by summary.glm()).
+
+```{r}
+require(boot)
+med <- summary(Boston$crim)[3] #returns median
+Boston$bicrim <- ifelse(Boston$crim < median(Boston$crim), 0 , 1)
+glm.bootfit <- function(data, index) {
+    glm.fit <- glm(Boston$bicrim ~ medv + indus + black + ptratio, data=data, subset=index, family=binomial)
+    return(coef(glm.fit)[2]) # first is intercept so we do for second ceof which is medv
+}
+boot(Boston, glm.bootfit, R=100)
+
+# compare to ML s.e.
+summary(glm(bicrim ~ medv + indus + black + ptratio, data = Boston, family=binomial))
+```
+**Bootstrapped result is approx. 0.01323143 whereas ML s.e. is 0.017074.**
+
+### Question 4
+```{r}
+require(quanteda, quietly = TRUE, warn.conflicts = FALSE)
+partyDfm <- dfm(ie2010Corpus, groups = "party", verbose = FALSE)
+populismDict <- dictionary(list(populism = c("elit*", "consensus*", "undemocratic",
+                                             "referend*", "corrupt*", "propagand*",
+                                             "politici*", "*deceit*", "*deceiv", "*betray*", 
+                                             "shame*", "scandal*", "truth*", 
+                                             "dishonest*","establishm*","ruling*")))
+partyDfmPop <- dfm(ie2010Corpus, dictionary = populismDict, groups = "party")
+dotchart(as.matrix(partyDfmPop / rowSums(partyDfm))[,1], xlab = "Populism Proportion")
+```
+
+
+### Question 5
+
+Here we will use kmeans clustering to see if we can produce groupings by party of the 1984 US House of Representatives, based on their voting records from 16 votes.  This data is the object `HouseVotes84` from the `mlbench` package.  Since this is stored as a list of factors, use the following code to transform it into a method that will work with the `kmeans()` function.
+```{r}
+data(HouseVotes84, package = "mlbench") 
+HouseVotes84num <- as.data.frame(lapply(HouseVotes84[, -1], unclass))
+HouseVotes84num[is.na(HouseVotes84num)] <- 0
+set.seed(2)
+```
+
+a.  What does each line of that code snippet do, and why was this operation needed?  What is the `-1` indexing for?
+
+**The `lapply(HouseVotes84[, -1], unclass)` converts the factor into a 1 for Nay, 2 for Yea.  `as.data.frame()` ensures that this object is a data.frame.  The `[-1]` removes the `Class` column so that we have only votes in our dataset.  The `is.na()` and 0 assignment converts `NA` values (representing abstentions) into zeroes.**
+
+b.  Perform a kmeans clustering on the votes only data, for 2 classes, after setting the seed to 100 as per above.  Construct a table comparing the actual membership of the Congressperson's party (you will find this as one of the variables in the `HouseVotes84` data) to the cluster assigned by the kmeans procedure.  Report the 
+    i.   accuracy  
+    ii.  precision  
+    iii.  recall  
+
+```{r}
+# define a general function to compute precision & recall
+precrecall <- function(mytable, verbose=TRUE) {
+    truePositives <- mytable[1,1]
+    falsePositives <- sum(mytable[1,]) - truePositives
+    falseNegatives <- sum(mytable[,1]) - truePositives
+    precision <- truePositives / (truePositives + falsePositives)
+    recall <- truePositives / (truePositives + falseNegatives)
+    if (verbose) {
+        print(mytable)
+        cat("\n precision =", round(precision, 2), 
+            "\n    recall =", round(recall, 2), 
+            "\n  accuracy =", sum(diag(mytable)) / sum(mytable), 
+            "\n")
+    }
+    invisible(c(precision, recall))
+}
+
+# compute the tables
+set.seed(2) # just to set to requested value (again)
+(kmt <- table(kmeans(HouseVotes84num, 2)$cluster, HouseVotes84[,1]))
+precrecall(kmt)
+```
+
+
+c.  Repeat b twice more to produce three more confusion matrix tables, comparing the results.  Are they the same?  If not, why not?
+
+```{r}
+(kmt <- table(kmeans(HouseVotes84num, 2)$cluster, HouseVotes84[,1]))
+precrecall(kmt)
+```
+**The result is not the same because there are random starting values for the clusters.  The second time we perform the clustering, different random starting values reversed the cluster labels.  But since these are unsupervised -- since kmeans() has no idea what the two different groups are supposed to represent -- then one answer is as good as the other.**
